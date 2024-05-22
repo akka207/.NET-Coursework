@@ -22,6 +22,7 @@ namespace Exam
         public RegistrationWindow()
         {
             InitializeComponent();
-        }
+            this.DataContext = new RegistrationViewModel();
+        } 
     }
 }

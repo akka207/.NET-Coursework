@@ -20,6 +20,7 @@ namespace Exam
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainViewModel();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Exam
 {
@@ -37,7 +38,11 @@ namespace Exam
                 }
             }
         }
-
+        public MainViewModel()
+        {
+            ValidateCommand = new RelayCommand(Validate);
+        }
+        public ICommand ValidateCommand { get; }
         public void Validate()
         {
             if (_login == "admin" && _password == "password")
