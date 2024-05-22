@@ -5,15 +5,15 @@ namespace Exam
 {
     public class RegistrationViewModel : INotifyPropertyChanged
     {
-        private string _username;
-        public string Username
+        private string _login;
+        public string Login
         {
-            get { return _username; }
+            get { return _login; }
             set
             {
-                if (_username != value)
+                if (_login != value)
                 {
-                    _username = value;
+                    _login = value;
                     OnPropertyChanged("Username");
                 }
             }
@@ -33,6 +33,19 @@ namespace Exam
             }
         }
 
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
+                    OnPropertyChanged("Email");
+                }
+            }
+        }
         public ICommand RegisterCommand { get; }
 
         public RegistrationViewModel()
@@ -42,7 +55,7 @@ namespace Exam
 
         private void Register(object parameter)
         {
-            if (!string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password))
+            if (!string.IsNullOrWhiteSpace(Login) && !string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(Email))
             {
                 MessageBox.Show("Registered sucessfully");
             }
