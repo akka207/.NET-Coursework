@@ -6,7 +6,24 @@
         xmlns:local="clr-namespace:Exam"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="LoginButton_Style" TargetType="Button">
+            <Setter Property="Background" Value="WhiteSmoke"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="3">
+            <Button Content="Login" Height="25px" Width="50px" Style="{StaticResource LoginButton_Style}"/>
+        </Grid>
     </Grid>
 </Window>
