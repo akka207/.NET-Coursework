@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exam.Migrations
 {
     [DbContext(typeof(SQLiteDbContext))]
-    [Migration("20240524053430_m0")]
+    [Migration("20240524134651_m0")]
     partial class m0
     {
         /// <inheritdoc />
@@ -53,15 +53,12 @@ namespace Exam.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("HashedPasword")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Login")

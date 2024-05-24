@@ -50,15 +50,12 @@ namespace Exam.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("HashedPasword")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Login")

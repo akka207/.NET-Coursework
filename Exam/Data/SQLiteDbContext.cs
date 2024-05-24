@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StaffManagerModels;
 using System.Windows.Controls;
+using Microsoft.Extensions.Configuration;
 
 namespace Exam.Data
 {
@@ -20,7 +21,7 @@ namespace Exam.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlite("FileName=C:/Users/Alex/Staff.db");
+            optionsBuilder.UseSqlite(Config.Configuration.GetConnectionString("DefaultConnection"));
         }
     }
 }
