@@ -55,6 +55,7 @@ namespace Exam
 
         private void Register(object parameter)
         {
+            MessageBox.Show("Hello");
             if (!string.IsNullOrWhiteSpace(Login) && !string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(Email))
             {
                 MessageBox.Show("Registered sucessfully");
