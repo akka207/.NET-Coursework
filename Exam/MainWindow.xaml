@@ -25,7 +25,7 @@
         <Grid Grid.Column="1" Grid.Row="1">
             <TextBox Height="25px" Width="150px" Margin="0 0 0 125" Text="Login"/>
             <TextBox Height="25px" Width="150px" Margin="0 0 0 50" Text="Password"/>
-            <Button Content="Login" Width="150px" Height="25px" Margin="0 20 0 0 " Style="{StaticResource LoginButton_Style}"/>
+            <Button Content="Login" Width="150px" Height="25px" Margin="0 20 0 0 " Style="{StaticResource LoginButton_Style}" Command="{Binding ValidateCommand}"/>
             <Button Content="Registration" Width="150px" Height="25px" Margin="0 110 0 0 " Style="{StaticResource LoginButton_Style}"/>
         </Grid>
     </Grid>

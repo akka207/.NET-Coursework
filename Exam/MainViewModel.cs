@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-
+using Exam.Data;
 namespace Exam
 {
     internal class MainViewModel : INotifyPropertyChanged
@@ -40,16 +40,19 @@ namespace Exam
         }
         public MainViewModel()
         {
-            ValidateCommand = new RelayCommand(Validate);
+            ValidateCommand = new AsyncRelayCommand(Validate);
         }
         public ICommand ValidateCommand { get; }
-        public void Validate()
+        public async Task Validate()
         {
-            if (_login == "admin" && _password == "password")
+            Thread.Sleep(10000);
+            await Task.Delay(100000).ConfigureAwait(false);
+            if (await DBController.CheckPasswordAsync(_login, _password))
             {
-                // Open New Window
+                // Adolf
+                Application.Current.Windows.OfType<RegistrationWindow>().FirstOrDefault()?.Close();
             }
-            else if (true)
+            else
             {
                 MessageBox.Show("Incorrect login or password!");
             }
