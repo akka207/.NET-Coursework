@@ -15,7 +15,12 @@ namespace Exam.Data
         {
             using (var context = Config.DbContext)
             {
-                return context.Persons.Where(p => p.Login == login).First().HashedPasword == GetMD5(password);
+                var query = context.Persons.Where(p => p.Login == login);
+                if (query.Count() > 0 && query.First().HashedPasword == GetMD5(password))
+                {
+                    return true;
+                }
+                return false;
             }
         }
         public static async Task<bool> CheckPasswordAsync(string login, string password)
@@ -24,7 +29,7 @@ namespace Exam.Data
             {
                 return await Task.Run(() =>
                 {
-                    return context.Persons.Where(p => p.Login == login).First().HashedPasword == GetMD5(password);
+                    return CheckPassword(login, password);
                 });
             }
         }

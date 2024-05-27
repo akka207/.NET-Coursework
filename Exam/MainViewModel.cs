@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Exam.Data;
 namespace Exam
 {
@@ -38,25 +39,37 @@ namespace Exam
                 }
             }
         }
-        public MainViewModel()
+
+        public Dispatcher Dispatcher;
+
+        public MainViewModel(Dispatcher dispatcher)
         {
-            ValidateCommand = new AsyncRelayCommand(Validate);
+            ValidateCommand = new RelayCommand(Validate);
+            Dispatcher = dispatcher;
         }
+
+
         public ICommand ValidateCommand { get; }
-        public async Task Validate()
+        public void Validate()
         {
-            Thread.Sleep(10000);
-            await Task.Delay(100000).ConfigureAwait(false);
-            if (await DBController.CheckPasswordAsync(_login, _password))
+            Mouse.OverrideCursor = Cursors.Wait;
+            Task.Run(async () =>
             {
-                // Adolf
-                Application.Current.Windows.OfType<RegistrationWindow>().FirstOrDefault()?.Close();
-            }
-            else
-            {
-                MessageBox.Show("Incorrect login or password!");
-            }
+                Thread.Sleep(5000);
+                if (await DBController.CheckPasswordAsync(_login, _password) == true)
+                {
+                    //Application.Current.Windows.OfType<RegistrationWindow>().FirstOrDefault()?.Close();
+                    MessageBox.Show("Succesfull!");
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect login or password!");
+                }
+                Dispatcher.Invoke(() => { Mouse.OverrideCursor = null; });
+            });
         }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
