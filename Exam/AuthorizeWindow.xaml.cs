@@ -91,7 +91,7 @@ namespace Exam
                     else
                     {
                         DBController.RegisterPerson(person, _password);
-
+                        MessageBox.Show("Succesfull!", "Progress", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     }
                 }
 
@@ -100,8 +100,6 @@ namespace Exam
                     Mouse.OverrideCursor = null;
                     AvailableControls(true);
                 });
-
-                MessageBox.Show("Succesfull!", "Progress", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             });
         }
 
