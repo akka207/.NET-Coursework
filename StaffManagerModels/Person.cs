@@ -12,6 +12,7 @@ namespace StaffManagerModels
         public string Login { get; set; } = default!;
         public string? HashedPasword { get; set; }
         public string? FullName { get; set; } = default!;
+        public string? Phone { get; set; } = default!;
         public string? Email { get; set; } = default!;
 
     }

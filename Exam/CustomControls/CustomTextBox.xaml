@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="Exam.CustomControls.CustomTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Exam.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="400" x:Name="Control">
+    <Grid>
+        <TextBlock x:Name="placeholder" Background="Transparent" Text="{Binding ElementName=Control, Path=Placeholder}" Foreground="Gray" VerticalAlignment="Center"/>
+        <TextBox x:Name="textBox" Background="Transparent" VerticalAlignment="Center" TextChanged="textBox_TextChanged" IsKeyboardFocusedChanged="textBox_IsKeyboardFocusedChanged"/>
+    </Grid>
+</UserControl>
