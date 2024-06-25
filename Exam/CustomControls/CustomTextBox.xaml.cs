@@ -51,6 +51,7 @@ namespace Exam.CustomControls
         public CustomTextBox()
         {
             InitializeComponent();
+            border.Highlight = false;
         }
 
 
@@ -67,6 +68,7 @@ namespace Exam.CustomControls
         }
         private void textBox_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            border.Highlight = textBox.IsKeyboardFocused;
             if (textBox.IsKeyboardFocused || textBox.Text != string.Empty)
             {
                 placeholder.Visibility = Visibility.Hidden;
