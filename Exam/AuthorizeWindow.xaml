@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Exam"
         xmlns:AControls="clr-namespace:Exam.AuthorizeControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" MinWidth="600" MaxWidth="600">
+        Title="MainWindow" MinHeight="450" MaxHeight="450" MinWidth="600" MaxWidth="600">
     <Window.Resources>
         <Style x:Key="LoginButton_Style" TargetType="Button">
             <Setter Property="Background" Value="WhiteSmoke"/>
@@ -16,15 +16,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <AControls:LoginControl x:Name="logInControl" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="290" Height="300" OnLogIn="logInControl_OnLogIn" OnSignUp="logInControl_OnSignUp" Visibility="Hidden"/>
-        <AControls:RegistrationControl x:Name="registerControl" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="290" Height="330" OnSignUp="registerControl_OnSignUp" OnLogIn="registerControl_OnLogIn" Visibility="Visible"/>
+        <AControls:LoginControl x:Name="logInControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="290" Height="370" OnLogIn="logInControl_OnLogIn" OnSignUp="logInControl_OnSignUp" Visibility="Visible"/>
+        <AControls:RegistrationControl x:Name="registerControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="290" Height="370" OnSignUp="registerControl_OnSignUp" OnLogIn="registerControl_OnLogIn" Visibility="Hidden"/>
     </Grid>
 </Window>

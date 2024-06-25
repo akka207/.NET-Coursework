@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="400" x:Name="Control">
-    <Border Style="{StaticResource Border_CommonStyle}">
+    <Border x:Name="border" Style="{StaticResource Border_CommonStyle}">
         <Grid>
             <TextBlock x:Name="placeholder" Text="{Binding ElementName=Control, Path=Placeholder}" Foreground="Gray" VerticalAlignment="Center"/>
-            <TextBox x:Name="textBox" VerticalAlignment="Center" TextChanged="textBox_TextChanged" IsKeyboardFocusedChanged="textBox_IsKeyboardFocusedChanged"/>
+            <TextBox x:Name="textBox" Height="90" VerticalAlignment="Center" TextChanged="textBox_TextChanged" IsKeyboardFocusedChanged="textBox_IsKeyboardFocusedChanged" Padding="5 38 0 0"/>
         </Grid>
     </Border>
 </UserControl>

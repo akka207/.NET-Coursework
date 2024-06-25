@@ -9,15 +9,15 @@
     <Border>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <CustomControls:CustomTextBox x:Name="login" Grid.Row="0" Placeholder="Login" FontSize="20"/>
@@ -28,7 +28,7 @@
             <CustomControls:CustomTextBox x:Name="email" Grid.Row="5" Placeholder="Email" FontSize="20"/>
             <Button x:Name="confirmButton" Grid.Row="6" Content="Sign Up" FontSize="20" Height="40" Click="confirmButton_Click"/>
 
-            <Button x:Name="logInButton" Grid.Row="8" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click"/>
+            <Button x:Name="logInButton" Grid.Row="8" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click" VerticalAlignment="Bottom"/>
         </Grid>
     </Border>
 </UserControl>
