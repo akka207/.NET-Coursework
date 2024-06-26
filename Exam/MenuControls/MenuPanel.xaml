@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="Exam.MenuControls.MenuPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Exam.MenuControls"
+             xmlns:CustomControls="clr-namespace:Exam.CustomControls"
+             mc:Ignorable="d" x:Name="control">
+    <Border x:Name="originBorder" Width="400" MinHeight="260" 
+            CornerRadius="0 0 20 0" BorderThickness="2" BorderBrush="{StaticResource PrimaryBrush}"
+            IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" Background="Transparent">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="320"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CustomControls:CircleImageButton IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" Grid.Column="0" x:Name="sheduleMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="sheduleMenuButton_OnClick"/>
+                    <CustomControls:TextButton Grid.Column="1" Text="Schedule" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="sheduleMenuButton_OnClick"/>
+                </Grid>
+            </CustomControls:CustomBorder>
+            
+            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="320"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CustomControls:CircleImageButton IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" x:Name="personnelMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="personnelMenuButton_OnClick"/>
+                    <CustomControls:TextButton Grid.Column="1" Text="Personnel" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="personnelMenuButton_OnClick"/>
+                </Grid>
+            </CustomControls:CustomBorder>
+            
+            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="320"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CustomControls:CircleImageButton IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" x:Name="profileMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" Grid.Row="3" OnClick="profileMenuButton_OnClick"/>
+                    <CustomControls:TextButton Grid.Column="1" Text="Profile" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="profileMenuButton_OnClick"/>
+                </Grid>
+            </CustomControls:CustomBorder>
+
+
+            <!--<Grid Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Schedule" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Personnel" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Profile" VerticalAlignment="Center"/>
+            </Grid>-->
+        </Grid>
+    </Border>
+</UserControl>

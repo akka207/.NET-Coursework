@@ -23,5 +23,27 @@ namespace Exam
         {
             InitializeComponent();
         }
+
+        private void MenuPanel_OnMenuSelected(object sender, MenuControls.MenuPanel.MenuType e)
+        {
+            switch(e)
+            {
+                case MenuControls.MenuPanel.MenuType.Schedule:
+                    schedule.Visibility = Visibility.Visible;
+                    personnel.Visibility = Visibility.Hidden;
+                    profile.Visibility = Visibility.Hidden;
+                    break;
+                case MenuControls.MenuPanel.MenuType.Personnel:
+                    schedule.Visibility = Visibility.Hidden;
+                    personnel.Visibility = Visibility.Visible;
+                    profile.Visibility = Visibility.Hidden;
+                    break;
+                case MenuControls.MenuPanel.MenuType.Profile:
+                    schedule.Visibility = Visibility.Hidden;
+                    personnel.Visibility = Visibility.Hidden;
+                    profile.Visibility = Visibility.Visible;
+                    break;
+            }
+        }
     }
 }

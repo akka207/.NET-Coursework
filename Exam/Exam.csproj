@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\lorem.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
@@ -31,7 +35,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MenuControls\" />
+    <Folder Include="MenuControls\ProfileControls\" />
+    <Folder Include="MenuControls\PersonnelControls\" />
+    <Folder Include="MenuControls\ScheduleControls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\lorem.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
