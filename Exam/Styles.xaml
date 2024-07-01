@@ -3,7 +3,7 @@
                     xmlns:CustomControls="clr-namespace:Exam.CustomControls">
 
     <FontFamily x:Key="Inter">pack://application:,,,/Fonts/#Inter</FontFamily>
-    
+
     <Color x:Key="PrimaryColor">#2E3532</Color>
     <Color x:Key="SecondaryColor">#7E9181</Color>
     <Color x:Key="TertiaryColor">#C7CEDB</Color>
@@ -45,7 +45,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
@@ -56,8 +56,8 @@
         <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
-    
-    
+
+
     <Style TargetType="TextBlock">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>

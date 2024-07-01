@@ -10,10 +10,10 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="84"/>
-            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <MenuControls:ScheduleControl x:Name="schedule" Visibility="Visible" Background="Aqua" Grid.Column="1"/>
+        <MenuControls:ScheduleControl x:Name="schedule" Visibility="Visible" Grid.Column="1"/>
         <MenuControls:PersonnelControl x:Name="personnel" Visibility="Hidden" Background="WhiteSmoke" Grid.Column="1"/>
         <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1"/>
         

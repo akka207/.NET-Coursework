@@ -63,5 +63,10 @@ namespace Exam.MenuControls
                 originBorder.Width = control.MinWidth;
             }
         }
+
+        private void control_Loaded(object sender, RoutedEventArgs e)
+        {
+            originBorder.Width = control.MinWidth;
+        }
     }
 }

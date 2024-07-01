@@ -54,6 +54,17 @@ namespace Exam.Data
             }
         }
 
+        public static List<Event> GetEvents(Staff staff, DateTime startDate, DateTime endDate)
+        {
+            using (var context = Config.DbContext)
+            {
+                return context.Staffs
+                    .Where(s => s.Id == staff.Id)
+                    .First().Schedule.Events
+                    .Where(e => e.EndDateTime >= startDate && e.StartDateTime <= endDate)
+                    .ToList();
+            }
+        }
 
         private static string GetMD5(string input)
         {
