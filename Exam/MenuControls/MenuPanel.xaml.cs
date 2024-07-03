@@ -52,18 +52,6 @@ namespace Exam.MenuControls
             OnMenuSelected?.Invoke(this, MenuType.Profile);
         }
 
-        private void forall_IsMouseDirectlyOverChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if(originBorder.IsMouseOver)
-            {
-                originBorder.Width = control.MaxWidth;
-            }
-            else
-            {
-                originBorder.Width = control.MinWidth;
-            }
-        }
-
         private void control_Loaded(object sender, RoutedEventArgs e)
         {
             originBorder.Width = control.MinWidth;

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Exam.MenuControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d" x:Name="control" Loaded="control_Loaded">
-    <Border x:Name="originBorder"
+    <Border x:Name="originBorder" MinWidth="180"
             CornerRadius="0 0 20 0" BorderThickness="2" BorderBrush="{StaticResource PrimaryBrush}"
             Background="Transparent">
         <Grid>
