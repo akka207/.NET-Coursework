@@ -30,11 +30,12 @@ namespace Exam.AuthorizeControls
                 return login.textBox.Text;
             }
         }
+
         public string Password
         {
             get
             {
-                return password.textBox.Text;
+                return showPasswordCheckBox.IsChecked == true ? passwordTextBox.textBox.Text : passwordBox.Password;
             }
         }
 
@@ -52,5 +53,20 @@ namespace Exam.AuthorizeControls
         {
             OnSignUp?.Invoke(sender, e);
         }
+
+        private void showPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            passwordTextBox.textBox.Text = passwordBox.Password;
+            passwordTextBox.Visibility = Visibility.Visible;
+            passwordBox.Visibility = Visibility.Collapsed;
+        }
+
+        private void showPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            passwordBox.Password = passwordTextBox.textBox.Text;
+            passwordTextBox.Visibility = Visibility.Collapsed;
+            passwordBox.Visibility = Visibility.Visible;
+        }
     }
+
 }

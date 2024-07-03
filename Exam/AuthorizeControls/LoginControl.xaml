@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Exam.AuthorizeControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -17,9 +18,11 @@
         </Grid.RowDefinitions>
 
         <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Placeholder="Login" FontSize="20"/>
-        <CustomControls:CustomTextBox x:Name="password" Grid.Row="2" Placeholder="Password" FontSize="20"/>
-        <Button x:Name="logInButton" Grid.Row="3" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click"/>
+        <PasswordBox x:Name="passwordBox" Grid.Row="2" FontSize="20" Visibility="Collapsed" BorderThickness="0px"/>
+        <CustomControls:CustomTextBox x:Name="passwordTextBox" Grid.Row="2" Placeholder="Password" FontSize="20" />
+        <CheckBox x:Name="showPasswordCheckBox" Grid.Row="3" Content="Show Password" Checked="showPasswordCheckBox_Checked" Unchecked="showPasswordCheckBox_Unchecked" IsChecked="True"/>
 
+        <Button x:Name="logInButton" Grid.Row="4" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click"/>
         <Button x:Name="signUpButton" Grid.Row="5" Content="Sign Up" FontSize="20" Height="40" Click="signUpButton_Click" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>
