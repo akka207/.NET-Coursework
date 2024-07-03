@@ -23,17 +23,35 @@ namespace Exam.Data
                 return false;
             }
         }
-        public static async Task<bool> CheckPasswordAsync(string login, string password)
-        {
-            using (var context = Config.DbContext)
-            {
-                return await Task.Run(() =>
-                {
-                    return CheckPassword(login, password);
-                });
-            }
-        }
 
+        public static Staff? GetStaff(string login, string password)
+        {
+            if (CheckPassword(login, password))
+            {
+                using (var context = Config.DbContext)
+                {
+                    Staff staff = context.Staffs.Where(s => s.Person.Login == login).FirstOrDefault();
+                    if (staff != null)
+                    {
+                        if (staff.Person == null)
+                        {
+                            staff.Person = context.Persons.Where(p => p.Id == staff.PersonId).FirstOrDefault();
+                        }
+                        if (staff.Role == null)
+                        {
+                            staff.Role = context.Roles.Where(r => r.Id == staff.RoleId).FirstOrDefault();
+                        }
+                        if (staff.Schedule == null)
+                        {
+                            staff.Schedule = context.Schedules.Where(s => s.Id == staff.ScheduleId).FirstOrDefault();
+                            staff.Schedule.Events = context.Events.Where(e => e.ScheduleId == staff.Schedule.Id).ToArray();
+                        }
+                    }
+                    return staff;
+                }
+            }
+            return null;
+        }
 
         public static void RegisterPerson(Person person, string password)
         {
@@ -41,28 +59,7 @@ namespace Exam.Data
             {
                 person.HashedPasword = GetMD5(password);
                 context.Persons.Add(person);
-                context.SaveChanges(); 
-            }
-        }
-        public static async Task RegisterPersonAsync(Person person, string password)
-        {
-            using (var context = Config.DbContext)
-            {
-                person.HashedPasword = GetMD5(password);
-                await context.Persons.AddAsync(person);
-                await context.SaveChangesAsync();
-            }
-        }
-
-        public static List<Event> GetEvents(Staff staff, DateTime startDate, DateTime endDate)
-        {
-            using (var context = Config.DbContext)
-            {
-                return context.Staffs
-                    .Where(s => s.Id == staff.Id)
-                    .First().Schedule.Events
-                    .Where(e => e.EndDateTime >= startDate && e.StartDateTime <= endDate)
-                    .ToList();
+                context.SaveChanges();
             }
         }
 

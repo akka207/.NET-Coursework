@@ -14,10 +14,10 @@ namespace Exam.MenuControls
     }
     public class Week
     {
-        public List<Day> Days { get; set; }
+        public List<Day> Days { get; set; } = new List<Day>();
     }
     public class Month
     {
-        public List<Week> Weeks { get; set; }
+        public List<Week> Weeks { get; set; } = new List<Week>();
     }
 }

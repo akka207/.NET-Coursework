@@ -40,15 +40,29 @@ namespace Exam
             {
                 if (DBController.CheckPassword(_login, _password) == true)
                 {
-                    MessageBox.Show("Succesfull!", "Progress", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    Staff? staff = DBController.GetStaff(_login, _password);
+                    if (staff == null)
+                    {
+                        MessageBox.Show("Occured error while getting staff information!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        Dispatcher.Invoke(() => 
+                        { 
+                            Menu menu = new Menu();
+                            menu.CurrentStaff = staff;
+                            menu.Show();
+                            Close();
+                        });
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Incorrect login or password!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                Dispatcher.Invoke(() => 
-                { 
-                    Mouse.OverrideCursor = null; 
+                Dispatcher.Invoke(() =>
+                {
+                    Mouse.OverrideCursor = null;
                     AvailableControls(true);
                 });
             });

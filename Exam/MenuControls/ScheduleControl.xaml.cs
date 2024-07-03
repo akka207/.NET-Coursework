@@ -23,17 +23,7 @@ namespace Exam.MenuControls
     /// </summary>
     public partial class ScheduleControl : UserControl
     {
-        #region Attached properties area
-        public Staff CurrentStaff
-        {
-            get { return (Staff)GetValue(CurrentStaffProperty); }
-            set { SetValue(CurrentStaffProperty, value); }
-        }
-
-        public static readonly DependencyProperty CurrentStaffProperty =
-            DependencyProperty.Register("CurrentStaff", typeof(Staff), typeof(ScheduleControl), new UIPropertyMetadata(null));
-        #endregion
-
+        public Staff CurrentStaff;
 
         public enum ScheduleView
         {
@@ -85,7 +75,11 @@ namespace Exam.MenuControls
 
         private Day GenerateDay(DateTime date)
         {
-            return new Day() { Date = date, Events = DBController.GetEvents(CurrentStaff, ToStartOfDay(date), ToStartOfNextDay(date)) };
+            List<Event> events = CurrentStaff.Schedule.Events
+                    .Where(e => e.EndDateTime >= ToStartOfDay(date) && e.StartDateTime <= ToStartOfNextDay(date))
+                    .ToList();
+
+            return new Day() { Date = date, Events = events };
         }
         private Week GenerateWeek(DateTime date)
         {
@@ -104,7 +98,7 @@ namespace Exam.MenuControls
 
             for (int i = 0; i < 4; i++)
             {
-                month.Weeks.Add(GenerateWeek(date.AddDays(i*7)));
+                month.Weeks.Add(GenerateWeek(date.AddDays(i * 7)));
             }
 
             return month;
@@ -113,7 +107,7 @@ namespace Exam.MenuControls
 
         private void ChangeContainment(ScheduleView view)
         {
-            switch(view)
+            switch (view)
             {
                 case ScheduleView.Day:
                     DayView = GenerateDay(DateToView);

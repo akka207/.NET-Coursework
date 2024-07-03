@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StaffManagerModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace Exam
     /// </summary>
     public partial class Menu : Window
     {
+        public Staff CurrentStaff;
+
         public Menu()
         {
             InitializeComponent();
@@ -44,6 +47,12 @@ namespace Exam
                     profile.Visibility = Visibility.Visible;
                     break;
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Title = $"{CurrentStaff.Person.Login} | {CurrentStaff.Role.Name}";
+            schedule.CurrentStaff = CurrentStaff;
         }
     }
 }

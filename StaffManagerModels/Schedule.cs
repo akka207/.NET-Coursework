@@ -9,6 +9,6 @@ namespace StaffManagerModels
     public class Schedule
     {
         public int Id { get; set; }
-        public Event[] Events { get; set; }
+        public ICollection<Event> Events { get; set; }
     }
 }
