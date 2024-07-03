@@ -11,6 +11,7 @@ namespace Exam.MenuControls
     {
         public DateTime Date { get; set; }
         public List<Event> Events { get; set; }
+        public bool IsSelected { get; set; } = false;
     }
     public class Week
     {

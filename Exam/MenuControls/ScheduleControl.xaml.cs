@@ -62,21 +62,13 @@ namespace Exam.MenuControls
             DateTime pastMonday = date.Date.AddDays(-daysToSubtract);
             return new DateTime(pastMonday.Year, pastMonday.Month, pastMonday.Day, 0, 0, 0);
         }
-        //private DateTime GetNearestFutureMonday(DateTime date)
-        //{
-        //    int daysToAdd = ((int)DayOfWeek.Monday - (int)date.DayOfWeek + 7) % 7;
-        //    if (daysToAdd == 0)
-        //    {
-        //        daysToAdd = 7;
-        //    }
-        //    DateTime futureMonday = date.Date.AddDays(daysToAdd);
-        //    return new DateTime(futureMonday.Year, futureMonday.Month, futureMonday.Day, 0, 0, 0);
-        //}
 
         private Day GenerateDay(DateTime date)
         {
             List<Event> events = CurrentStaff.Schedule.Events
                     .Where(e => e.EndDateTime >= ToStartOfDay(date) && e.StartDateTime <= ToStartOfNextDay(date))
+                    .OrderBy(e => e.StartDateTime)
+                    .ThenBy(e => e.EndDateTime)
                     .ToList();
 
             return new Day() { Date = date, Events = events };
@@ -111,12 +103,24 @@ namespace Exam.MenuControls
             {
                 case ScheduleView.Day:
                     DayView = GenerateDay(DateToView);
+                    daySchedule.Visibility = Visibility.Visible;
+                    weekSchedule.Visibility = Visibility.Hidden;
+                    monthSchedule.Visibility = Visibility.Hidden;
+                    daySchedule.ItemsSource = DayView.Events;
                     break;
                 case ScheduleView.Week:
                     WeekView = GenerateWeek(DateToView);
+                    daySchedule.Visibility = Visibility.Hidden;
+                    weekSchedule.Visibility = Visibility.Visible;
+                    monthSchedule.Visibility = Visibility.Hidden;
+                    weekSchedule.ItemsSource = WeekView.Days;
                     break;
                 case ScheduleView.Month:
                     MonthView = GenerateMonth(DateToView);
+                    daySchedule.Visibility = Visibility.Hidden;
+                    weekSchedule.Visibility = Visibility.Hidden;
+                    monthSchedule.Visibility = Visibility.Visible;
+                    monthSchedule.ItemsSource = MonthView.Weeks;
                     break;
             }
         }
@@ -132,6 +136,11 @@ namespace Exam.MenuControls
         private void monthButton_Click(object sender, RoutedEventArgs e)
         {
             ChangeContainment(ScheduleView.Month);
+        }
+
+        private void control_Loaded(object sender, RoutedEventArgs e)
+        {
+            ChangeContainment(ScheduleView.Day);
         }
     }
 }

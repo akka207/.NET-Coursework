@@ -35,9 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MenuControls\ProfileControls\" />
-    <Folder Include="MenuControls\PersonnelControls\" />
-    <Folder Include="MenuControls\ScheduleControls\" />
+    <Folder Include="MenuControls\Profile\" />
+    <Folder Include="MenuControls\Personnel\" />
   </ItemGroup>
 
   <ItemGroup>

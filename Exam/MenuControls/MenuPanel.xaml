@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:Exam.MenuControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d" x:Name="control" Loaded="control_Loaded">
-    <Border x:Name="originBorder" Width="400" MinHeight="260" 
+    <Border x:Name="originBorder"
             CornerRadius="0 0 20 0" BorderThickness="2" BorderBrush="{StaticResource PrimaryBrush}"
-            IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" Background="Transparent">
+            Background="Transparent">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"/>
@@ -17,7 +17,7 @@
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
 
-            <CustomControls:CustomBorder IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
@@ -29,7 +29,7 @@
                 </Grid>
             </CustomControls:CustomBorder>
 
-            <CustomControls:CustomBorder IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
@@ -41,28 +41,17 @@
                 </Grid>
             </CustomControls:CustomBorder>
 
-            <CustomControls:CustomBorder IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="320"/>
                     </Grid.ColumnDefinitions>
 
-                    <CustomControls:CircleImageButton IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" x:Name="profileMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" Grid.Row="3" OnClick="profileMenuButton_OnClick"/>
+                    <CustomControls:CircleImageButton x:Name="profileMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" Grid.Row="3" OnClick="profileMenuButton_OnClick"/>
                     <CustomControls:TextButton Grid.Column="1" Text="Profile" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="profileMenuButton_OnClick"/>
                 </Grid>
             </CustomControls:CustomBorder>
-
-
-            <!--<Grid Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock Text="Schedule" VerticalAlignment="Center"/>
-            </Grid>
-            <Grid Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock Text="Personnel" VerticalAlignment="Center"/>
-            </Grid>
-            <Grid Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock Text="Profile" VerticalAlignment="Center"/>
-            </Grid>-->
         </Grid>
     </Border>
 </UserControl>
