@@ -18,6 +18,6 @@
         <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1"/>
         
         <MenuControls:MenuPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2"
-                                OnMenuSelected="MenuPanel_OnMenuSelected" MinWidth="84" MaxWidth="400"/>
+                                OnMenuSelected="MenuPanel_OnMenuSelected" MinWidth="84" MaxWidth="400" Background="White"/>
     </Grid>
 </Window>

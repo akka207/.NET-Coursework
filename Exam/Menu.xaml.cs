@@ -47,7 +47,7 @@ namespace Exam
                     profile.Visibility = Visibility.Visible;
                     break;
             }
-        }
+            }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

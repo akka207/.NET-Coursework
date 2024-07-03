@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StaffManagerModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,42 @@ namespace Exam.MenuControls
     /// </summary>
     public partial class ProfileControl : UserControl
     {
+        public Staff CurrentStaff { get; set; }
         public ProfileControl()
         {
             InitializeComponent();
         }
+
+        private void PhoneButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (phoneTextBox.IsReadOnly)
+            {
+                phoneTextBox.IsReadOnly = false;
+                phoneButton.Content = "Save";
+            }
+            else
+            {
+                phoneTextBox.IsReadOnly = true;
+                phoneButton.Content = "Change";
+                CurrentStaff.Person.Phone = phoneTextBox.Text;
+            }
+        }
+
+        private void EmailButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (emailTextBox.IsReadOnly)
+            {
+                emailTextBox.IsReadOnly = false;
+                emailButton.Content = "Save";
+            }
+            else
+            {
+                emailTextBox.IsReadOnly = true;
+                emailButton.Content = "Change";
+                CurrentStaff.Person.Email = emailTextBox.Text;
+            }
+        }
     }
+
 }
+
