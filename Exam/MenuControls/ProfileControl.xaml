@@ -6,7 +6,46 @@
              xmlns:local="clr-namespace:Exam.MenuControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="10" Padding="10" Margin="10">
+        <StackPanel>
+            <!-- Header -->
+            <TextBlock Text="Staff Information" FontSize="24" FontWeight="Bold" 
+                       HorizontalAlignment="Center" Margin="10"/>
+
+            <!-- Staff Details -->
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Role:" FontWeight="Bold" Margin="5"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentStaff.Role.Name}" Margin="5" IsReadOnly="True"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Login:" FontWeight="Bold" Margin="5"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CurrentStaff.Person.Login}" Margin="5" IsReadOnly="True"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Full Name:" FontWeight="Bold" Margin="5"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentStaff.Person.FullName}" Margin="5" IsReadOnly="True"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Phone:" FontWeight="Bold" Margin="5"/>
+                <TextBox x:Name="phoneTextBox" Grid.Row="5" Grid.Column="1" Text="{Binding CurrentStaff.Person.Phone}" Margin="5" IsReadOnly="True"/>
+                <Button x:Name="phoneButton" Grid.Row="5" Grid.Column="2" Content="Change" Margin="5" Click="PhoneButton_Click"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Email:" FontWeight="Bold" Margin="5"/>
+                <TextBox x:Name="emailTextBox" Grid.Row="6" Grid.Column="1" Text="{Binding CurrentStaff.Person.Email}" Margin="5" IsReadOnly="True"/>
+                <Button x:Name="emailButton" Grid.Row="6" Grid.Column="2" Content="Change" Margin="5" Click="EmailButton_Click"/>
+            </Grid>
+        </StackPanel>
+    </Border>
 </UserControl>
