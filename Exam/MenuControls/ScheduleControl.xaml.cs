@@ -3,6 +3,7 @@ using Exam.Data;
 using StaffManagerModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,28 @@ namespace Exam.MenuControls
     /// <summary>
     /// Interaction logic for ScheduleControl.xaml
     /// </summary>
-    public partial class ScheduleControl : UserControl
+    public partial class ScheduleControl : UserControl, INotifyPropertyChanged
     {
         public Staff CurrentStaff;
+
+
+
+        private Event selectedEvent = null;
+        public Event SelectedEvent
+        {
+            get
+            {
+                return selectedEvent;
+            }
+            set
+            {
+                if (value != selectedEvent)
+                {
+                    selectedEvent = value;
+                    OnPropertyChanged(nameof(SelectedEvent));
+                }
+            }
+        }
 
         public enum ScheduleView
         {
@@ -76,12 +96,14 @@ namespace Exam.MenuControls
         private Week GenerateWeek(DateTime date)
         {
             Week week = new Week();
+            week.EventsCount = 0;
 
             for (int i = 0; i < 7; i++)
             {
-                week.Days.Add(GenerateDay(GetNearestPastMonday(date).AddDays(i)));
+                Day day = GenerateDay(GetNearestPastMonday(date).AddDays(i));
+                week.Days.Add(day);
+                week.EventsCount += day.Events.Count;
             }
-
             return week;
         }
         private Month GenerateMonth(DateTime date)
@@ -141,12 +163,34 @@ namespace Exam.MenuControls
         private void control_Loaded(object sender, RoutedEventArgs e)
         {
             ChangeContainment(ScheduleView.Day);
+            SelectedEvent = CurrentStaff.Schedule.Events
+                .Where(e => e.StartDateTime > DateTime.Now)
+                .OrderBy(e => e.StartDateTime)
+                .FirstOrDefault();
         }
 
         private void dayofWeek_CustomBorder_Loaded(object sender, RoutedEventArgs e)
         {
             var border = sender as CustomBorder;
             border.Highlight = (border.DataContext as Day).IsSelected;
+        }
+
+        private void dayofWeek_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            SelectedEvent = (sender as CustomBorder).DataContext as Event;
+        }
+
+
+
+
+
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

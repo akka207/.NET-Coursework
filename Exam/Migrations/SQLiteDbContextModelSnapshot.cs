@@ -23,6 +23,10 @@ namespace Exam.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("EndDateTime")
                         .HasColumnType("TEXT");
 
@@ -40,7 +44,7 @@ namespace Exam.Migrations
 
                     b.HasIndex("ScheduleId");
 
-                    b.ToTable("Events", (string)null);
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Person", b =>
@@ -67,7 +71,7 @@ namespace Exam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persons", (string)null);
+                    b.ToTable("Persons");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Role", b =>
@@ -82,7 +86,7 @@ namespace Exam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Schedule", b =>
@@ -93,7 +97,7 @@ namespace Exam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Schedules", (string)null);
+                    b.ToTable("Schedules");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Staff", b =>
@@ -119,7 +123,7 @@ namespace Exam.Migrations
 
                     b.HasIndex("ScheduleId");
 
-                    b.ToTable("Staffs", (string)null);
+                    b.ToTable("Staffs");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Event", b =>

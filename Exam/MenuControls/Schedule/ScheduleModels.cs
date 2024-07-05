@@ -15,6 +15,7 @@ namespace Exam.MenuControls
     }
     public class Week
     {
+        public int EventsCount { get; set; }
         public List<Day> Days { get; set; } = new List<Day>();
     }
     public class Month

@@ -32,7 +32,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="dayofWeek_event_template" DataType="{x:Type ListItem}">
-            <CustomControls:CustomBorder Style="{StaticResource Border_CommonStyle}" Height="Auto">
+            <CustomControls:CustomBorder Style="{StaticResource Border_CommonStyle}" Height="Auto" MouseLeftButtonUp="dayofWeek_MouseLeftButtonUp">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -80,7 +80,10 @@
 
         <DataTemplate x:Key="month_template" DataType="{x:Type ListItem}">
             <Border>
-                <TextBlock Text="Week"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Events: "/>
+                    <TextBlock Text="{Binding EventsCount}"/>
+                </StackPanel>
             </Border>
         </DataTemplate>
     </UserControl.Resources>
@@ -88,7 +91,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="16*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="12*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
@@ -97,14 +101,42 @@
             <Button x:Name="monthButton" Content="Month" Click="monthButton_Click"/>
         </StackPanel>
 
-        <ItemsControl ItemTemplate="{StaticResource day_template}"   x:Name="daySchedule"   Grid.Row="2"/>
-        <ItemsControl ItemTemplate="{StaticResource dayofWeek_template}"  x:Name="weekSchedule"  Grid.Row="2" Visibility="Hidden" HorizontalAlignment="Center">
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=control, Path=SelectedEvent.Name}"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Active"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=control, Path=SelectedEvent.Description}" TextWrapping="Wrap"/>
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="From"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ElementName=control, Path=SelectedEvent.StartDateTime}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal">
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="To"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ElementName=control, Path=SelectedEvent.EndDateTime}"/>
+            </StackPanel>
+        </Grid>
+        
+        <ItemsControl ItemTemplate="{StaticResource day_template}"          x:Name="daySchedule"   Grid.Row="2" Grid.RowSpan="2"/>
+        <ItemsControl ItemTemplate="{StaticResource dayofWeek_template}"    x:Name="weekSchedule"  Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl ItemTemplate="{StaticResource month_template}" x:Name="monthSchedule" Grid.Row="2" Visibility="Hidden"/>
+        <ItemsControl ItemTemplate="{StaticResource month_template}"        x:Name="monthSchedule" Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden"/>
+
     </Grid>
 </UserControl>
