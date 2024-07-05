@@ -71,7 +71,7 @@ namespace Exam.MenuControls
                     .ThenBy(e => e.EndDateTime)
                     .ToList();
 
-            return new Day() { Date = date, Events = events };
+            return new Day() { Date = date, Events = events, IsSelected = date.Date == DateTime.Today };
         }
         private Week GenerateWeek(DateTime date)
         {
@@ -141,6 +141,12 @@ namespace Exam.MenuControls
         private void control_Loaded(object sender, RoutedEventArgs e)
         {
             ChangeContainment(ScheduleView.Day);
+        }
+
+        private void dayofWeek_CustomBorder_Loaded(object sender, RoutedEventArgs e)
+        {
+            var border = sender as CustomBorder;
+            border.Highlight = (border.DataContext as Day).IsSelected;
         }
     }
 }

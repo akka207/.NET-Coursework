@@ -19,7 +19,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <AControls:LoginControl x:Name="logInControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="290" Height="370" OnLogIn="logInControl_OnLogIn" OnSignUp="logInControl_OnSignUp" Visibility="Visible"/>
+        <AControls:LoginControl x:Name="logInControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="290" Height="370" OnLogIn="logInControl_OnLogIn" OnSignUp="logInControl_OnSignUp" Visibility="Visible" OnDebugLogIn="logInControl_OnDebugLogIn"/>
         <AControls:RegistrationControl x:Name="registerControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="290" Height="370" OnSignUp="registerControl_OnSignUp" OnLogIn="registerControl_OnLogIn" Visibility="Hidden"/>
     </Grid>
 </Window>

@@ -13,5 +13,8 @@ namespace StaffManagerModels
         public DateTime StartDateTime { get; set; }
         public DateTime? EndDateTime { get; set; }
         public int ScheduleId { get; set; }
+
+        // ignored
+        public bool IsSelected { get; set; } = false;
     }
 }

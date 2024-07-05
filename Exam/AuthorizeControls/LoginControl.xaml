@@ -15,6 +15,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Placeholder="Login" FontSize="20"/>
@@ -24,5 +25,6 @@
 
         <Button x:Name="logInButton" Grid.Row="4" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click"/>
         <Button x:Name="signUpButton" Grid.Row="5" Content="Sign Up" FontSize="20" Height="40" Click="signUpButton_Click" VerticalAlignment="Bottom"/>
+        <Button x:Name="debugButton" Grid.Row="7" Content="(debug) Log In as Akka 207" FontSize="10" Height="40" Click="debugButton_Click"/>
     </Grid>
 </UserControl>

@@ -122,5 +122,43 @@ namespace Exam
             logInControl.Visibility = Visibility.Visible;
             registerControl.Visibility = Visibility.Hidden;
         }
+
+        private void logInControl_OnDebugLogIn(object sender, EventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            AvailableControls(false);
+
+            string _login = "Akka 207", _password = "!Qwerty1";
+            Task.Run(() =>
+            {
+                if (DBController.CheckPassword(_login, _password) == true)
+                {
+                    Staff? staff = DBController.GetStaff(_login, _password);
+                    if (staff == null)
+                    {
+                        MessageBox.Show("Occured error while getting staff information!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            Menu menu = new Menu();
+                            menu.CurrentStaff = staff;
+                            menu.Show();
+                            Close();
+                        });
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect login or password!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                Dispatcher.Invoke(() =>
+                {
+                    Mouse.OverrideCursor = null;
+                    AvailableControls(true);
+                });
+            });
+        }
     }
 }

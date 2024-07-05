@@ -7,7 +7,7 @@
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d" x:Name="control" Loaded="control_Loaded">
     <Border x:Name="originBorder" MinWidth="180"
-            CornerRadius="0 0 20 0" BorderThickness="2" BorderBrush="{StaticResource PrimaryBrush}"
+            CornerRadius="0 0 20 0" BorderThickness="0 0 2 2" BorderBrush="{StaticResource PrimaryBrush}"
             Background="Transparent">
         <Grid>
             <Grid.RowDefinitions>
@@ -36,7 +36,7 @@
                         <ColumnDefinition Width="320"/>
                     </Grid.ColumnDefinitions>
 
-                    <CustomControls:CircleImageButton IsMouseDirectlyOverChanged="forall_IsMouseDirectlyOverChanged" x:Name="personnelMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="personnelMenuButton_OnClick"/>
+                    <CustomControls:CircleImageButton x:Name="personnelMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="personnelMenuButton_OnClick"/>
                     <CustomControls:TextButton Grid.Column="1" Text="Personnel" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="personnelMenuButton_OnClick"/>
                 </Grid>
             </CustomControls:CustomBorder>

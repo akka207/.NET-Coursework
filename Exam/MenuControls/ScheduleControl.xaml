@@ -31,7 +31,7 @@
             </CustomControls:CustomBorder>
         </DataTemplate>
 
-        <DataTemplate x:Key="dayofWeek_template" DataType="{x:Type ListItem}">
+        <DataTemplate x:Key="dayofWeek_event_template" DataType="{x:Type ListItem}">
             <CustomControls:CustomBorder Style="{StaticResource Border_CommonStyle}" Height="Auto">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -48,14 +48,14 @@
         </DataTemplate>
 
 
-        
 
-        <DataTemplate x:Key="week_template" DataType="{x:Type ListItem}">
-            <CustomControls:CustomBorder x:Name="border" Width="90" Margin="1 0 1 0" VerticalAlignment="Top">
+
+        <DataTemplate x:Key="dayofWeek_template" DataType="{x:Type ListItem}">
+            <CustomControls:CustomBorder x:Name="border" Loaded="dayofWeek_CustomBorder_Loaded" Width="90" Margin="1 0 1 0" VerticalAlignment="Top">
                 <StackPanel Orientation="Vertical" Grid.Row="1">
                     <TextBlock Text="{Binding Date, Converter={StaticResource dateTimeToDateConverter}}"/>
                     <TextBlock Text="{Binding Date.DayOfWeek}"/>
-                    <ItemsControl x:Name="events" ItemTemplate="{StaticResource dayofWeek_template}" ItemsSource="{Binding Events}" Grid.Row="2"/>
+                    <ItemsControl x:Name="events" ItemTemplate="{StaticResource dayofWeek_event_template}" ItemsSource="{Binding Events}" Grid.Row="2"/>
                 </StackPanel>
                 <CustomControls:CustomBorder.Style>
                     <Style BasedOn="{StaticResource Border_CommonStyle}" TargetType="{x:Type CustomControls:CustomBorder}">
@@ -65,6 +65,9 @@
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="False">
                                 <Setter Property="Height" Value="56"/>
+                            </Trigger>
+                            <Trigger Property="Highlight" Value="True">
+                                <Setter Property="Background" Value="LightGreen"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -95,7 +98,7 @@
         </StackPanel>
 
         <ItemsControl ItemTemplate="{StaticResource day_template}"   x:Name="daySchedule"   Grid.Row="2"/>
-        <ItemsControl ItemTemplate="{StaticResource week_template}"  x:Name="weekSchedule"  Grid.Row="2" Visibility="Hidden" HorizontalAlignment="Center">
+        <ItemsControl ItemTemplate="{StaticResource dayofWeek_template}"  x:Name="weekSchedule"  Grid.Row="2" Visibility="Hidden" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True"/>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using StaffManagerModels;
 using System.Windows.Controls;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Exam.Data
 {
@@ -17,7 +18,11 @@ namespace Exam.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Staff> Staffs { get; set; }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Event>().Ignore(i => i.IsSelected);
+            base.OnModelCreating(modelBuilder);
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

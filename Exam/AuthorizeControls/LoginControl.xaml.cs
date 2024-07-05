@@ -22,6 +22,7 @@ namespace Exam.AuthorizeControls
     {
         public event EventHandler OnLogIn;
         public event EventHandler OnSignUp;
+        public event EventHandler OnDebugLogIn;
 
         public string Login
         {
@@ -66,6 +67,11 @@ namespace Exam.AuthorizeControls
             passwordBox.Password = passwordTextBox.textBox.Text;
             passwordTextBox.Visibility = Visibility.Collapsed;
             passwordBox.Visibility = Visibility.Visible;
+        }
+
+        private void debugButton_Click(object sender, RoutedEventArgs e)
+        {
+            OnDebugLogIn?.Invoke(sender, e);
         }
     }
 
