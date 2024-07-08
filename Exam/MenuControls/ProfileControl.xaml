@@ -22,6 +22,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -45,6 +46,7 @@
                 <TextBlock Grid.Row="6" Grid.Column="0" Text="Email:" FontWeight="Bold" Margin="5"/>
                 <TextBox x:Name="emailTextBox" Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=control, Path=CurrentStaff.Person.Email}" IsReadOnly="True"/>
                 <Button x:Name="emailButton" Grid.Row="6" Grid.Column="2" Content="Change" Width="100px" Click="EmailButton_Click"/>
+                <Button Grid.Row="8" Grid.ColumnSpan="3" Content="Change Password"  Click="ChangePasswordButton_Click"/>
             </Grid>
         </StackPanel>
     </Border>

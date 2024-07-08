@@ -15,7 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Exam.Data;
+using Exam.Windows;
 namespace Exam.MenuControls
 {
     /// <summary>
@@ -53,6 +54,7 @@ namespace Exam.MenuControls
                 phoneTextBox.IsReadOnly = true;
                 phoneButton.Content = "Change";
                 CurrentStaff.Person.Phone = phoneTextBox.Text;
+                DBController.EditPersonInfo(CurrentStaff.Person);
                 // а‘узу би-ллахи мин аш-шайтан ар-раджим
             }
         }
@@ -69,8 +71,14 @@ namespace Exam.MenuControls
                 emailTextBox.IsReadOnly = true;
                 emailButton.Content = "Change";
                 CurrentStaff.Person.Email = emailTextBox.Text;
+                DBController.EditPersonInfo(CurrentStaff.Person);
                 // а‘узу би-ллахи мин аш-шайтан ар-раджим
             }
+        }
+        private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            changePasswordWindow.ShowDialog();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName = "")

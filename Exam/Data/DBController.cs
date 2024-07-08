@@ -7,6 +7,7 @@ using System.Security.RightsManagement;
 using StaffManagerModels;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.Pkcs;
+using System.Text.RegularExpressions;
 
 namespace Exam.Data
 {
@@ -98,20 +99,29 @@ namespace Exam.Data
             }
         }
 
-        public static void ChangePassword(string login, string oldPassword, string newPassword)
+        public static bool ChangePassword(string login, string oldPassword, string newPassword)
         {
             using (var context = Config.DbContext)
             {
-                if (context.Persons.Any(p => p.Login == login))
+                try
                 {
-                    Person findedPerson = context.Persons.First(p => p.Login == login);
-
-                    if (findedPerson != null && CheckPassword(login, oldPassword))
+                    if (context.Persons.Any(p => p.Login == login))
                     {
-                        findedPerson.HashedPasword = GetMD5(newPassword);
-                        context.SaveChanges();
+                        Person findedPerson = context.Persons.First(p => p.Login == login);
+
+                        if (findedPerson != null && CheckPassword(login, oldPassword))
+                        {
+                            findedPerson.HashedPasword = GetMD5(newPassword);
+                            return true;
+                            context.SaveChanges();
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+                return false;
             }
         }
 
