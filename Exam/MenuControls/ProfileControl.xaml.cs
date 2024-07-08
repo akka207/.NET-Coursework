@@ -1,6 +1,8 @@
 ﻿using StaffManagerModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,21 @@ namespace Exam.MenuControls
     /// <summary>
     /// Interaction logic for ProfileControl.xaml
     /// </summary>
-    public partial class ProfileControl : UserControl
+    public partial class ProfileControl : UserControl, INotifyPropertyChanged
     {
-        public Staff CurrentStaff { get; set; }
+        public Staff _currentStaff;
+        public Staff CurrentStaff
+        {
+            get { return _currentStaff; }
+            set
+            {
+                if(_currentStaff != value)
+                {
+                    _currentStaff = value;
+                    OnPropertyChanged(nameof(CurrentStaff));
+                }
+            }
+        }
         public ProfileControl()
         {
             InitializeComponent();
@@ -39,6 +53,7 @@ namespace Exam.MenuControls
                 phoneTextBox.IsReadOnly = true;
                 phoneButton.Content = "Change";
                 CurrentStaff.Person.Phone = phoneTextBox.Text;
+                // а‘узу би-ллахи мин аш-шайтан ар-раджим
             }
         }
 
@@ -54,7 +69,13 @@ namespace Exam.MenuControls
                 emailTextBox.IsReadOnly = true;
                 emailButton.Content = "Change";
                 CurrentStaff.Person.Email = emailTextBox.Text;
+                // а‘узу би-ллахи мин аш-шайтан ар-раджим
             }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

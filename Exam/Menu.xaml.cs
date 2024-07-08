@@ -53,6 +53,7 @@ namespace Exam
         {
             Title = $"{CurrentStaff.Person.Login} | {CurrentStaff.Role.Name}";
             schedule.CurrentStaff = CurrentStaff;
+            profile.CurrentStaff = CurrentStaff;
         }
     }
 }
