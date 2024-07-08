@@ -10,6 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MenuControls\Personnel\**" />
+    <Compile Remove="MenuControls\Profile\**" />
+    <EmbeddedResource Remove="MenuControls\Personnel\**" />
+    <EmbeddedResource Remove="MenuControls\Profile\**" />
+    <None Remove="MenuControls\Personnel\**" />
+    <None Remove="MenuControls\Profile\**" />
+    <Page Remove="MenuControls\Personnel\**" />
+    <Page Remove="MenuControls\Profile\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Icons\lorem.png" />
   </ItemGroup>
 
@@ -32,11 +43,6 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MenuControls\Profile\" />
-    <Folder Include="MenuControls\Personnel\" />
   </ItemGroup>
 
   <ItemGroup>

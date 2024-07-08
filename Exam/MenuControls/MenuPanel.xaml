@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Exam.MenuControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
-             mc:Ignorable="d" x:Name="control" Loaded="control_Loaded">
+             mc:Ignorable="d" x:Name="control" Loaded="Window_Loaded">
     <Border x:Name="originBorder" MinWidth="180"
             CornerRadius="0 0 20 0" BorderThickness="0 0 2 2" BorderBrush="{StaticResource PrimaryBrush}"
             Background="Transparent">
@@ -15,6 +15,7 @@
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="80"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
@@ -52,6 +53,19 @@
                     <CustomControls:TextButton Grid.Column="1" Text="Profile" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="profileMenuButton_OnClick"/>
                 </Grid>
             </CustomControls:CustomBorder>
+
+            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="AddUser">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="320"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CustomControls:CircleImageButton x:Name="addMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" Grid.Row="3" OnClick="addMenuButton_OnClick"/>
+                    <CustomControls:TextButton Grid.Column="1" Text="Add User" Height="{Binding ElementName=addMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="addMenuButton_OnClick"/>
+                </Grid>
+            </CustomControls:CustomBorder>
         </Grid>
+        
     </Border>
 </UserControl>
