@@ -86,15 +86,12 @@ namespace Exam.Data
         {
             using (var context = Config.DbContext)
             {
-                if (context.Persons.Any(p => p.Id == newPerson.Id))
+                Person? person = context.Persons.First(p => p.Id == newPerson.Id);
+                if (person != null)
                 {
-                    Person person = context.Persons.First(p => p.Id == newPerson.Id);
-                    if (person != null)
-                    {
-                        person.Email = newPerson.Email;
-                        person.Phone = newPerson.Phone;
-                        context.SaveChanges();
-                    }
+                    person.Email = newPerson.Email;
+                    person.Phone = newPerson.Phone;
+                    context.SaveChanges();
                 }
             }
         }
@@ -103,24 +100,15 @@ namespace Exam.Data
         {
             using (var context = Config.DbContext)
             {
-                try
-                {
-                    if (context.Persons.Any(p => p.Login == login))
-                    {
-                        Person findedPerson = context.Persons.First(p => p.Login == login);
+                Person? findedPerson = context.Persons.FirstOrDefault(p => p.Login == login);
 
-                        if (findedPerson != null && CheckPassword(login, oldPassword))
-                        {
-                            findedPerson.HashedPasword = GetMD5(newPassword);
-                            return true;
-                            context.SaveChanges();
-                        }
-                    }
-                }
-                catch (Exception ex)
+                if (findedPerson != null && CheckPassword(login, oldPassword))
                 {
-                    return false;
+                    findedPerson.HashedPasword = GetMD5(newPassword);
+                    context.SaveChanges();
+                    return true;
                 }
+
                 return false;
             }
         }
