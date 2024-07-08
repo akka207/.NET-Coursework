@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Security.RightsManagement;
 using StaffManagerModels;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.Pkcs;
 
 namespace Exam.Data
 {
@@ -53,6 +54,23 @@ namespace Exam.Data
             return null;
         }
 
+        public static ICollection<Staff> GetAllStaff()
+        {
+            using (var context = Config.DbContext)
+            {
+                List<Staff> list = context.Staffs.ToList();
+
+                foreach (var staff in list)
+                {
+                    staff.Person = context.Persons.Where(p => p.Id == staff.PersonId).FirstOrDefault();
+                    staff.Role = context.Roles.Where(r => r.Id == staff.RoleId).FirstOrDefault();
+                    staff.Schedule = context.Schedules.Where(s => s.Id == staff.ScheduleId).FirstOrDefault();
+                }
+
+                return list;
+            }
+        }
+
         public static void RegisterPerson(Person person, string password)
         {
             using (var context = Config.DbContext)
@@ -60,6 +78,40 @@ namespace Exam.Data
                 person.HashedPasword = GetMD5(password);
                 context.Persons.Add(person);
                 context.SaveChanges();
+            }
+        }
+
+        public static void EditPersonInfo(Person newPerson)
+        {
+            using (var context = Config.DbContext)
+            {
+                if (context.Persons.Any(p => p.Id == newPerson.Id))
+                {
+                    Person person = context.Persons.First(p => p.Id == newPerson.Id);
+                    if (person != null)
+                    {
+                        person.Email = newPerson.Email;
+                        person.Phone = newPerson.Phone;
+                        context.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        public static void ChangePassword(string login, string oldPassword, string newPassword)
+        {
+            using (var context = Config.DbContext)
+            {
+                if (context.Persons.Any(p => p.Login == login))
+                {
+                    Person findedPerson = context.Persons.First(p => p.Login == login);
+
+                    if (findedPerson != null && CheckPassword(login, oldPassword))
+                    {
+                        findedPerson.HashedPasword = GetMD5(newPassword);
+                        context.SaveChanges();
+                    }
+                }
             }
         }
 

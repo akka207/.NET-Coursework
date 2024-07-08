@@ -15,6 +15,5 @@ namespace StaffManagerModels
         public int RoleId { get; set; }
         public Schedule Schedule { get; set; }
         public int ScheduleId { get; set; }
-
     }
 }

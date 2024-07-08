@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
 
         <MenuControls:ScheduleControl x:Name="schedule" Visibility="Visible" Grid.Column="1"/>
-        <MenuControls:PersonnelControl x:Name="personnel" Visibility="Hidden" Background="WhiteSmoke" Grid.Column="1"/>
+        <MenuControls:PersonnelControl x:Name="personnel" Visibility="Hidden" Grid.Column="1"/>
         <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1"/>
         
         <MenuControls:MenuPanel VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" OnMenuSelected="MenuPanel_OnMenuSelected" Width="180"/>
