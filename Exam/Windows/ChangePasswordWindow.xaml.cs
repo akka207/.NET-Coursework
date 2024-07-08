@@ -19,14 +19,15 @@ namespace Exam.Windows
     /// </summary>
     public partial class ChangePasswordWindow : Window
     {
-        public ChangePasswordWindow()
+        string login;
+        public ChangePasswordWindow(string Login)
         {
             InitializeComponent();
+            login = Login;
         }
 
         private void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            string login = LoginTextBox.Text;
             string oldPassword = OldPasswordBox.Password;
             string newPassword = NewPasswordBox.Password;
             if (DBController.ChangePassword(login, oldPassword, newPassword))
