@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Exam.Generators;
 namespace Exam.AuthorizeControls
 {
     /// <summary>
@@ -75,10 +75,14 @@ namespace Exam.AuthorizeControls
         {
             OnSignUp?.Invoke(sender, e);
         }
-
-        private void logInButton_Click(object sender, RoutedEventArgs e)
+        private void generateLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            OnLogIn?.Invoke(sender, e);
+            login.textBox.Text = LoginGenerator.GenerateLogin(Fullname);
+        }
+        private void generatePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            password.textBox.Text = PasswordGenerator.GeneratePassword();
+            passwordC.textBox.Text = password.textBox.Text;
         }
     }
 }

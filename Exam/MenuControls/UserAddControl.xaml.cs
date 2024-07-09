@@ -24,8 +24,6 @@ namespace Exam.MenuControls
         public UserAddControl()
         {
             InitializeComponent();
-            string pass = PasswordGenerator.GeneratePassword();
-            Console.Write(pass);
         }
     }
 }

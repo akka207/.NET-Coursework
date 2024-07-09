@@ -8,10 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <controls:RegistrationControl Margin="10 0 10 0">
-            <controls:RegistrationControl.Clip>
-                <RectangleGeometry Rect="0,0,800,430"/>
-            </controls:RegistrationControl.Clip>
-        </controls:RegistrationControl>
+        <controls:AdminRegistrationControl Margin="10 0 10 0" />
     </Grid>
 </UserControl>
