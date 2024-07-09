@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Exam.AuthorizeControls.AdminRegistrationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:CustomControls="clr-namespace:Exam.CustomControls"
+             xmlns:local="clr-namespace:Exam.AuthorizeControls"
+             mc:Ignorable="d">
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="30*"/>
+            </Grid.ColumnDefinitions>
+            <CustomControls:CustomTextBox x:Name="login" Grid.Row="0" Placeholder="Login" FontSize="20"/>
+            <CustomControls:CustomTextBox x:Name="fullname" Grid.Row="1" Placeholder="Full Name" FontSize="20"/>
+            <CustomControls:CustomTextBox x:Name="password" Grid.Row="2" Placeholder="Password" FontSize="20"/>
+            <CustomControls:CustomTextBox x:Name="passwordC" Grid.Row="3" Placeholder="Confirm Password" FontSize="20"/>
+            <CustomControls:CustomTextBox x:Name="phone" Grid.Row="4" Placeholder="Phone" FontSize="20"/>
+            <CustomControls:CustomTextBox x:Name="email" Grid.Row="5" Placeholder="Email" FontSize="20"/>
+            <Button x:Name="confirmButton" Grid.Row="6" Content="Sign Up" FontSize="20" Height="40" Click="confirmButton_Click"/>
+            
+ 
+        </Grid>
+    </Border>
+</UserControl>

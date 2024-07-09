@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Exam.AuthorizeControls;
+using Exam.Generators;
 namespace Exam.MenuControls
 {
     /// <summary>
@@ -23,6 +24,8 @@ namespace Exam.MenuControls
         public UserAddControl()
         {
             InitializeComponent();
+            string pass = PasswordGenerator.GeneratePassword();
+            Console.Write(pass);
         }
     }
 }
