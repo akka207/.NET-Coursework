@@ -25,7 +25,7 @@
                         <ColumnDefinition Width="320"/>
                     </Grid.ColumnDefinitions>
 
-                    <CustomControls:CircleImageButton Grid.Column="0" x:Name="sheduleMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="sheduleMenuButton_OnClick"/>
+                    <CustomControls:CircleImageButton Grid.Column="0" x:Name="sheduleMenuButton" IconPath="pack://application:,,,/Icons/ScheduleIcon.png" OnClick="sheduleMenuButton_OnClick"/>
                     <CustomControls:TextButton Grid.Column="1" Text="Schedule" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="sheduleMenuButton_OnClick"/>
                 </Grid>
             </CustomControls:CustomBorder>
@@ -37,7 +37,7 @@
                         <ColumnDefinition Width="320"/>
                     </Grid.ColumnDefinitions>
 
-                    <CustomControls:CircleImageButton x:Name="personnelMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="personnelMenuButton_OnClick"/>
+                    <CustomControls:CircleImageButton x:Name="personnelMenuButton" IconPath="pack://application:,,,/Icons/PersonnelIcon.png" OnClick="personnelMenuButton_OnClick"/>
                     <CustomControls:TextButton Grid.Column="1" Text="Personnel" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="personnelMenuButton_OnClick"/>
                 </Grid>
             </CustomControls:CustomBorder>
@@ -49,7 +49,7 @@
                         <ColumnDefinition Width="320"/>
                     </Grid.ColumnDefinitions>
 
-                    <CustomControls:CircleImageButton x:Name="profileMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" Grid.Row="3" OnClick="profileMenuButton_OnClick"/>
+                    <CustomControls:CircleImageButton x:Name="profileMenuButton" IconPath="pack://application:,,,/Icons/ProfileIcon.png" Grid.Row="3" OnClick="profileMenuButton_OnClick"/>
                     <CustomControls:TextButton Grid.Column="1" Text="Profile" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="profileMenuButton_OnClick"/>
                 </Grid>
             </CustomControls:CustomBorder>
@@ -61,7 +61,7 @@
                         <ColumnDefinition Width="320"/>
                     </Grid.ColumnDefinitions>
 
-                    <CustomControls:CircleImageButton x:Name="addMenuButton" IconPath="pack://application:,,,/Icons/lorem.png" Grid.Row="3" OnClick="addMenuButton_OnClick"/>
+                    <CustomControls:CircleImageButton x:Name="addMenuButton" IconPath="pack://application:,,,/Icons/AddUserIcon.png" Grid.Row="3" OnClick="addMenuButton_OnClick"/>
                     <CustomControls:TextButton Grid.Column="1" Text="Add User" Height="{Binding ElementName=addMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="addMenuButton_OnClick"/>
                 </Grid>
             </CustomControls:CustomBorder>

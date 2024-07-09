@@ -21,7 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Icons\AddUserIcon.png" />
     <None Remove="Icons\lorem.png" />
+    <None Remove="Icons\PersonnelIcon.png" />
+    <None Remove="Icons\ProfileIcon.png" />
+    <None Remove="Icons\ScheduleIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +50,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Icons\AddUserIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Icons\lorem.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\PersonnelIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\ProfileIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\ScheduleIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
