@@ -65,10 +65,16 @@ namespace Exam.CustomControls
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBoxText = textBox.Text;
+            HandlePlaceholder();
         }
         private void textBox_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             border.Highlight = textBox.IsKeyboardFocused;
+            HandlePlaceholder();
+        }
+
+        private void HandlePlaceholder()
+        {
             if (textBox.IsKeyboardFocused || textBox.Text != string.Empty)
             {
                 placeholder.Visibility = Visibility.Hidden;
