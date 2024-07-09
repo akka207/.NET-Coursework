@@ -1,4 +1,5 @@
-﻿using StaffManagerModels;
+﻿using Exam.Data;
+using StaffManagerModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,6 @@ namespace Exam
     /// </summary>
     public partial class Menu : Window
     {
-        public Staff CurrentStaff;
-
         public Menu()
         {
             InitializeComponent();
@@ -60,10 +59,7 @@ namespace Exam
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title = $"{CurrentStaff.Person.Login} | {CurrentStaff.Role.Name}";
-            schedule.CurrentStaff = CurrentStaff;
-            profile.CurrentStaff = CurrentStaff;
-            panel.CurrentStaff = CurrentStaff;
+            Title = $"{DBController.CurrentStaff.Person.Login} | {DBController.CurrentStaff.Role.Name}";
         }
     }
 }

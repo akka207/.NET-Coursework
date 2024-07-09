@@ -1,4 +1,5 @@
 ﻿using Exam.Data;
+using Exam.MenuControls.PersonnelControls;
 using StaffManagerModels;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,6 @@ namespace Exam.MenuControls
     /// </summary>
     public partial class PersonnelControl : UserControl, INotifyPropertyChanged
     {
-        public Staff CurrentStaff;
-
         private ObservableCollection<Staff> staffList = null;
         public ObservableCollection<Staff> StaffList
         {
@@ -60,6 +59,45 @@ namespace Exam.MenuControls
         protected void OnPropertyChanged(string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void staff_ListBoxItem_Loaded(object sender, RoutedEventArgs e)
+        {
+            var addEventButton = ((sender as Border).Child as StackPanel).Children[3];
+            var editStaffButton = ((sender as Border).Child as StackPanel).Children[4];
+
+
+            switch(DBController.CurrentStaff.Role.Name)
+            {
+                case "User":
+                    addEventButton.Visibility = Visibility.Hidden;
+                    editStaffButton.Visibility = Visibility.Hidden;
+                    break;
+                case "Manager":
+                    addEventButton.Visibility = Visibility.Visible;
+                    editStaffButton.Visibility = Visibility.Hidden;
+                    break;
+                case "Admin":
+                    addEventButton.Visibility = Visibility.Visible;
+                    editStaffButton.Visibility = Visibility.Visible;
+                    break;
+            }
+        }
+
+        private void addEventButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddEventWindow window = new AddEventWindow();
+            window.SelectedStaff = (sender as Button).DataContext as Staff;
+            window.ShowDialog();
+            if(window.SelectedStaff.Id == DBController.CurrentStaff.Id)
+            {
+                DBController.UpdateCurrentStaff();
+            }
+        }
+
+        private void editStaffButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

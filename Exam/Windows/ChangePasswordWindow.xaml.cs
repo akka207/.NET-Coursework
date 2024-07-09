@@ -19,18 +19,16 @@ namespace Exam.Windows
     /// </summary>
     public partial class ChangePasswordWindow : Window
     {
-        string login;
-        public ChangePasswordWindow(string Login)
+        public ChangePasswordWindow()
         {
             InitializeComponent();
-            login = Login;
         }
 
         private void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
             string oldPassword = OldPasswordBox.Password;
             string newPassword = NewPasswordBox.Password;
-            if (DBController.ChangePassword(login, oldPassword, newPassword))
+            if (DBController.ChangePassword(DBController.CurrentStaff.Person.Login, oldPassword, newPassword))
             {
                 MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();

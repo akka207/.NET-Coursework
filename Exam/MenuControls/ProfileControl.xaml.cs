@@ -30,7 +30,7 @@ namespace Exam.MenuControls
             get { return _currentStaff; }
             set
             {
-                if(_currentStaff != value)
+                if (_currentStaff != value)
                 {
                     _currentStaff = value;
                     OnPropertyChanged(nameof(CurrentStaff));
@@ -53,8 +53,8 @@ namespace Exam.MenuControls
             {
                 phoneTextBox.IsReadOnly = true;
                 phoneButton.Content = "Change";
-                CurrentStaff.Person.Phone = phoneTextBox.Text;
-                DBController.EditPersonInfo(CurrentStaff.Person);
+                DBController.CurrentStaff.Person.Phone = phoneTextBox.Text;
+                DBController.EditPersonInfo(DBController.CurrentStaff.Person);
                 // а‘узу би-ллахи мин аш-шайтан ар-раджим
             }
         }
@@ -70,20 +70,25 @@ namespace Exam.MenuControls
             {
                 emailTextBox.IsReadOnly = true;
                 emailButton.Content = "Change";
-                CurrentStaff.Person.Email = emailTextBox.Text;
-                DBController.EditPersonInfo(CurrentStaff.Person);
+                DBController.CurrentStaff.Person.Email = emailTextBox.Text;
+                DBController.EditPersonInfo(DBController.CurrentStaff.Person);
                 // а‘узу би-ллахи мин аш-шайтан ар-раджим
             }
         }
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(CurrentStaff.Person.Login);
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
             changePasswordWindow.ShowDialog();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void control_Loaded(object sender, RoutedEventArgs e)
+        {
+            CurrentStaff = DBController.CurrentStaff;
         }
     }
 

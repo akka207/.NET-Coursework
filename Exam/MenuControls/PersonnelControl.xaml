@@ -8,11 +8,14 @@
              d:DesignHeight="600" d:DesignWidth="716">
     <UserControl.Resources>
         <DataTemplate x:Key="staff_ListBoxItem" DataType="{x:Type ListBoxItem}">
-            <Border Style="{StaticResource ListViewItemStyle}">
+            <Border Style="{StaticResource ListViewItemStyle}" Loaded="staff_ListBoxItem_Loaded">
                 <StackPanel Orientation="Horizontal" Style="{StaticResource StackPanelStyle}">
                     <TextBlock Text="{Binding Person.FullName}" Margin="5" Style="{StaticResource TextBlockStyle}"/>
                     <TextBlock Text=" - " Margin="5" Style="{StaticResource TextBlockStyle}"/>
                     <TextBlock Text="{Binding Role.Name}" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+
+                    <Button Content="Add Event" Click="addEventButton_Click"/>
+                    <Button Content="Edit Staff" Click="editStaffButton_Click"/>
                 </StackPanel>
             </Border>
         </DataTemplate>

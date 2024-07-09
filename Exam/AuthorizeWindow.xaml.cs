@@ -47,10 +47,10 @@ namespace Exam
                     }
                     else
                     {
+                        DBController.SelectCurrentStaff(_login, _password);
                         Dispatcher.Invoke(() => 
                         { 
                             Menu menu = new Menu();
-                            menu.CurrentStaff = staff;
                             menu.Show();
                             Close();
                         });
@@ -140,10 +140,10 @@ namespace Exam
                     }
                     else
                     {
+                        DBController.SelectCurrentStaff(_login, _password);
                         Dispatcher.Invoke(() =>
                         {
                             Menu menu = new Menu();
-                            menu.CurrentStaff = staff;
                             menu.Show();
                             Close();
                         });

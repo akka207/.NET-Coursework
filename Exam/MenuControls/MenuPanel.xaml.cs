@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using StaffManagerModels;
 using System.ComponentModel;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Exam.Data;
 namespace Exam.MenuControls
 {
     /// <summary>
@@ -30,19 +31,6 @@ namespace Exam.MenuControls
             Profile,
             UserAdd
         }
-        public Staff _currentStaff;
-        public Staff CurrentStaff
-        {
-            get { return _currentStaff; }
-            set
-            {
-                if (_currentStaff != value)
-                {
-                    _currentStaff = value;
-                    OnPropertyChanged(nameof(CurrentStaff));
-                }
-            }
-        }
         public event EventHandler<MenuType> OnMenuSelected;
 
 
@@ -53,10 +41,10 @@ namespace Exam.MenuControls
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //if (CurrentStaff.Role.Name != "Admin")
-            //{
-            //    AddUser.Visibility = Visibility.Collapsed;
-            //}
+            if (DBController.CurrentStaff.Role.Name != "Admin")
+            {
+                AddUser.Visibility = Visibility.Collapsed;
+            }
         }
         private void sheduleMenuButton_OnClick(object sender, EventArgs e)
         {

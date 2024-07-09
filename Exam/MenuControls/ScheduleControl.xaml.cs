@@ -24,10 +24,6 @@ namespace Exam.MenuControls
     /// </summary>
     public partial class ScheduleControl : UserControl, INotifyPropertyChanged
     {
-        public Staff CurrentStaff;
-
-
-
         private Event selectedEvent = null;
         public Event SelectedEvent
         {
@@ -70,7 +66,7 @@ namespace Exam.MenuControls
         }
         private DateTime ToStartOfNextDay(DateTime dateTime)
         {
-            return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0);
+            return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day + 1, 0, 0, 0);
         }
         private DateTime GetNearestPastMonday(DateTime date)
         {
@@ -85,8 +81,9 @@ namespace Exam.MenuControls
 
         private Day GenerateDay(DateTime date)
         {
-            List<Event> events = CurrentStaff.Schedule.Events
-                    .Where(e => e.EndDateTime >= ToStartOfDay(date) && e.StartDateTime <= ToStartOfNextDay(date))
+            List<Event> events = DBController.CurrentStaff.Schedule.Events
+                    .Where(e => (e.EndDateTime != null ? e.EndDateTime : e.StartDateTime) >= ToStartOfDay(date)
+                                && e.StartDateTime < ToStartOfNextDay(date))
                     .OrderBy(e => e.StartDateTime)
                     .ThenBy(e => e.EndDateTime)
                     .ToList();
@@ -163,7 +160,7 @@ namespace Exam.MenuControls
         private void control_Loaded(object sender, RoutedEventArgs e)
         {
             ChangeContainment(ScheduleView.Day);
-            SelectedEvent = CurrentStaff.Schedule.Events
+            SelectedEvent = DBController.CurrentStaff.Schedule.Events
                 .Where(e => e.StartDateTime > DateTime.Now)
                 .OrderBy(e => e.StartDateTime)
                 .FirstOrDefault();
