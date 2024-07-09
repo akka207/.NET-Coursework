@@ -35,19 +35,28 @@ namespace Exam
                     schedule.Visibility = Visibility.Visible;
                     personnel.Visibility = Visibility.Hidden;
                     profile.Visibility = Visibility.Hidden;
+                    add.Visibility = Visibility.Hidden;
                     break;
                 case MenuControls.MenuPanel.MenuType.Personnel:
                     schedule.Visibility = Visibility.Hidden;
                     personnel.Visibility = Visibility.Visible;
                     profile.Visibility = Visibility.Hidden;
+                    add.Visibility = Visibility.Hidden;
                     break;
                 case MenuControls.MenuPanel.MenuType.Profile:
                     schedule.Visibility = Visibility.Hidden;
                     personnel.Visibility = Visibility.Hidden;
                     profile.Visibility = Visibility.Visible;
+                    add.Visibility = Visibility.Hidden;
+                    break;
+                case MenuControls.MenuPanel.MenuType.UserAdd:
+                    schedule.Visibility = Visibility.Hidden;
+                    personnel.Visibility = Visibility.Hidden;
+                    profile.Visibility = Visibility.Hidden;
+                    add.Visibility = Visibility.Visible;
                     break;
             }
-            }
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

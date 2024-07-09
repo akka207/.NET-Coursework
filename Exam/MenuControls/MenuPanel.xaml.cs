@@ -53,10 +53,10 @@ namespace Exam.MenuControls
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (CurrentStaff.Role.Name != "Admin")
-            {
-                AddUser.Visibility = Visibility.Collapsed;
-            }
+            //if (CurrentStaff.Role.Name != "Admin")
+            //{
+            //    AddUser.Visibility = Visibility.Collapsed;
+            //}
         }
         private void sheduleMenuButton_OnClick(object sender, EventArgs e)
         {
