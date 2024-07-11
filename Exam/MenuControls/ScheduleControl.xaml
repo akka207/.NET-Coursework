@@ -48,6 +48,27 @@
         </DataTemplate>
 
 
+        <DataTemplate x:Key="dayofWeekofMonth_event_template" DataType="{x:Type ListItem}">
+            <CustomControls:CustomBorder Height="40" Width="80" Margin="1 -1 1 0" MouseLeftButtonUp="dayofWeek_MouseLeftButtonUp" Loaded="dayofWeekofMonth_Loaded">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding Date.DayOfWeek}" Grid.Row="0" FontSize="12" HorizontalAlignment="Center" Margin="0 1 0 0 "/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Events.Count}"/>
+                        <TextBlock Text="Events" FontSize="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <CustomControls:CustomBorder.Style>
+                    <Style TargetType="{x:Type CustomControls:CustomBorder}" BasedOn="{StaticResource Border_CommonStyle}">
+                        <Style.Triggers>
+                            <Trigger Property="Highlight" Value="True">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </CustomControls:CustomBorder.Style>
+            </CustomControls:CustomBorder>
+        </DataTemplate>
+
 
 
         <DataTemplate x:Key="dayofWeek_template" DataType="{x:Type ListItem}">
@@ -76,32 +97,53 @@
         </DataTemplate>
 
 
-
+        
 
         <DataTemplate x:Key="month_template" DataType="{x:Type ListItem}">
-            <Border>
+            <CustomControls:CustomBorder>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Events: "/>
                     <TextBlock Text="{Binding EventsCount}"/>
+                    <ItemsControl ItemTemplate="{StaticResource dayofWeekofMonth_event_template}" ItemsSource="{Binding Days}" x:Name="weekSchedule"  Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Center">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </StackPanel>
-            </Border>
+                <CustomControls:CustomBorder.Style>
+                    <Style TargetType="{x:Type CustomControls:CustomBorder}" BasedOn="{StaticResource Border_CommonStyle}">
+                        <Setter Property="Margin" Value="1"/>
+                    </Style>
+                </CustomControls:CustomBorder.Style>
+            </CustomControls:CustomBorder>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel x:Name="weekSelector" Orientation="Vertical" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <CustomControls:CircleImageButton x:Name="arrowUpButton" Width="32" Height="32" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="arrowUpButton_OnClick"/>
+            <CustomControls:CircleImageButton x:Name="arrowDownButton" Width="32" Height="32" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="arrowDownButton_OnClick"/>
+        </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2">
             <Button x:Name="dayButton"   Content="Day"   Click="dayButton_Click"/>
             <Button x:Name="weekButton"  Content="Week"  Click="weekButton_Click"/>
             <Button x:Name="monthButton" Content="Month" Click="monthButton_Click"/>
         </StackPanel>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="6*"/>
@@ -127,8 +169,8 @@
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ElementName=control, Path=SelectedEvent.EndDateTime}"/>
             </StackPanel>
         </Grid>
-        
-        <ItemsControl ItemTemplate="{StaticResource day_template}"          x:Name="daySchedule"   Grid.Row="2" Grid.RowSpan="2"/>
+
+        <ItemsControl ItemTemplate="{StaticResource day_template}"          x:Name="daySchedule"   Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <ItemsControl ItemTemplate="{StaticResource dayofWeek_template}"    x:Name="weekSchedule"  Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -136,7 +178,8 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl ItemTemplate="{StaticResource month_template}"        x:Name="monthSchedule" Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden"/>
+        <ItemsControl ItemTemplate="{StaticResource month_template}"        x:Name="monthSchedule" Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden" Width="657" HorizontalAlignment="Left"/>
+
 
     </Grid>
 </UserControl>

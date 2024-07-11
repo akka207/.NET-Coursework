@@ -121,10 +121,13 @@ namespace Exam.MenuControls
             switch (view)
             {
                 case ScheduleView.Day:
+                    DateToView = DateTime.Now;
                     DayView = GenerateDay(DateToView);
                     daySchedule.Visibility = Visibility.Visible;
                     weekSchedule.Visibility = Visibility.Hidden;
                     monthSchedule.Visibility = Visibility.Hidden;
+                    arrowUpButton.Visibility = Visibility.Hidden;
+                    arrowDownButton.Visibility = Visibility.Hidden;
                     daySchedule.ItemsSource = DayView.Events;
                     break;
                 case ScheduleView.Week:
@@ -132,6 +135,8 @@ namespace Exam.MenuControls
                     daySchedule.Visibility = Visibility.Hidden;
                     weekSchedule.Visibility = Visibility.Visible;
                     monthSchedule.Visibility = Visibility.Hidden;
+                    arrowUpButton.Visibility = Visibility.Visible;
+                    arrowDownButton.Visibility = Visibility.Visible;
                     weekSchedule.ItemsSource = WeekView.Days;
                     break;
                 case ScheduleView.Month:
@@ -139,6 +144,8 @@ namespace Exam.MenuControls
                     daySchedule.Visibility = Visibility.Hidden;
                     weekSchedule.Visibility = Visibility.Hidden;
                     monthSchedule.Visibility = Visibility.Visible;
+                    arrowUpButton.Visibility = Visibility.Visible;
+                    arrowDownButton.Visibility = Visibility.Visible;
                     monthSchedule.ItemsSource = MonthView.Weeks;
                     break;
             }
@@ -188,6 +195,32 @@ namespace Exam.MenuControls
         protected void OnPropertyChanged(string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void dayofWeekofMonth_Loaded(object sender, RoutedEventArgs e)
+        {
+            var border = sender as CustomBorder;
+            border.Highlight = (border.DataContext as Day).IsSelected;
+        }
+
+        private void arrowUpButton_OnClick(object sender, EventArgs e)
+        {
+            DateToView = DateToView.AddDays(-7);
+            MonthView = GenerateMonth(DateToView);
+            WeekView = MonthView.Weeks.First();
+
+            OnPropertyChanged(nameof(MonthView));
+            OnPropertyChanged(nameof(WeekView));
+        }
+
+        private void arrowDownButton_OnClick(object sender, EventArgs e)
+        {
+            DateToView = DateToView.AddDays(7);
+            MonthView = GenerateMonth(DateToView);
+            WeekView = MonthView.Weeks.First();
+
+            OnPropertyChanged(nameof(MonthView));
+            OnPropertyChanged(nameof(WeekView));
         }
     }
 }
