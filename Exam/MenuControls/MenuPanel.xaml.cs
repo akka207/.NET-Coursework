@@ -41,7 +41,11 @@ namespace Exam.MenuControls
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+<<<<<<< Updated upstream
             if (DBController.CurrentStaff.Role.Name != "Admin")
+=======
+            if (CurrentStaff.Role.Name != "Admin")
+>>>>>>> Stashed changes
             {
                 AddUser.Visibility = Visibility.Collapsed;
             }
