@@ -18,7 +18,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Placeholder="Login" FontSize="20"/>
+        <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Placeholder="Login" FontSize="20" />
         <PasswordBox x:Name="passwordBox" Grid.Row="2" FontSize="20" Visibility="Collapsed" BorderThickness="0px"/>
         <CustomControls:CustomTextBox x:Name="passwordTextBox" Grid.Row="2" Placeholder="Password" FontSize="20" />
         <CheckBox x:Name="showPasswordCheckBox" Grid.Row="3" Content="Show Password" Checked="showPasswordCheckBox_Checked" Unchecked="showPasswordCheckBox_Unchecked" IsChecked="True"/>

@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="Exam.MenuControls.ProfileControl"
+﻿<UserControl x:Class="Exam.AuthorizeControls.AdminEditControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Exam.MenuControls"
-             mc:Ignorable="d" x:Name="control" Loaded="control_Loaded"
+             xmlns:local="clr-namespace:Exam.AuthorizeControls"
+             xmlns:CustomControls="clr-namespace:Exam.CustomControls"
+             mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="10" Padding="10" Margin="10">
         <StackPanel>
@@ -28,20 +29,20 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Role:" FontWeight="Bold" Margin="5"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=control, Path=CurrentStaff.Role.Name}" IsReadOnly="True"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=CStaff.Role.Name}" IsReadOnly="True"/>
 
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Login:" FontWeight="Bold" Margin="5"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=control, Path=CurrentStaff.Person.Login}" IsReadOnly="True"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=CStaff.Person.Login}" IsReadOnly="True"/>
 
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Full Name:" FontWeight="Bold" Margin="5"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=control, Path=CurrentStaff.Person.FullName}" IsReadOnly="True"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=CStaff.Person.FullName}" IsReadOnly="True"/>
 
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Phone:" FontWeight="Bold" Margin="5"/>
-                <TextBox x:Name="phoneTextBox" Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=control, Path=CurrentStaff.Person.Phone}" IsReadOnly="True"/>
+                <TextBox x:Name="phoneTextBox" Grid.Row="5" Grid.Column="1" Text="{Binding Path=CStaff.Person.Phone}" IsReadOnly="True"/>
                 <Button x:Name="phoneButton" Grid.Row="5" Grid.Column="2" Width="100px" Content="Change" Click="PhoneButton_Click"/>
 
                 <TextBlock Grid.Row="6" Grid.Column="0" Text="Email:" FontWeight="Bold" Margin="5"/>
-                <TextBox x:Name="emailTextBox" Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=control, Path=CurrentStaff.Person.Email}" IsReadOnly="True"/>
+                <TextBox x:Name="emailTextBox" Grid.Row="6" Grid.Column="1" Text="{Binding Path=CStaff.Person.Email}" IsReadOnly="True"/>
                 <Button x:Name="emailButton" Grid.Row="6" Grid.Column="2" Content="Change" Width="100px" Click="EmailButton_Click"/>
                 <Button Grid.Row="8" Grid.ColumnSpan="3" Content="Change Password"  Click="ChangePasswordButton_Click"/>
             </Grid>

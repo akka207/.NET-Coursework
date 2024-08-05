@@ -59,15 +59,23 @@ namespace Exam.Generators
         public static string GenerateLogin(string fullName)
         {
             var parts = fullName.Split(' ');
-            if (parts.Length < 2)
-                throw new ArgumentException("FullName must contain at least a first name and a surname");
+            try
+            {
+                if (parts.Length < 2)
+                    throw new ArgumentException("FullName must contain at least a first name and a surname");
+                var surname = parts[1];
+                var firstFourLetters = surname.Substring(0, Math.Min(4, surname.Length));
+                var transliterated = Transliterate(firstFourLetters);
+                var randomLetters = GenerateRandomAddition();
 
-            var surname = parts[1];
-            var firstFourLetters = surname.Substring(0, Math.Min(4, surname.Length));
-            var transliterated = Transliterate(firstFourLetters);
-            var randomLetters = GenerateRandomAddition();
+                return $"{transliterated}_{randomLetters}";
+            }
+            catch
+            {
+                // не дай боже якийсь інвалід не введе ім'я
+            }
 
-            return $"{transliterated}_{randomLetters}";
+            return "Error";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Exam.Data;
+﻿using Exam.AuthorizeControls;
+using Exam.Data;
 using Exam.MenuControls.PersonnelControls;
 using StaffManagerModels;
 using System;
@@ -17,7 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Exam.Windows;
 namespace Exam.MenuControls
 {
     /// <summary>
@@ -97,7 +98,10 @@ namespace Exam.MenuControls
 
         private void editStaffButton_Click(object sender, RoutedEventArgs e)
         {
-
+            AdminEditWindow window = new AdminEditWindow();
+            window.xD = (sender as Button).DataContext as Staff;
+            window.SetStaff();
+            window.ShowDialog();
         }
     }
 }
