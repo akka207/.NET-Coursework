@@ -6,24 +6,48 @@
              xmlns:local="clr-namespace:Exam.AuthorizeControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d">
-    
+    <Control.Resources>
+        <Style TargetType="{x:Type CheckBox}" x:Key="CustomCheckBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="checkboxImage" Source="pack://application:,,,/Icons/HidePassowrdIcon.png" Width="32"/>
+                            <ContentPresenter/>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="checkboxImage" Property="Source" Value="pack://application:,,,/Icons/HidePasswordIcon.png"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="checkboxImage" Property="Source" Value="pack://application:,,,/Icons/ShowPasswordIcon.png"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Control.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="50px"/>
+            <RowDefinition Height="50px"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
         <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Placeholder="Login" FontSize="20" />
-        <PasswordBox x:Name="passwordBox" Grid.Row="2" FontSize="20" Visibility="Collapsed" BorderThickness="0px"/>
-        <CustomControls:CustomTextBox x:Name="passwordTextBox" Grid.Row="2" Placeholder="Password" FontSize="20" />
-        <CheckBox x:Name="showPasswordCheckBox" Grid.Row="3" Content="Show Password" Checked="showPasswordCheckBox_Checked" Unchecked="showPasswordCheckBox_Unchecked" IsChecked="True"/>
+        <CustomControls:CustomPasswordBox x:Name="passwordBox" Grid.Row="2" PassPlaceholder="Password" FontSize="20" />
+        <CustomControls:CustomTextBox TextChanged="passwordTextBox_TextChanged" x:Name="passwordTextBox" Grid.Row="2" Placeholder="Password" FontSize="20" Visibility="Collapsed"/>
+        <CheckBox Height="50px" Width="50px" Style="{StaticResource CustomCheckBox}" x:Name="showPasswordCheckBox" Grid.Row="2" Grid.Column="1" Checked="showPasswordCheckBox_Checked" Unchecked="showPasswordCheckBox_Unchecked" IsChecked="False"/>
 
-        <Button x:Name="logInButton" Grid.Row="4" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click"/>
+        <Button x:Name="logInButton" Grid.Row="3" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click"/>
         <Button x:Name="signUpButton" Grid.Row="5" Content="Sign Up" FontSize="20" Height="40" Click="signUpButton_Click" VerticalAlignment="Bottom"/>
         <Button x:Name="debugButton" Grid.Row="7" Content="(debug) Log In as Akka 207" FontSize="10" Height="40" Click="debugButton_Click"/>
     </Grid>

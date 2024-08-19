@@ -53,8 +53,17 @@ namespace Exam.AuthorizeControls
         private void signUpButton_Click(object sender, RoutedEventArgs e)
         {
             OnSignUp?.Invoke(sender, e);
+        }        
+        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (passwordBox.Visibility == Visibility.Visible)
+                passwordTextBox.textBox.Text = passwordBox.Password;
         }
-
+        private void passwordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (passwordTextBox.Visibility == Visibility.Visible)
+                passwordBox.Password = passwordTextBox.textBox.Text;
+        }
         private void showPasswordCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             passwordTextBox.textBox.Text = passwordBox.Password;
@@ -65,6 +74,7 @@ namespace Exam.AuthorizeControls
         private void showPasswordCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             passwordBox.Password = passwordTextBox.textBox.Text;
+            passwordBox.OnPasswordChanged();
             passwordTextBox.Visibility = Visibility.Collapsed;
             passwordBox.Visibility = Visibility.Visible;
         }

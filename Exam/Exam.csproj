@@ -22,10 +22,12 @@
 
   <ItemGroup>
     <None Remove="Icons\AddUserIcon.png" />
+    <None Remove="Icons\HidePasswordIcon.png" />
     <None Remove="Icons\lorem.png" />
     <None Remove="Icons\PersonnelIcon.png" />
     <None Remove="Icons\ProfileIcon.png" />
     <None Remove="Icons\ScheduleIcon.png" />
+    <None Remove="Icons\ShowPasswordIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +55,9 @@
     <Resource Include="Icons\AddUserIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\HidePasswordIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Icons\lorem.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -63,6 +68,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\ScheduleIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\ShowPasswordIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

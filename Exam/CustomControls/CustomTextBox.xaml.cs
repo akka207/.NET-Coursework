@@ -32,7 +32,7 @@ namespace Exam.CustomControls
             DependencyProperty.Register("Placeholder", typeof(string), typeof(CustomTextBox), new UIPropertyMetadata("placeholder"));
         #endregion
 
-
+        public event TextChangedEventHandler TextChanged;
         private string textBoxText = string.Empty;
         public string TextBoxText
         {
@@ -66,6 +66,7 @@ namespace Exam.CustomControls
         {
             TextBoxText = textBox.Text;
             HandlePlaceholder();
+            TextChanged?.Invoke(this, e);
         }
         private void textBox_IsKeyboardFocusedChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -82,6 +83,7 @@ namespace Exam.CustomControls
             else
             {
                 placeholder.Visibility = Visibility.Visible;
+     
             }
         }
     }
