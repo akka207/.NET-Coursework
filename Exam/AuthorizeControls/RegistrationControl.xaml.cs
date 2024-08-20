@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Exam.Generators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -79,6 +80,19 @@ namespace Exam.AuthorizeControls
         private void logInButton_Click(object sender, RoutedEventArgs e)
         {
             OnLogIn?.Invoke(sender, e);
+        }
+
+        private void generatePasswordButton_Click(Object sender, RoutedEventArgs e)
+        {
+            string Password = PasswordGenerator.GeneratePassword();
+            password.textBox.Text = Password;
+            passwordC.textBox.Text = Password;
+        }
+
+        private void generateLoginButton_Click(Object obj, RoutedEventArgs e)
+        {
+            string Login = LoginGenerator.GenerateLogin(fullname.TextBoxText);
+            login.textBox.Text = Login;
         }
     }
 }
