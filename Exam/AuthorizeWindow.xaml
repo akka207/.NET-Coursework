@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Exam"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:AControls="clr-namespace:Exam.AuthorizeControls"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="MainWindow" MinHeight="450" MaxHeight="450" MinWidth="600" MaxWidth="600">
@@ -18,7 +19,8 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
+        <Image x:Name="gifImage" Width="150" Height="150" Margin="0 0 30 300"/>
+        <!--<Image gif:ImageBehavior.AnimatedSource="pack://application:,,,/GIFs/Icon.gif" Width="200" Height="200" />-->
         <AControls:LoginControl x:Name="logInControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="290" Height="400" OnLogIn="logInControl_OnLogIn" OnSignUp="logInControl_OnSignUp" Visibility="Visible" OnDebugLogIn="logInControl_OnDebugLogIn"/>
         <AControls:RegistrationControl x:Name="registerControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="290" Height="370" OnSignUp="registerControl_OnSignUp" OnLogIn="registerControl_OnLogIn" Visibility="Hidden"/>
     </Grid>

@@ -11,7 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
+using WpfAnimatedGif;
 namespace Exam
 {
     /// <summary>
@@ -23,8 +24,16 @@ namespace Exam
         public MainWindow()
         {
             InitializeComponent();
+            LoadGifAnimation();
         }
-
+        private void LoadGifAnimation()
+        {
+            var gifUri = new Uri("pack://application:,,,/GIFs/Icon.gif", UriKind.Absolute);
+            var image = new BitmapImage(gifUri);
+            ImageBehavior.SetAnimatedSource(gifImage, image);
+            ImageBehavior.SetRepeatBehavior(gifImage, new System.Windows.Media.Animation.RepeatBehavior(1));
+            ImageBehavior.SetAnimationSpeedRatio(gifImage, 1.5);
+        }
         private void AvailableControls(bool value)
         {
             logInControl.IsEnabled = value;
