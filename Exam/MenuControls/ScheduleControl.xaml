@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Exam.MenuControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d" x:Name="control" Loaded="control_Loaded"
-             d:DesignHeight="600" d:DesignWidth="716">
+             d:DesignHeight="600" d:DesignWidth="716"> 
     <UserControl.Resources>
         <local:DateTimeToTimeConverter x:Key="dateTimeToTimeConverter"/>
         <local:DateTimeRestyleConverter x:Key="dateTimeRestyleConverter"/>
@@ -51,7 +51,7 @@
         <DataTemplate x:Key="dayofWeekofMonth_event_template" DataType="{x:Type ListItem}">
             <CustomControls:CustomBorder Height="40" Width="80" Margin="1 -1 1 0" MouseLeftButtonUp="dayofWeek_MouseLeftButtonUp" Loaded="dayofWeekofMonth_Loaded">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                    <TextBlock Text="{Binding Date.DayOfWeek}" Grid.Row="0" FontSize="12" HorizontalAlignment="Center" Margin="0 1 0 0 "/>
+                    <TextBlock Text="{Binding Date, Converter={StaticResource dateTimeToDateConverter}}" Grid.Row="0" FontSize="12" HorizontalAlignment="Center" Margin="0 1 0 0 "/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBlock Text="{Binding Events.Count}"/>
                         <TextBlock Text="Events" FontSize="10" VerticalAlignment="Center"/>
@@ -97,10 +97,10 @@
         </DataTemplate>
 
 
-        
 
-        <DataTemplate x:Key="month_template" DataType="{x:Type ListItem}">
-            <CustomControls:CustomBorder>
+
+        <DataTemplate x:Key="weekOfMonth_template" DataType="{x:Type ListItem}">
+            <CustomControls:CustomBorder MouseUp="weekOfMonth_MouseUp">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Events: "/>
                     <TextBlock Text="{Binding EventsCount}"/>
@@ -131,7 +131,7 @@
             <ColumnDefinition Width="14*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
+
         <StackPanel x:Name="weekSelector" Orientation="Vertical" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <CustomControls:CircleImageButton x:Name="arrowUpButton" Width="32" Height="32" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="arrowUpButton_OnClick"/>
             <CustomControls:CircleImageButton x:Name="arrowDownButton" Width="32" Height="32" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="arrowDownButton_OnClick"/>
@@ -178,7 +178,7 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl ItemTemplate="{StaticResource month_template}"        x:Name="monthSchedule" Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden" Width="657" HorizontalAlignment="Left"/>
+        <ItemsControl ItemTemplate="{StaticResource weekOfMonth_template}"  x:Name="monthSchedule" Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden" Width="657" HorizontalAlignment="Left"/>
 
 
     </Grid>

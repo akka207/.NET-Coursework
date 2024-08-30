@@ -66,7 +66,8 @@ namespace Exam.MenuControls
         }
         private DateTime ToStartOfNextDay(DateTime dateTime)
         {
-            return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day + 1, 0, 0, 0);
+
+            return ToStartOfDay(dateTime).AddDays(1); ;
         }
         private DateTime GetNearestPastMonday(DateTime date)
         {
@@ -116,37 +117,46 @@ namespace Exam.MenuControls
         }
 
 
-        private void ChangeContainment(ScheduleView view)
+        private void ChangeContainment(ScheduleView view, bool doGenerate = true)
         {
             switch (view)
             {
                 case ScheduleView.Day:
                     DateToView = DateTime.Now;
-                    DayView = GenerateDay(DateToView);
+                    if (doGenerate)
+                    {
+                        DayView = GenerateDay(DateToView);
+                        daySchedule.ItemsSource = DayView.Events;
+                    }
                     daySchedule.Visibility = Visibility.Visible;
                     weekSchedule.Visibility = Visibility.Hidden;
                     monthSchedule.Visibility = Visibility.Hidden;
                     arrowUpButton.Visibility = Visibility.Hidden;
                     arrowDownButton.Visibility = Visibility.Hidden;
-                    daySchedule.ItemsSource = DayView.Events;
                     break;
                 case ScheduleView.Week:
-                    WeekView = GenerateWeek(DateToView);
+                    if (doGenerate)
+                    {
+                        WeekView = GenerateWeek(DateToView);
+                        weekSchedule.ItemsSource = WeekView.Days;
+                    }
                     daySchedule.Visibility = Visibility.Hidden;
                     weekSchedule.Visibility = Visibility.Visible;
                     monthSchedule.Visibility = Visibility.Hidden;
                     arrowUpButton.Visibility = Visibility.Visible;
                     arrowDownButton.Visibility = Visibility.Visible;
-                    weekSchedule.ItemsSource = WeekView.Days;
                     break;
                 case ScheduleView.Month:
-                    MonthView = GenerateMonth(DateToView);
+                    if (doGenerate)
+                    {
+                        MonthView = GenerateMonth(DateToView);
+                        monthSchedule.ItemsSource = MonthView.Weeks;
+                    }
                     daySchedule.Visibility = Visibility.Hidden;
                     weekSchedule.Visibility = Visibility.Hidden;
                     monthSchedule.Visibility = Visibility.Visible;
                     arrowUpButton.Visibility = Visibility.Visible;
                     arrowDownButton.Visibility = Visibility.Visible;
-                    monthSchedule.ItemsSource = MonthView.Weeks;
                     break;
             }
         }
@@ -208,9 +218,8 @@ namespace Exam.MenuControls
             DateToView = DateToView.AddDays(-7);
             MonthView = GenerateMonth(DateToView);
             WeekView = MonthView.Weeks.First();
-
-            OnPropertyChanged(nameof(MonthView));
-            OnPropertyChanged(nameof(WeekView));
+            weekSchedule.ItemsSource = WeekView.Days;
+            monthSchedule.ItemsSource = MonthView.Weeks;
         }
 
         private void arrowDownButton_OnClick(object sender, EventArgs e)
@@ -218,9 +227,15 @@ namespace Exam.MenuControls
             DateToView = DateToView.AddDays(7);
             MonthView = GenerateMonth(DateToView);
             WeekView = MonthView.Weeks.First();
+            weekSchedule.ItemsSource = WeekView.Days;
+            monthSchedule.ItemsSource = MonthView.Weeks;
+        }
 
-            OnPropertyChanged(nameof(MonthView));
-            OnPropertyChanged(nameof(WeekView));
+        private void weekOfMonth_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            WeekView = (sender as CustomBorder).DataContext as Week;
+            weekSchedule.ItemsSource = WeekView.Days;
+            ChangeContainment(ScheduleView.Week, false);
         }
     }
 }
