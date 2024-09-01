@@ -6,66 +6,92 @@
              xmlns:local="clr-namespace:Exam.MenuControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d" x:Name="control" Loaded="Window_Loaded">
-    <Border x:Name="originBorder" MinWidth="180"
+    <Grid Width="180">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="330"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" VerticalAlignment="Top"
+            x:Name="originBorder" MinWidth="180"
             CornerRadius="0 0 20 0" BorderThickness="0 0 2 2" BorderBrush="{StaticResource PrimaryBrush}"
             Background="Transparent">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="80"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="{Binding ElementName=control, Path=MenuItemHeight}"/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
 
-            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="320"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CustomControls:CircleImageButton Grid.Column="0" x:Name="sheduleMenuButton" IconPath="pack://application:,,,/Icons/ScheduleIcon.png" OnClick="sheduleMenuButton_OnClick"/>
+                        <CustomControls:TextButton Grid.Column="1" Text="Schedule" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="sheduleMenuButton_OnClick"/>
+                    </Grid>
+                </CustomControls:CustomBorder>
+
+                <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="320"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CustomControls:CircleImageButton x:Name="personnelMenuButton" IconPath="pack://application:,,,/Icons/PersonnelIcon.png" OnClick="personnelMenuButton_OnClick"/>
+                        <CustomControls:TextButton Grid.Column="1" Text="Personnel" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="personnelMenuButton_OnClick"/>
+                    </Grid>
+                </CustomControls:CustomBorder>
+
+                <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="AddUser">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="320"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CustomControls:CircleImageButton x:Name="addMenuButton" IconPath="pack://application:,,,/Icons/AddUserIcon.png" Grid.Row="3" OnClick="addMenuButton_OnClick"/>
+                        <CustomControls:TextButton Grid.Column="1" Text="Add User" Height="{Binding ElementName=addMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="addMenuButton_OnClick"/>
+                    </Grid>
+                </CustomControls:CustomBorder>
+
+                <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="320"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CustomControls:CircleImageButton x:Name="profileMenuButton" IconPath="pack://application:,,,/Icons/ProfileIcon.png" Grid.Row="3" OnClick="profileMenuButton_OnClick"/>
+                        <CustomControls:TextButton Grid.Column="1" Text="My Profile" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="profileMenuButton_OnClick" Loaded="TextButton_Loaded"/>
+                    </Grid>
+                </CustomControls:CustomBorder>
+            </Grid>
+
+        </Border>
+
+        <Border Grid.Row="2" VerticalAlignment="Top"
+            x:Name="bottomBorder" MinWidth="180" Height="80" Margin="0 0 0 40"
+            CornerRadius="0 20 0 0" BorderThickness="0 2 2 0" BorderBrush="{StaticResource PrimaryBrush}"
+            Background="Transparent">
+            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0 0 0 3">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="320"/>
                     </Grid.ColumnDefinitions>
 
-                    <CustomControls:CircleImageButton Grid.Column="0" x:Name="sheduleMenuButton" IconPath="pack://application:,,,/Icons/ScheduleIcon.png" OnClick="sheduleMenuButton_OnClick"/>
-                    <CustomControls:TextButton Grid.Column="1" Text="Schedule" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="sheduleMenuButton_OnClick"/>
+                    <CustomControls:CircleImageButton x:Name="logoutButton" IconPath="pack://application:,,,/Icons/lorem.png" Grid.Row="3" OnClick="logoutButton_OnClick"/>
+                    <CustomControls:TextButton Grid.Column="1" Text="Logout" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="logoutButton_OnClick"/>
                 </Grid>
             </CustomControls:CustomBorder>
-
-            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="320"/>
-                    </Grid.ColumnDefinitions>
-
-                    <CustomControls:CircleImageButton x:Name="personnelMenuButton" IconPath="pack://application:,,,/Icons/PersonnelIcon.png" OnClick="personnelMenuButton_OnClick"/>
-                    <CustomControls:TextButton Grid.Column="1" Text="Personnel" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="personnelMenuButton_OnClick"/>
-                </Grid>
-            </CustomControls:CustomBorder>
-
-            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="320"/>
-                    </Grid.ColumnDefinitions>
-
-                    <CustomControls:CircleImageButton x:Name="profileMenuButton" IconPath="pack://application:,,,/Icons/ProfileIcon.png" Grid.Row="3" OnClick="profileMenuButton_OnClick"/>
-                    <CustomControls:TextButton Grid.Column="1" Text="Profile" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="profileMenuButton_OnClick"/>
-                </Grid>
-            </CustomControls:CustomBorder>
-
-            <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="AddUser">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="320"/>
-                    </Grid.ColumnDefinitions>
-
-                    <CustomControls:CircleImageButton x:Name="addMenuButton" IconPath="pack://application:,,,/Icons/AddUserIcon.png" Grid.Row="3" OnClick="addMenuButton_OnClick"/>
-                    <CustomControls:TextButton Grid.Column="1" Text="Add User" Height="{Binding ElementName=addMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="addMenuButton_OnClick"/>
-                </Grid>
-            </CustomControls:CustomBorder>
-        </Grid>
-        
-    </Border>
+        </Border>
+    </Grid>
 </UserControl>

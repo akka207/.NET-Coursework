@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Exam" 
         xmlns:MenuControls="clr-namespace:Exam.MenuControls"
         mc:Ignorable="d" Loaded="Window_Loaded" x:Name="menu" WindowStartupLocation="CenterScreen"
-        Title="Menu" Height="600" Width="900">
+        Title="Menu" MinHeight="450" Height="640" Width="900" MinWidth="700">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"/>
@@ -17,6 +17,8 @@
         <MenuControls:PersonnelControl x:Name="personnel" Visibility="Hidden" Grid.Column="1"/>
         <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1"/>
         <MenuControls:UserAddControl x:Name="add" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1"/>
-        <MenuControls:MenuPanel x:Name="panel" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" OnMenuSelected="MenuPanel_OnMenuSelected" Width="180"/>
+        <MenuControls:MenuPanel x:Name="panel" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0"
+                                Width="180" Height="{Binding ElementName=menu, Path=Height}"
+                                OnMenuSelected="MenuPanel_OnMenuSelected" OnLogout="panel_OnLogout"/>
     </Grid>
 </Window>

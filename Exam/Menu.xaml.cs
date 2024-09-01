@@ -61,5 +61,13 @@ namespace Exam
         {
             Title = $"{DBController.CurrentStaff.Person.Login} | {DBController.CurrentStaff.Role.Name}";
         }
-    }
+
+		private void panel_OnLogout(object sender, EventArgs e)
+		{
+            DBController.RemoveCurrentStaff();
+            AuthorizeWindow authorizeWindow = new AuthorizeWindow();
+			Close();
+            authorizeWindow.Show();
+		}
+	}
 }

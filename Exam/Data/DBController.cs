@@ -62,6 +62,11 @@ namespace Exam.Data
             CurrentStaff = GetStaff(login, password);
         }
 
+        public static void RemoveCurrentStaff()
+        {
+            CurrentStaff = null;
+        }
+
         public static void UpdateCurrentStaff()
         {
             using (var context = Config.DbContext)
