@@ -8,8 +8,8 @@
              d:DesignHeight="100" d:DesignWidth="400" x:Name="Control">
     <local:CustomBorder Highlight="True" x:Name="border" Style="{StaticResource Border_CommonStyle}">
         <Grid>
-            <TextBlock x:Name="placeholder" Text="{Binding ElementName=Control, Path=Placeholder}" Foreground="Gray" VerticalAlignment="Center"/>
-            <TextBox x:Name="textBox" Height="90" VerticalAlignment="Center" TextChanged="textBox_TextChanged" IsKeyboardFocusedChanged="textBox_IsKeyboardFocusedChanged" Padding="5 38 0 0"/>
+            <TextBlock x:Name="placeholder" Text="{Binding ElementName=Control, Path=Placeholder}" Style="{StaticResource TextBlock_CommonStyle}" VerticalAlignment="Center" Padding="5 0 0 0"/>
+            <TextBox x:Name="textBox" Height="90" VerticalAlignment="Center" TextChanged="textBox_TextChanged" IsKeyboardFocusedChanged="textBox_IsKeyboardFocusedChanged" Padding="5 36 0 0"/>
         </Grid>
     </local:CustomBorder>
 </UserControl>

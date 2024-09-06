@@ -36,12 +36,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="60"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
         <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Grid.Column="1" Placeholder="Login" FontSize="20" />
         <CustomControls:CustomPasswordBox x:Name="passwordBox" Grid.Row="2" Grid.Column="1" PassPlaceholder="Password" FontSize="20" />
@@ -51,6 +50,8 @@
 
         <Button x:Name="logInButton" Grid.Row="3" Grid.Column="1" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click"/>
         <Button x:Name="signUpButton" Grid.Row="5" Grid.Column="1" Content="Sign Up" FontSize="20" Height="40" Click="signUpButton_Click" VerticalAlignment="Bottom"/>
-        <Button x:Name="debugButton" Grid.Row="7" Grid.Column="1" Content="(debug) Log In as Akka 207" FontSize="10" Height="40" Click="debugButton_Click"/>
+
+
+        <Button x:Name="debugButton" Grid.Row="5" Grid.Column="2" Content="debug" FontSize="10" Height="40" Click="debugButton_Click" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>
