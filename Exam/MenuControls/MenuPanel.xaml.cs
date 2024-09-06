@@ -34,23 +34,36 @@ namespace Exam.MenuControls
 		public event EventHandler<MenuType> OnMenuSelected;
 		public event EventHandler OnLogout;
 
-		public int MenuHeight { get; set; } = 250;
-		public int MenuItemHeight { get; set; } = 0;
+		private int menuItemHeight = 0;
+		public int MenuItemHeight { 
+			get
+			{
+				return menuItemHeight;
+			}
+			set
+			{
+				if(value !=  menuItemHeight)
+				{
+					menuItemHeight = value;
+					OnPropertyChanged(nameof(MenuItemHeight));
+				}
+			}
+		}
+
 
 		public MenuPanel()
 		{
 			InitializeComponent();
-			if (DBController.CurrentStaff.Role.Name == "Admin")
-			{
-				MenuHeight = 330;
-				MenuItemHeight = 80;
-			}
 		}
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			if (DBController.CurrentStaff.Role.Name != "Admin")
 			{
 				AddUser.Visibility = Visibility.Collapsed;
+			}
+			else
+			{
+				MenuItemHeight = 80;
 			}
 		}
 		private void sheduleMenuButton_OnClick(object sender, EventArgs e)
