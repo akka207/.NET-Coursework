@@ -70,7 +70,7 @@
                         </Grid.ColumnDefinitions>
 
                         <CustomControls:CircleImageButton x:Name="profileMenuButton" IconPath="pack://application:,,,/Icons/ProfileIcon.png" Grid.Row="3" OnClick="profileMenuButton_OnClick"/>
-                        <CustomControls:TextButton Grid.Column="1" Text="My Profile" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="profileMenuButton_OnClick" Loaded="TextButton_Loaded"/>
+                        <CustomControls:TextButton Grid.Column="1" Text="My Profile" Height="{Binding ElementName=sheduleMenuButton, Path=Height}" Width="320" VerticalAlignment="Center" OnClick="profileMenuButton_OnClick"/>
                     </Grid>
                 </CustomControls:CustomBorder>
             </Grid>

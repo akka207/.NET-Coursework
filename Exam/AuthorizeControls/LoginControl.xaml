@@ -31,24 +31,26 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="50px"/>
-            <RowDefinition Height="50px"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
-        <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Placeholder="Login" FontSize="20" />
-        <CustomControls:CustomPasswordBox x:Name="passwordBox" Grid.Row="2" PassPlaceholder="Password" FontSize="20" />
-        <CustomControls:CustomTextBox TextChanged="passwordTextBox_TextChanged" x:Name="passwordTextBox" Grid.Row="2" Placeholder="Password" FontSize="20" Visibility="Collapsed"/>
-        <CheckBox Height="50px" Width="50px" Style="{StaticResource CustomCheckBox}" x:Name="showPasswordCheckBox" Grid.Row="2" Grid.Column="1" Checked="showPasswordCheckBox_Checked" Unchecked="showPasswordCheckBox_Unchecked" IsChecked="False"/>
+        <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Grid.Column="1" Placeholder="Login" FontSize="20" />
+        <CustomControls:CustomPasswordBox x:Name="passwordBox" Grid.Row="2" Grid.Column="1" PassPlaceholder="Password" FontSize="20" />
+        <CustomControls:CustomTextBox TextChanged="passwordTextBox_TextChanged" x:Name="passwordTextBox" Grid.Row="2" Grid.Column="1" Placeholder="Password" FontSize="20" Visibility="Collapsed"/>
+        <CheckBox Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center"
+                  Style="{StaticResource CustomCheckBox}" x:Name="showPasswordCheckBox" Grid.Row="2" Grid.Column="3" Checked="showPasswordCheckBox_Checked" Unchecked="showPasswordCheckBox_Unchecked" IsChecked="False"/>
 
-        <Button x:Name="logInButton" Grid.Row="3" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click"/>
-        <Button x:Name="signUpButton" Grid.Row="5" Content="Sign Up" FontSize="20" Height="40" Click="signUpButton_Click" VerticalAlignment="Bottom"/>
-        <Button x:Name="debugButton" Grid.Row="7" Content="(debug) Log In as Akka 207" FontSize="10" Height="40" Click="debugButton_Click"/>
+        <Button x:Name="logInButton" Grid.Row="3" Grid.Column="1" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click"/>
+        <Button x:Name="signUpButton" Grid.Row="5" Grid.Column="1" Content="Sign Up" FontSize="20" Height="40" Click="signUpButton_Click" VerticalAlignment="Bottom"/>
+        <Button x:Name="debugButton" Grid.Row="7" Grid.Column="1" Content="(debug) Log In as Akka 207" FontSize="10" Height="40" Click="debugButton_Click"/>
     </Grid>
 </UserControl>

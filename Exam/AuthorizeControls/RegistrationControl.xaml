@@ -20,20 +20,21 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
-            <CustomControls:CustomTextBox x:Name="fullname" Grid.Row="0" Placeholder="Full Name" FontSize="20"/>
-            <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Placeholder="Login" FontSize="20"/>
-            <Button x:Name="createLoginButton" Grid.Row="1" Grid.Column="1" Content="Generate Login" FontSize="20" Height="40" Click="generateLoginButton_Click"/>
-            <CustomControls:CustomTextBox x:Name="password" Grid.Row="2" Placeholder="Password" FontSize="20"/>
-            <Button x:Name="createPasswordButton" Grid.Row="2"  Grid.Column="1" Content="Generate Password"  FontSize="20" Height="40" Click="generatePasswordButton_Click"/>
-            <CustomControls:CustomTextBox x:Name="passwordC" Grid.Row="3" Placeholder="Confirm Password" FontSize="20"/>
-            <CustomControls:CustomTextBox x:Name="phone" Grid.Row="4" Placeholder="Phone" FontSize="20"/>
-            <CustomControls:CustomTextBox x:Name="email" Grid.Row="5" Placeholder="Email" FontSize="20"/>
-            <Button x:Name="confirmButton" Grid.Row="6" Content="Sign Up" FontSize="20" Height="40" Click="confirmButton_Click"/>
+            <CustomControls:CustomTextBox x:Name="fullname" Grid.Row="0" Grid.Column="1" Placeholder="Full Name" FontSize="20"/>
+            <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Grid.Column="1" Placeholder="Login" FontSize="20"/>
+            <Button x:Name="createLoginButton" Grid.Row="1" Grid.Column="2" Content="Generate" FontSize="20" Height="25" Click="generateLoginButton_Click" Margin="5 0 0 0"/>
+            <CustomControls:CustomTextBox x:Name="password" Grid.Row="2" Grid.Column="1" Placeholder="Password" FontSize="20"/>
+            <Button x:Name="createPasswordButton" Grid.Row="2"  Grid.Column="2" Content="Generate"  FontSize="20" Height="25" Click="generatePasswordButton_Click" Margin="5 0 0 0"/>
+            <CustomControls:CustomTextBox x:Name="passwordC" Grid.Row="3" Grid.Column="1" Placeholder="Confirm Password" FontSize="20"/>
+            <CustomControls:CustomTextBox x:Name="phone" Grid.Row="4" Grid.Column="1" Placeholder="Phone" FontSize="20"/>
+            <CustomControls:CustomTextBox x:Name="email" Grid.Row="5" Grid.Column="1" Placeholder="Email" FontSize="20"/>
+            <Button x:Name="confirmButton" Grid.Row="6" Grid.Column="1" Content="Sign Up" FontSize="20" Height="40" Click="confirmButton_Click"/>
 
-            <Button x:Name="logInButton" Grid.Row="8" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click" VerticalAlignment="Bottom"/>
+            <Button x:Name="logInButton" Grid.Row="8" Grid.Column="1" Content="Log In" FontSize="20" Height="40" Click="logInButton_Click" VerticalAlignment="Bottom"/>
         </Grid>
     </Border>
 </UserControl>
