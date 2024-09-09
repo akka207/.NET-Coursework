@@ -59,7 +59,7 @@ namespace Exam.CustomControls
 
         public void SetValidationErrors(List<string> errors)
         {
-            if(errors == null)
+            if(errors == null || errors.Count == 0)
             {
                 ValidationErrors = null;
                 return;

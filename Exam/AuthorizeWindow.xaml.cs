@@ -107,7 +107,12 @@ namespace Exam
                 else
                 {
                     var personValidatorMessages = DataValidators.ValidatePerson(person);
-                    registerControl.fullname.SetValidationErrors(personValidatorMessages.Item2);
+                    registerControl.fullname.SetValidationErrors(personValidatorMessages.Item2[DataValidators.Fields.FullName]);
+                    registerControl.login.SetValidationErrors(personValidatorMessages.Item2[DataValidators.Fields.Login]);
+                    registerControl.password.SetValidationErrors(personValidatorMessages.Item2[DataValidators.Fields.Password]);
+                    registerControl.passwordC.SetValidationErrors(personValidatorMessages.Item2[DataValidators.Fields.CPassword]);
+                    registerControl.phone.SetValidationErrors(personValidatorMessages.Item2[DataValidators.Fields.Phone]);
+                    registerControl.email.SetValidationErrors(personValidatorMessages.Item2[DataValidators.Fields.Email]);
 
 					if (personValidatorMessages.Item1)
                     {

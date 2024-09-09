@@ -10,6 +10,7 @@
         <Grid>
             <TextBlock x:Name="placeholder" Text="{Binding ElementName=Control, Path=Placeholder}" Style="{StaticResource TextBlock_PlaceholderStyle}" VerticalAlignment="Center" Padding="5 0 0 0"/>
             <TextBox x:Name="textBox" Height="90" VerticalAlignment="Center" TextChanged="textBox_TextChanged" IsKeyboardFocusedChanged="textBox_IsKeyboardFocusedChanged" Padding="5 36 0 0"/>
+        
         </Grid>
     </local:CustomBorder>
 </UserControl>
