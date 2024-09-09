@@ -47,12 +47,31 @@ namespace Exam.CustomControls
             }
         }
 
+        public List<string> ValidationErrors = null;
+
 
         public CustomTextBox()
         {
             InitializeComponent();
             border.Highlight = false;
         }
+
+
+        public void SetValidationErrors(List<string> errors)
+        {
+            if(errors == null)
+            {
+                ValidationErrors = null;
+                return;
+            }
+            if(ValidationErrors == null)
+            {
+                ValidationErrors = new List<string>();
+            }
+
+            ValidationErrors.AddRange(errors);
+
+		}
 
 
         public event PropertyChangedEventHandler PropertyChanged;

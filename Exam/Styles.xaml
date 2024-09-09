@@ -9,6 +9,7 @@
     <Color x:Key="SecondaryColor">#7E9181</Color>
     <Color x:Key="MainColor">#C7CEDB</Color>
     <Color x:Key="ShadowedColor">#A0AAB2</Color>
+    <Color x:Key="ShadowedGreenColor">#94b299</Color>
     <Color x:Key="AccentColor">#AA6373</Color>
 
     <SolidColorBrush x:Key="DarkBrush" Color="{StaticResource DarkColor}"/>
@@ -16,6 +17,7 @@
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
     <SolidColorBrush x:Key="MainBrush" Color="{StaticResource MainColor}"/>
     <SolidColorBrush x:Key="ShadowedBrush" Color="{StaticResource ShadowedColor}"/>
+    <SolidColorBrush x:Key="ShadowedGreenBrush" Color="{StaticResource ShadowedGreenColor}"/>
     <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="TextBlock_CommonStyle">
@@ -24,18 +26,30 @@
         <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
-    
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextBlock_PlaceholderStyle">
+        <Setter Property="Foreground" Value="{StaticResource ShadowedBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="{StaticResource Inter}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
     <Style TargetType="{x:Type CustomControls:CustomBorder }" x:Key="Border_CommonStyle">
         <Setter Property="Background" Value="{StaticResource MainBrush}"/>
         <Setter Property="Height" Value="35"/>
-        <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+            </Trigger>
             <Trigger Property="Highlight" Value="True">
                 <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush" Value="{StaticResource ShadowedGreenBrush}"/>
             </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource ShadowedBrush}"/>
+            <Trigger Property="ValidationState" Value="False">
+                <Setter Property="BorderThickness" Value="0 0 0 3"/>
+                <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

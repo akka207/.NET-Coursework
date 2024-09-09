@@ -107,7 +107,9 @@ namespace Exam
                 else
                 {
                     var personValidatorMessages = DataValidators.ValidatePerson(person);
-                    if (personValidatorMessages.Count > 0)
+                    registerControl.fullname.SetValidationErrors(personValidatorMessages.Item2);
+
+					if (personValidatorMessages.Item1)
                     {
                         MessageBox.Show(String.Join('\n', personValidatorMessages), "Invalid data", MessageBoxButton.OK, MessageBoxImage.Error);
                     }

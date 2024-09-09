@@ -9,42 +9,87 @@ namespace StaffManagerModels
 {
     public static class DataValidators
     {
-        public static List<string> ValidatePerson(Person person)
+        public enum Fields
         {
-            List<string> invalidDataMessages = new List<string>();
+            Login,
+            Password,
+            FullName,
+            CPassword,
+            Phone,
+            Email
+        }
+
+        public static Tuple<bool, Dictionary<Fields, List<string>>> ValidatePerson(Person person)
+        {
+            Dictionary<Fields, List<string>> invalidDataMessages = new Dictionary<Fields, List<string>>();
+            bool isAllOK = true;
+            foreach (var type in (Fields[])Enum.GetValues(typeof(Fields)))
+            {
+                invalidDataMessages.Add(type, new List<string>());
+            }
 
             if (string.IsNullOrWhiteSpace(person.Login))
-                invalidDataMessages.Add("Login can't be empty or spaces!");
+            {
+                invalidDataMessages[Fields.Login].Add("Login can't be empty or spaces!");
+                isAllOK = false;
+            }
 
             if (string.IsNullOrWhiteSpace(person.FullName))
-                invalidDataMessages.Add("Full Name can't be empty or spaces!");
+            {
+                invalidDataMessages[Fields.Login].Add("Full Name can't be empty or spaces!");
+                isAllOK = false;
+            }
 
             if (string.IsNullOrWhiteSpace(person.Phone))
-                invalidDataMessages.Add("Phone can't be empty or spaces!");
+            {
+                invalidDataMessages[Fields.Phone].Add("Phone can't be empty or spaces!");
+                isAllOK = false;
+            }
 
             if (string.IsNullOrWhiteSpace(person.Email))
-                invalidDataMessages.Add("Email can't be empty or spaces!");
+            {
+                invalidDataMessages[Fields.Email].Add("Email can't be empty or spaces!");
+                isAllOK = false;
+            }
 
             if (person.Login.Length < 5)
-                invalidDataMessages.Add("Login must be at least 5 characters long!");
+            {
+                invalidDataMessages[Fields.Login].Add("Login must be at least 5 characters long!");
+                isAllOK = false;
+            }
 
             if (!Regex.IsMatch(person.FullName, @"\s"))
-                invalidDataMessages.Add("Full Name must contain both first and last name!");
+            {
+                invalidDataMessages[Fields.FullName].Add("Full Name must contain both first and last name!");
+                isAllOK = false;
+            }
 
             if (!Regex.IsMatch(person.Phone, @"^\+?[0-9\s\-]+$"))
-                invalidDataMessages.Add("Phone can only contain numbers, spaces, or hyphens, and can start with a '+'!");
+            {
+                invalidDataMessages[Fields.Phone].Add("Phone can only contain numbers, spaces, or hyphens, and can start with a '+'!");
+                isAllOK = false;
+            }
 
             if (!person.Email.Contains('@'))
-                invalidDataMessages.Add("Email must contain '@' symbol!");
+            {
+                invalidDataMessages[Fields.Email].Add("Email must contain '@' symbol!");
+				isAllOK = false;
+			}
 
-            if (!Regex.IsMatch(person.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-                invalidDataMessages.Add("Email format is invalid!");
+			if (!Regex.IsMatch(person.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                invalidDataMessages[Fields.Email].Add("Email format is invalid!");
+				isAllOK = false;
+			}
 
-            if (person.Phone.Length != 10)
-                invalidDataMessages.Add("Phone number must be 10 characters long!");
+			if (person.Phone.Length != 10)
+            {
+                invalidDataMessages[Fields.Phone].Add("Phone number must be 10 characters long!");
+				isAllOK = false;
+			}
 
-            return invalidDataMessages;
-        }
+            return new Tuple<bool, Dictionary<Fields, List<string>>>(isAllOK, invalidDataMessages);
+		}
 
         public static List<string> ValidatePassword(string password, string passwordConfirmation)
         {
