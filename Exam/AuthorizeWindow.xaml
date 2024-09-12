@@ -15,13 +15,17 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
         <Image x:Name="gifImage" Width="150" Height="150" Margin="0 0 30 300"/>
         <!--<Image gif:ImageBehavior.AnimatedSource="pack://application:,,,/GIFs/Icon.gif" Width="200" Height="200" />-->
-        <AControls:LoginControl x:Name="logInControl" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="290" Height="400" OnLogIn="logInControl_OnLogIn" OnSignUp="logInControl_OnSignUp" Visibility="Visible" OnDebugLogIn="logInControl_OnDebugLogIn"/>
-        <AControls:RegistrationControl x:Name="registerControl" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="290" Height="400" OnSignUp="registerControl_OnSignUp" OnLogIn="registerControl_OnLogIn" Visibility="Hidden"/>
+        <AControls:LoginControl x:Name="logInControl" Grid.Column="1" Grid.ColumnSpan="2" 
+                                HorizontalAlignment="Left" VerticalAlignment="Center" Width="350" Height="400"
+                                OnLogIn="logInControl_OnLogIn" OnSignUp="logInControl_OnSignUp" Visibility="Visible" OnDebugLogIn="logInControl_OnDebugLogIn"/>
+        <AControls:RegistrationControl x:Name="registerControl" Grid.Column="1" Grid.ColumnSpan="2" 
+                                HorizontalAlignment="Left" VerticalAlignment="Center" Width="350" Height="400" 
+                                OnSignUp="registerControl_OnSignUp" OnLogIn="registerControl_OnLogIn" Visibility="Hidden"/>
     </Grid>
 </Window>

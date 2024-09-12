@@ -9,6 +9,8 @@ namespace StaffManagerModels
 {
     public static class DataValidators
     {
+        public record ValidationResult(bool IsAllOK, Dictionary<Fields, List<string>> Data);
+
         public enum Fields
         {
             Login,
@@ -19,7 +21,7 @@ namespace StaffManagerModels
             Email
         }
 
-        public static Tuple<bool, Dictionary<Fields, List<string>>> ValidatePerson(Person person)
+        public static ValidationResult ValidatePerson(Person person)
         {
             Dictionary<Fields, List<string>> invalidDataMessages = new Dictionary<Fields, List<string>>();
             bool isAllOK = true;
@@ -88,38 +90,69 @@ namespace StaffManagerModels
 				isAllOK = false;
 			}
 
-            return new Tuple<bool, Dictionary<Fields, List<string>>>(isAllOK, invalidDataMessages);
+            return new ValidationResult(isAllOK, invalidDataMessages);
 		}
 
-        public static List<string> ValidatePassword(string password, string passwordConfirmation)
+        public static ValidationResult ValidatePassword(string password, string passwordConfirmation)
         {
-            List<string> invalidPasswordMessages = new List<string>();
+            Dictionary<Fields, List<string>> invalidPasswordMessages = new Dictionary<Fields, List<string>>();
+			bool isAllOK = true;
+			invalidPasswordMessages.Add(Fields.Password, new List<string>());
+			invalidPasswordMessages.Add(Fields.CPassword, new List<string>());
+			
+			
 
-            if (string.IsNullOrWhiteSpace(password))
-                invalidPasswordMessages.Add("Password can't be empty or spaces!");
+			if (string.IsNullOrWhiteSpace(password))
+			{
+				invalidPasswordMessages[Fields.Password].Add("Password can't be empty or spaces!");
+				isAllOK = false;
+			}
+			else
+			{
+				if (password.Length < 8)
+				{
+					invalidPasswordMessages[Fields.Password].Add("Password must be at least 8 characters long!");
+					isAllOK = false;
+				}
 
-            if (password != passwordConfirmation)
-                invalidPasswordMessages.Add("Password and confirmation do not match!");
+				if (!Regex.IsMatch(password, @"[A-Z]"))
+				{
+					invalidPasswordMessages[Fields.Password].Add("Password must contain at least one uppercase letter!");
+					isAllOK = false;
+				}
 
-            if (password.Length < 8)
-                invalidPasswordMessages.Add("Password must be at least 8 characters long!");
+				if (!Regex.IsMatch(password, @"[a-z]"))
+				{
+					invalidPasswordMessages[Fields.Password].Add("Password must contain at least one lowercase letter!");
+					isAllOK = false;
+				}
 
-            if (!Regex.IsMatch(password, @"[A-Z]"))
-                invalidPasswordMessages.Add("Password must contain at least one uppercase letter!");
+				if (!Regex.IsMatch(password, @"[0-9]"))
+				{
+					invalidPasswordMessages[Fields.Password].Add("Password must contain at least one digit!");
+					isAllOK = false;
+				}
 
-            if (!Regex.IsMatch(password, @"[a-z]"))
-                invalidPasswordMessages.Add("Password must contain at least one lowercase letter!");
+				if (!Regex.IsMatch(password, @"[\W_]"))
+				{
+					invalidPasswordMessages[Fields.Password].Add("Password must contain at least one special character!");
+					isAllOK = false;
+				}
 
-            if (!Regex.IsMatch(password, @"[0-9]"))
-                invalidPasswordMessages.Add("Password must contain at least one digit!");
+				if (password.Contains(' '))
+				{
+					invalidPasswordMessages[Fields.Password].Add("Password cannot contain spaces!");
+					isAllOK = false;
+				}
 
-            if (!Regex.IsMatch(password, @"[\W_]"))
-                invalidPasswordMessages.Add("Password must contain at least one special character!");
+				if (password != passwordConfirmation)
+				{
+					invalidPasswordMessages[Fields.CPassword].Add("Password and confirmation do not match!");
+					isAllOK = false;
+				}
+			}
 
-            if (password.Contains(' '))
-                invalidPasswordMessages.Add("Password cannot contain spaces!");
-
-            return invalidPasswordMessages;
-        }
+			return new ValidationResult(isAllOK, invalidPasswordMessages);
+		}
     }
 }

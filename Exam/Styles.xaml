@@ -40,17 +40,38 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderThickness" Value="2"/>
-                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                <Setter Property="BorderThickness" Value="0 0 3 0"/>
+                <Setter Property="BorderBrush" Value="{StaticResource ShadowedGreenBrush}"/>
             </Trigger>
             <Trigger Property="Highlight" Value="True">
-                <Setter Property="BorderThickness" Value="2"/>
-                <Setter Property="BorderBrush" Value="{StaticResource ShadowedGreenBrush}"/>
+                <Setter Property="BorderThickness" Value="0 0 3 0"/>
+                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
             </Trigger>
             <Trigger Property="ValidationState" Value="False">
                 <Setter Property="BorderThickness" Value="0 0 0 3"/>
                 <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
             </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="ValidationState" Value="False"/>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                    <Condition Property="Highlight" Value="False"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="BorderThickness" Value="0 0 3 3"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="ValidationState" Value="False"/>
+                    <Condition Property="Highlight" Value="True"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="BorderThickness" Value="0 0 3 3"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
         </Style.Triggers>
     </Style>
 

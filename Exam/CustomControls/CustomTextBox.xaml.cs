@@ -62,15 +62,17 @@ namespace Exam.CustomControls
             if(errors == null || errors.Count == 0)
             {
                 ValidationErrors = null;
+                border.ValidationState = true;
                 return;
-            }
+			}
             if(ValidationErrors == null)
             {
                 ValidationErrors = new List<string>();
             }
-
+            
             ValidationErrors.AddRange(errors);
-
+            border.ValidationState = false;
+            Control.ToolTip = string.Join('\n', errors);
 		}
 
 
