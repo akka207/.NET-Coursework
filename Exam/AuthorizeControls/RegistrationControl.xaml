@@ -33,7 +33,7 @@
             <CustomControls:CustomTextBox x:Name="email" Grid.Row="5" Grid.Column="0" Placeholder="Email"/>
             <Button x:Name="confirmButton" Grid.Row="6" Grid.Column="0" Content="Sign Up" Height="40" Click="confirmButton_Click"/>
 
-            <Button x:Name="logInButton" Grid.Row="8" Grid.Column="0" Content="Log In" Height="40" Click="logInButton_Click" VerticalAlignment="Bottom"/>
+            <Button x:Name="logInButton" Grid.Row="8" Grid.Column="0" Content="Back to Log In" Height="40" Click="logInButton_Click" VerticalAlignment="Bottom"/>
         </Grid>
     </Border>
 </UserControl>
