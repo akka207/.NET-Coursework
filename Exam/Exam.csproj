@@ -23,7 +23,10 @@
   <ItemGroup>
     <None Remove="GIFs\Icon.gif" />
     <None Remove="Icons\AddUserIcon.png" />
+    <None Remove="Icons\ArrowDown.png" />
+    <None Remove="Icons\ArrowUp.png" />
     <None Remove="Icons\HidePasswordIcon.png" />
+    <None Remove="Icons\Logout.png" />
     <None Remove="Icons\lorem.png" />
     <None Remove="Icons\PersonnelIcon.png" />
     <None Remove="Icons\ProfileIcon.png" />
@@ -59,7 +62,16 @@
     <Resource Include="Icons\AddUserIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\ArrowDown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\ArrowUp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Icons\HidePasswordIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Logout.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\lorem.png">

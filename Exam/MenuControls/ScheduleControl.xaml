@@ -14,7 +14,6 @@
 
 
 
-
         <DataTemplate x:Key="day_template" DataType="{x:Type ListItem}">
             <CustomControls:CustomBorder Style="{StaticResource Border_CommonStyle}" Height="50">
                 <Grid>
@@ -31,6 +30,7 @@
             </CustomControls:CustomBorder>
         </DataTemplate>
 
+        
         <DataTemplate x:Key="dayofWeek_event_template" DataType="{x:Type ListItem}">
             <CustomControls:CustomBorder Style="{StaticResource Border_CommonStyle}" Height="Auto" MouseLeftButtonUp="dayofWeek_MouseLeftButtonUp">
                 <Grid>
@@ -49,7 +49,7 @@
 
 
         <DataTemplate x:Key="dayofWeekofMonth_event_template" DataType="{x:Type ListItem}">
-            <CustomControls:CustomBorder Height="40" Width="80" Margin="1 -1 1 0" MouseLeftButtonUp="dayofWeek_MouseLeftButtonUp" Loaded="dayofWeekofMonth_Loaded">
+            <CustomControls:CustomBorder Height="40" Width="80" MouseLeftButtonUp="dayofWeek_MouseLeftButtonUp" Loaded="dayofWeekofMonth_Loaded">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                     <TextBlock Text="{Binding Date, Converter={StaticResource dateTimeToDateConverter}}" Grid.Row="0" FontSize="12" HorizontalAlignment="Center" Margin="0 1 0 0 "/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -58,7 +58,7 @@
                     </StackPanel>
                 </StackPanel>
                 <CustomControls:CustomBorder.Style>
-                    <Style TargetType="{x:Type CustomControls:CustomBorder}" BasedOn="{StaticResource Border_CommonStyle}">
+                    <Style TargetType="{x:Type CustomControls:CustomBorder}" BasedOn="{StaticResource WeekTile_Border_Style}">
                         <Style.Triggers>
                             <Trigger Property="Highlight" Value="True">
                                 <Setter Property="Background" Value="LightGreen"/>
@@ -70,26 +70,41 @@
         </DataTemplate>
 
 
-
         <DataTemplate x:Key="dayofWeek_template" DataType="{x:Type ListItem}">
-            <CustomControls:CustomBorder x:Name="border" Loaded="dayofWeek_CustomBorder_Loaded" Width="90" Margin="1 0 1 0" VerticalAlignment="Top">
+            <CustomControls:CustomBorder x:Name="border" Loaded="dayofWeek_CustomBorder_Loaded" Width="90" VerticalAlignment="Top">
                 <StackPanel Orientation="Vertical" Grid.Row="1">
                     <TextBlock Text="{Binding Date, Converter={StaticResource dateTimeToDateConverter}}"/>
                     <TextBlock Text="{Binding Date.DayOfWeek}"/>
                     <ItemsControl x:Name="events" ItemTemplate="{StaticResource dayofWeek_event_template}" ItemsSource="{Binding Events}" Grid.Row="2"/>
                 </StackPanel>
                 <CustomControls:CustomBorder.Style>
-                    <Style BasedOn="{StaticResource Border_CommonStyle}" TargetType="{x:Type CustomControls:CustomBorder}">
+                    <Style BasedOn="{StaticResource WeekTile_Border_Style}" TargetType="{x:Type CustomControls:CustomBorder}">
                         <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Height" Value="53.5"/>
+                            </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Height" Value="Auto"/>
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="False">
-                                <Setter Property="Height" Value="56"/>
-                            </Trigger>
-                            <Trigger Property="Highlight" Value="True">
-                                <Setter Property="Background" Value="LightGreen"/>
-                            </Trigger>
+                            
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Highlight" Value="True"/>
+                                    <Condition Property="IsMouseOver" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Background" Value="LightGreen"/>
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Highlight" Value="True"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter Property="Background" Value="{StaticResource ShadowedGreenBrush}"/>
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
                         </Style.Triggers>
                     </Style>
                 </CustomControls:CustomBorder.Style>
@@ -97,10 +112,8 @@
         </DataTemplate>
 
 
-
-
         <DataTemplate x:Key="weekOfMonth_template" DataType="{x:Type ListItem}">
-            <CustomControls:CustomBorder MouseUp="weekOfMonth_MouseUp">
+            <CustomControls:CustomBorder MouseUp="weekOfMonth_MouseUp" Style="{StaticResource WeekTile_Border_Style}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Events: "/>
                     <TextBlock Text="{Binding EventsCount}"/>
@@ -112,14 +125,13 @@
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </StackPanel>
-                <CustomControls:CustomBorder.Style>
-                    <Style TargetType="{x:Type CustomControls:CustomBorder}" BasedOn="{StaticResource Border_CommonStyle}">
-                        <Setter Property="Margin" Value="1"/>
-                    </Style>
-                </CustomControls:CustomBorder.Style>
             </CustomControls:CustomBorder>
         </DataTemplate>
     </UserControl.Resources>
+    
+    
+    
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -132,9 +144,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="weekSelector" Orientation="Vertical" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <CustomControls:CircleImageButton x:Name="arrowUpButton" Width="32" Height="32" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="arrowUpButton_OnClick"/>
-            <CustomControls:CircleImageButton x:Name="arrowDownButton" Width="32" Height="32" IconPath="pack://application:,,,/Icons/lorem.png" OnClick="arrowDownButton_OnClick"/>
+        <StackPanel x:Name="weekSelector" Orientation="Vertical" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 30">
+            <CustomControls:CircleImageButton x:Name="arrowDownButton" Width="32" Height="32" ImageWidth="32" ImageHeight="32" Margin="1" IconPath="pack://application:,,,/Icons/ArrowUp.png"   OnClick="arrowDownButton_OnClick"/>
+            <CustomControls:CircleImageButton x:Name="arrowUpButton"   Width="32" Height="32" ImageWidth="32" ImageHeight="32" Margin="1" IconPath="pack://application:,,,/Icons/ArrowDown.png" OnClick="arrowUpButton_OnClick"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2">
@@ -178,8 +190,7 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl ItemTemplate="{StaticResource weekOfMonth_template}"  x:Name="monthSchedule" Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden" Width="657" HorizontalAlignment="Left"/>
-
+        <ItemsControl ItemTemplate="{StaticResource weekOfMonth_template}"  x:Name="monthSchedule" Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden" Width="635" HorizontalAlignment="Center"/>
 
     </Grid>
 </UserControl>

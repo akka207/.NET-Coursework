@@ -6,13 +6,12 @@
              xmlns:local="clr-namespace:Exam.CustomControls"
              xmlns:origin="clr-namespace:Exam"
              mc:Ignorable="d" 
-             Width="70" Height="70" 
              x:Name="Control">
     <UserControl.Resources>
         <origin:TestConverter x:Key="testConverter"/>
     </UserControl.Resources>
     <Grid>
-        <Image Source="{Binding ElementName=Control, Path=IconPath}" Width="64" Height="64"/>
-        <Button Width="Auto" Height="Auto" Background="Transparent" BorderThickness="0" Click="Button_Click"/>
+        <Image Source="{Binding ElementName=Control, Path=IconPath}" Width="{Binding ElementName=Control, Path=ImageWidth}" Height="{Binding ElementName=Control, Path=ImageHeight}"/>
+        <Button Width="{Binding ElementName=Control, Path=Width}" Height="{Binding ElementName=Control, Path=Height}" Background="Transparent" BorderThickness="0" Click="Button_Click"/>
     </Grid>
 </UserControl>
