@@ -214,21 +214,21 @@ namespace Exam.MenuControls
         }
 
         private void arrowUpButton_OnClick(object sender, EventArgs e)
-        {
-            DateToView = DateToView.AddDays(-7);
-            MonthView = GenerateMonth(DateToView);
-            WeekView = MonthView.Weeks.First();
-            weekSchedule.ItemsSource = WeekView.Days;
-            monthSchedule.ItemsSource = MonthView.Weeks;
-        }
+		{
+			DateToView = DateToView.AddDays(7);
+			MonthView = GenerateMonth(DateToView);
+			WeekView = MonthView.Weeks.First();
+			weekSchedule.ItemsSource = WeekView.Days;
+			monthSchedule.ItemsSource = MonthView.Weeks;
+		}
 
         private void arrowDownButton_OnClick(object sender, EventArgs e)
         {
-            DateToView = DateToView.AddDays(7);
-            MonthView = GenerateMonth(DateToView);
-            WeekView = MonthView.Weeks.First();
-            weekSchedule.ItemsSource = WeekView.Days;
-            monthSchedule.ItemsSource = MonthView.Weeks;
+			DateToView = DateToView.AddDays(-7);
+			MonthView = GenerateMonth(DateToView);
+			WeekView = MonthView.Weeks.First();
+			weekSchedule.ItemsSource = WeekView.Days;
+			monthSchedule.ItemsSource = MonthView.Weeks;
         }
 
         private void weekOfMonth_MouseUp(object sender, MouseButtonEventArgs e)

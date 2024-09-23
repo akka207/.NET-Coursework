@@ -76,19 +76,18 @@
     </Style>
 
     <Style TargetType="{x:Type CustomControls:CustomBorder}" x:Key="MenuButton_Border_Style">
-        <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
-        <Setter Property="BorderThickness" Value="0 3 0 0"/>
         <Setter Property="Background" Value="Transparent"/>
         <Style.Triggers>
             <Trigger Property="Highlight" Value="True">
-                <Setter Property="BorderBrush" Value="{StaticResource SecondaryBrush}"/>
+                <Setter Property="Background" Value="{StaticResource SecondaryBrush}"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="{StaticResource SecondaryBrush}"/>
+                <Setter Property="Background" Value="{StaticResource SecondaryBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
+    
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
@@ -142,7 +141,7 @@
         <Setter Property="Background" Value="{StaticResource MainBrush}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource ShadowedBrush}"/>
+                <Setter Property="Background" Value="{StaticResource SecondaryBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

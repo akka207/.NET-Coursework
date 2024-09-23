@@ -145,8 +145,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel x:Name="weekSelector" Orientation="Vertical" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 30">
-            <CustomControls:CircleImageButton x:Name="arrowDownButton" Width="32" Height="32" ImageWidth="32" ImageHeight="32" Margin="1" IconPath="pack://application:,,,/Icons/ArrowUp.png"   OnClick="arrowDownButton_OnClick"/>
-            <CustomControls:CircleImageButton x:Name="arrowUpButton"   Width="32" Height="32" ImageWidth="32" ImageHeight="32" Margin="1" IconPath="pack://application:,,,/Icons/ArrowDown.png" OnClick="arrowUpButton_OnClick"/>
+            <CustomControls:CircleImageButton x:Name="arrowDownButton" Width="32" Height="32" ImageWidth="32" ImageHeight="32" Margin="1" IconPath="pack://application:,,,/Icons/ArrowUp.png"   OnClick="arrowDownButton_OnClick" ToolTip="Previous Week"/>
+            <CustomControls:CircleImageButton x:Name="arrowUpButton"   Width="32" Height="32" ImageWidth="32" ImageHeight="32" Margin="1" IconPath="pack://application:,,,/Icons/ArrowDown.png" OnClick="arrowUpButton_OnClick" ToolTip="Next Week"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Grid.ColumnSpan="2">
