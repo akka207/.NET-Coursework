@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Exam" 
         xmlns:MenuControls="clr-namespace:Exam.MenuControls"
         mc:Ignorable="d" Loaded="Window_Loaded" x:Name="menu" WindowStartupLocation="CenterScreen"
-        Title="Menu" MinHeight="450" Height="640" MaxHeight="720" Width="875" MinWidth="875">
+        Title="Menu" MinHeight="450" Height="640" MaxHeight="720" Width="900" MinWidth="900">
     <Grid Background="{StaticResource ShadowedBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"/>
