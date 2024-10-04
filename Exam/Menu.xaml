@@ -4,20 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Exam" 
+        xmlns:CustomControls="clr-namespace:Exam.CustomControls" 
         xmlns:MenuControls="clr-namespace:Exam.MenuControls"
         mc:Ignorable="d" Loaded="Window_Loaded" x:Name="menu" WindowStartupLocation="CenterScreen"
-        Title="Menu" MinHeight="450" Height="640" MaxHeight="720" Width="900" MinWidth="900">
-    <Grid Background="{StaticResource ShadowedBrush}">
+        MinHeight="450" Height="640" MaxHeight="720" Width="900" MinWidth="900" WindowStyle="None">
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Grid Background="{StaticResource MainBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <MenuControls:ScheduleControl x:Name="schedule" Visibility="Visible" Grid.Column="1"/>
-        <MenuControls:PersonnelControl x:Name="personnel" Visibility="Hidden" Grid.Column="1"/>
-        <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1"/>
-        <MenuControls:UserAddControl x:Name="add" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1"/>
-        <MenuControls:MenuPanel x:Name="panel" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0"
+        <Rectangle Fill="{StaticResource ShadowedBrush}" Grid.Row="0" Grid.Column="1" MouseLeftButtonDown="DragPanel_MouseLeftButtonDown"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <CustomControls:CircleImageButton x:Name="minimize" ImageWidth="24" ImageHeight="24" IconPath="pack://application:,,,/Icons/MinimizeIcon.png" Margin="0 6 6 0" OnClick="minimize_OnClick"/>
+            <CustomControls:CircleImageButton x:Name="close" ImageWidth="24" ImageHeight="24" IconPath="pack://application:,,,/Icons/CloseIcon.png" Margin="0 6 6 0" OnClick="close_OnClick"/>
+        </StackPanel>
+
+        <Rectangle Fill="{StaticResource DarkBrush}" Grid.Row="1" Grid.Column="1"/>
+
+        <MenuControls:ScheduleControl x:Name="schedule" Visibility="Visible" Grid.Column="1" Grid.Row="2"/>
+        <MenuControls:PersonnelControl x:Name="personnel" Visibility="Hidden" Grid.Column="1" Grid.Row="2"/>
+        <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1" Grid.Row="2"/>
+        <MenuControls:UserAddControl x:Name="add" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1" Grid.Row="2"/>
+        <MenuControls:MenuPanel x:Name="panel" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" 
                                 Width="180" Height="{Binding ElementName=menu, Path=Height}"
                                 OnMenuSelected="MenuPanel_OnMenuSelected" OnLogout="panel_OnLogout"/>
     </Grid>

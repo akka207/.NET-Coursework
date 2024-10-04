@@ -87,6 +87,11 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="{x:Type Border}" x:Key="Event_Border_Style">
+        <Setter Property="BorderBrush" Value="{StaticResource DarkBrush}"/>
+        <Setter Property="BorderThickness" Value="3 3 0 0"/>
+        <Setter Property="CornerRadius" Value="30 0 0 0"/>
+    </Style>
     
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="Transparent"/>

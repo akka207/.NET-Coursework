@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:Exam.MenuControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d" x:Name="control" Loaded="control_Loaded"
-             d:DesignHeight="600" d:DesignWidth="716"> 
+             d:DesignHeight="600" d:DesignWidth="716">
     <UserControl.Resources>
         <local:DateTimeToTimeConverter x:Key="dateTimeToTimeConverter"/>
         <local:DateTimeRestyleConverter x:Key="dateTimeRestyleConverter"/>
         <local:DateTimeToDateConverter x:Key="dateTimeToDateConverter"/>
-
+        <local:EmptyDateConverter x:Key="emptyDateConverter"/>
+        
 
 
         <DataTemplate x:Key="day_template" DataType="{x:Type ListItem}">
@@ -30,7 +31,7 @@
             </CustomControls:CustomBorder>
         </DataTemplate>
 
-        
+
         <DataTemplate x:Key="dayofWeek_event_template" DataType="{x:Type ListItem}">
             <CustomControls:CustomBorder Style="{StaticResource Border_CommonStyle}" Height="Auto" MouseLeftButtonUp="dayofWeek_MouseLeftButtonUp">
                 <Grid>
@@ -61,7 +62,7 @@
                     <Style TargetType="{x:Type CustomControls:CustomBorder}" BasedOn="{StaticResource WeekTile_Border_Style}">
                         <Style.Triggers>
                             <Trigger Property="Highlight" Value="True">
-                                <Setter Property="Background" Value="LightGreen"/>
+                                <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -86,14 +87,14 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Height" Value="Auto"/>
                             </Trigger>
-                            
+
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="Highlight" Value="True"/>
                                     <Condition Property="IsMouseOver" Value="False"/>
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
-                                    <Setter Property="Background" Value="LightGreen"/>
+                                    <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                             <MultiTrigger>
@@ -128,10 +129,10 @@
             </CustomControls:CustomBorder>
         </DataTemplate>
     </UserControl.Resources>
-    
-    
-    
-    
+
+
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -155,32 +156,44 @@
             <Button x:Name="monthButton" Content="Month" Click="monthButton_Click"/>
         </StackPanel>
 
-        <Grid Grid.Row="3" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource Event_Border_Style}" Margin="10 0 0 0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="4"/>
+                </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=control, Path=SelectedEvent.Name}"/>
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="Active"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=control, Path=SelectedEvent.Description}" TextWrapping="Wrap"/>
-            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="From"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ElementName=control, Path=SelectedEvent.StartDateTime}"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal">
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="To"/>
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ElementName=control, Path=SelectedEvent.EndDateTime}"/>
-            </StackPanel>
-        </Grid>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=control, Path=SelectedEvent.Name}" Margin="0 20 0 0" FontSize="32"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=control, Path=SelectedEvent.Description}" Margin="0 20 0 0" TextWrapping="Wrap" FontSize="14"/>
+
+
+                <Rectangle Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="0 5 0 7" Fill="{StaticResource DarkBrush}"/>
+
+                <Rectangle Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Fill="{StaticResource DarkBrush}"/>
+
+
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="Active" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+
+                <StackPanel Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="From"/>
+                        <TextBlock Text="{Binding ElementName=control, Path=SelectedEvent.StartDateTime, Converter={StaticResource emptyDateConverter}}" TextWrapping="Wrap" Width="90"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="To"/>
+                        <TextBlock Text="{Binding ElementName=control, Path=SelectedEvent.EndDateTime, Converter={StaticResource emptyDateConverter}}" TextWrapping="Wrap" Width="90"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
 
         <ItemsControl ItemTemplate="{StaticResource day_template}"          x:Name="daySchedule"   Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <ItemsControl ItemTemplate="{StaticResource dayofWeek_template}"    x:Name="weekSchedule"  Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden" HorizontalAlignment="Center">

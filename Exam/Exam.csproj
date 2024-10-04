@@ -25,9 +25,11 @@
     <None Remove="Icons\AddUserIcon.png" />
     <None Remove="Icons\ArrowDown.png" />
     <None Remove="Icons\ArrowUp.png" />
+    <None Remove="Icons\CloseIcon.png" />
     <None Remove="Icons\HidePasswordIcon.png" />
     <None Remove="Icons\Logout.png" />
     <None Remove="Icons\lorem.png" />
+    <None Remove="Icons\MinimizeIcon.png" />
     <None Remove="Icons\PersonnelIcon.png" />
     <None Remove="Icons\ProfileIcon.png" />
     <None Remove="Icons\ScheduleIcon.png" />
@@ -68,6 +70,7 @@
     <Resource Include="Icons\ArrowUp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\CloseIcon.png" />
     <Resource Include="Icons\HidePasswordIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -77,6 +80,7 @@
     <Resource Include="Icons\lorem.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\MinimizeIcon.png" />
     <Resource Include="Icons\PersonnelIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

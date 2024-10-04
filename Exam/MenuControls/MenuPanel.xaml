@@ -10,23 +10,22 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="330"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="117"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" VerticalAlignment="Top"
             x:Name="originBorder" MinWidth="180"
             CornerRadius="0 0 20 0" BorderThickness="0 0 3 3" BorderBrush="{StaticResource PrimaryBrush}"
-            Background="{StaticResource MainBrush}">
+            Background="{StaticResource ShadowedBrush}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="10"/>
                     <RowDefinition Height="80"/>
                     <RowDefinition Height="80"/>
                     <RowDefinition Height="{Binding ElementName=control, Path=MenuItemHeight}"/>
                     <RowDefinition Height="80"/>
                 </Grid.RowDefinitions>
 
-                <CustomControls:CustomBorder x:Name="scheduleBorder" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}"  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <CustomControls:CustomBorder x:Name="scheduleBorder" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>
@@ -38,7 +37,7 @@
                     </Grid>
                 </CustomControls:CustomBorder>
 
-                <CustomControls:CustomBorder x:Name="personnelBorder" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                <CustomControls:CustomBorder x:Name="personnelBorder" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>
@@ -50,7 +49,7 @@
                     </Grid>
                 </CustomControls:CustomBorder>
 
-                <CustomControls:CustomBorder x:Name="addBorder" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <CustomControls:CustomBorder x:Name="addBorder" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>
@@ -63,7 +62,7 @@
                 </CustomControls:CustomBorder>
 
                 <CustomControls:CustomBorder x:Name="profileBorder" Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}"
-                                             Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="0 0 29 0">
+                                             Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="0 0 23 0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="80"/>
@@ -78,10 +77,10 @@
 
         </Border>
 
-        <Border Grid.Row="2" VerticalAlignment="Top"
-            x:Name="bottomBorder" MinWidth="180" Height="80"
+        <Border Grid.Row="2"
+            x:Name="bottomBorder" Height="80"
             CornerRadius="0 20 0 0" BorderThickness="0 3 3 0" BorderBrush="{StaticResource PrimaryBrush}"
-            Background="{StaticResource MainBrush}">
+            Background="{StaticResource ShadowedBrush}">
             <CustomControls:CustomBorder Width="{Binding ElementName=control, Path=Width}" Style="{StaticResource MenuButton_Border_Style}" 
                                          BorderThickness="0 0 0 3" CornerRadius="0 23 0 0" Height="80">
                 <Grid>

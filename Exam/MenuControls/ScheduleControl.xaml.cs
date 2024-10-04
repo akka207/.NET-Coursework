@@ -181,9 +181,16 @@ namespace Exam.MenuControls
                 .Where(e => e.StartDateTime > DateTime.Now)
                 .OrderBy(e => e.StartDateTime)
                 .FirstOrDefault();
-        }
 
-        private void dayofWeek_CustomBorder_Loaded(object sender, RoutedEventArgs e)
+            SelectedEvent = new Event()
+            {
+                Name = "Select event in schedule",
+                Description = "Use Day/Week/Month menu to navigate between all your events",
+                StartDateTime = DateTime.MinValue
+            };
+		}
+
+		private void dayofWeek_CustomBorder_Loaded(object sender, RoutedEventArgs e)
         {
             var border = sender as CustomBorder;
             border.Highlight = (border.DataContext as Day).IsSelected;

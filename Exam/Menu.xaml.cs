@@ -69,5 +69,20 @@ namespace Exam
 			Close();
             authorizeWindow.Show();
 		}
+
+		private void DragPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+            DragMove();
+		}
+
+		private void minimize_OnClick(object sender, EventArgs e)
+		{
+            WindowState = WindowState.Minimized;
+		}
+
+		private void close_OnClick(object sender, EventArgs e)
+		{
+            Close();
+		}
 	}
 }
