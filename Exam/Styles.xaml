@@ -92,7 +92,13 @@
         <Setter Property="BorderThickness" Value="3 3 0 0"/>
         <Setter Property="CornerRadius" Value="30 0 0 0"/>
     </Style>
-    
+
+    <Style TargetType="{x:Type Border}" x:Key="Profile_Border_Style">
+        <Setter Property="BorderBrush" Value="{StaticResource DarkBrush}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="CornerRadius" Value="30"/>
+    </Style>
+
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
@@ -143,7 +149,7 @@
 
 
     <Style TargetType="{x:Type CustomControls:CustomBorder}" x:Key="WeekTile_Border_Style">
-        <Setter Property="Background" Value="{StaticResource MainBrush}"/>
+        <Setter Property="Background" Value="{StaticResource ShadowedBrush}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource SecondaryBrush}"/>
@@ -163,13 +169,17 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
+    <Style x:Key="TextBlock_Tytle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
     <Style x:Key="ListViewItemStyle" TargetType="{x:Type Border}">
-        <Setter Property="Margin" Value="5"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="Margin" Value="5 5 5 0"/>
+        <Setter Property="Background" Value="{StaticResource ShadowedBrush}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="LightBlue"/>
+                <Setter Property="Background" Value="{StaticResource ShadowedGreenBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

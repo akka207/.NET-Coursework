@@ -8,19 +8,32 @@
              d:DesignHeight="600" d:DesignWidth="716">
     <UserControl.Resources>
         <DataTemplate x:Key="staff_ListBoxItem" DataType="{x:Type ListBoxItem}">
-            <Border Style="{StaticResource ListViewItemStyle}" Loaded="staff_ListBoxItem_Loaded">
-                <StackPanel Orientation="Horizontal" Style="{StaticResource StackPanelStyle}">
-                    <TextBlock Text="{Binding Person.FullName}" Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                    <TextBlock Text=" - " Margin="5" Style="{StaticResource TextBlockStyle}"/>
-                    <TextBlock Text="{Binding Role.Name}" Margin="5" Style="{StaticResource TextBlockStyle}"/>
+            <Border Style="{StaticResource ListViewItemStyle}" Loaded="staff_ListBoxItem_Loaded"
+                    Height="50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2"/>
+                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <Button Content="Add Event" Click="addEventButton_Click"/>
-                    <Button Content="Edit Staff" Click="editStaffButton_Click"/>
-                </StackPanel>
+                    <Rectangle Grid.Column="1" Margin="0 2 0 2" Fill="{StaticResource DarkBrush}"/>
+
+                    <TextBlock Grid.Column="0" Text="{Binding Role.Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="2" Text="{Binding Person.FullName}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
+                    <Button x:Name="addEventButton" Grid.Column="4" Width="80" Content="Add Event" Click="addEventButton_Click"/>
+                    <Button x:Name="editStaffButton" Grid.Column="5" Width="80" Content="Edit Staff" Click="editStaffButton_Click"/>
+                </Grid>
             </Border>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <ItemsControl x:Name="staffItemsControl" ItemsSource="{Binding ElementName=control, Path=StaffList}" ItemTemplate="{StaticResource staff_ListBoxItem}"/>
+        <ScrollViewer>
+            <ItemsControl x:Name="staffItemsControl" ItemsSource="{Binding ElementName=control, Path=StaffList}" ItemTemplate="{StaticResource staff_ListBoxItem}"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -35,7 +35,7 @@
 
         <MenuControls:ScheduleControl x:Name="schedule" Visibility="Visible" Grid.Column="1" Grid.Row="2"/>
         <MenuControls:PersonnelControl x:Name="personnel" Visibility="Hidden" Grid.Column="1" Grid.Row="2"/>
-        <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1" Grid.Row="2"/>
+        <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Padding="20"/>
         <MenuControls:UserAddControl x:Name="add" Visibility="Hidden" Background="AntiqueWhite" Grid.Column="1" Grid.Row="2"/>
         <MenuControls:MenuPanel x:Name="panel" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" 
                                 Width="180" Height="{Binding ElementName=menu, Path=Height}"

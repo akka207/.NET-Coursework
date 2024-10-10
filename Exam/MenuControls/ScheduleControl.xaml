@@ -12,7 +12,7 @@
         <local:DateTimeRestyleConverter x:Key="dateTimeRestyleConverter"/>
         <local:DateTimeToDateConverter x:Key="dateTimeToDateConverter"/>
         <local:EmptyDateConverter x:Key="emptyDateConverter"/>
-        
+
 
 
         <DataTemplate x:Key="day_template" DataType="{x:Type ListItem}">
@@ -40,10 +40,6 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Grid.Row="0"/>
-                    <StackPanel Orientation="Vertical" Grid.Row="1">
-                        <TextBlock Text="Active to: "/>
-                        <TextBlock Text="{Binding EndDateTime, Converter={StaticResource dateTimeRestyleConverter}}" TextWrapping="Wrap"/>
-                    </StackPanel>
                 </Grid>
             </CustomControls:CustomBorder>
         </DataTemplate>
@@ -69,7 +65,7 @@
                 </CustomControls:CustomBorder.Style>
             </CustomControls:CustomBorder>
         </DataTemplate>
-
+        
 
         <DataTemplate x:Key="dayofWeek_template" DataType="{x:Type ListItem}">
             <CustomControls:CustomBorder x:Name="border" Loaded="dayofWeek_CustomBorder_Loaded" Width="90" VerticalAlignment="Top">
