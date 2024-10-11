@@ -24,7 +24,7 @@
                     <Rectangle Grid.Column="1" Margin="0 2 0 2" Fill="{StaticResource DarkBrush}"/>
 
                     <TextBlock Grid.Column="0" Text="{Binding Role.Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Column="2" Text="{Binding Person.FullName}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
+                    <TextBlock Grid.Column="2" Text="{Binding Person.FullName}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                     <Button x:Name="addEventButton" Grid.Column="4" Width="80" Content="Add Event" Click="addEventButton_Click"/>
                     <Button x:Name="editStaffButton" Grid.Column="5" Width="80" Content="Edit Staff" Click="editStaffButton_Click"/>
                 </Grid>

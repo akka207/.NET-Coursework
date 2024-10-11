@@ -25,9 +25,9 @@
             </Grid.ColumnDefinitions>
             <CustomControls:CustomTextBox x:Name="fullname" Grid.Row="0" Grid.Column="0" Placeholder="Full Name"/>
             <CustomControls:CustomTextBox x:Name="login" Grid.Row="1" Grid.Column="0" Placeholder="Login"/>
-            <Button x:Name="createLoginButton" Grid.Row="1" Grid.Column="1" Content="Generate" Height="30" Click="generateLoginButton_Click" Margin="5 0 0 0"/>
+            <Button x:Name="createLoginButton" Grid.Row="1" Grid.Column="1" Content="Generate" Height="30" Click="generateLoginButton_Click" />
             <CustomControls:CustomTextBox x:Name="password" Grid.Row="2" Grid.Column="0" Placeholder="Password"/>
-            <Button x:Name="createPasswordButton" Grid.Row="2"  Grid.Column="1" Content="Generate"  Height="30" Click="generatePasswordButton_Click" Margin="5 0 0 0"/>
+            <Button x:Name="createPasswordButton" Grid.Row="2"  Grid.Column="1" Content="Generate"  Height="30" Click="generatePasswordButton_Click" />
             <CustomControls:CustomTextBox x:Name="passwordC" Grid.Row="3" Grid.Column="0" Placeholder="Confirm Password"/>
             <CustomControls:CustomTextBox x:Name="phone" Grid.Row="4" Grid.Column="0" Placeholder="Phone"/>
             <CustomControls:CustomTextBox x:Name="email" Grid.Row="5" Grid.Column="0" Placeholder="Email"/>

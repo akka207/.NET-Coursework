@@ -94,8 +94,16 @@
     </Style>
 
     <Style TargetType="{x:Type Border}" x:Key="Profile_Border_Style">
+        <Setter Property="Background" Value="{StaticResource ShadowedBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource DarkBrush}"/>
         <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="CornerRadius" Value="30"/>
+    </Style>
+
+    <Style TargetType="{x:Type Border}" x:Key="ProfileTyle_Border_Style" BasedOn="{StaticResource Profile_Border_Style}">
+        <Setter Property="Background" Value="{StaticResource MainBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DarkBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="CornerRadius" Value="30"/>
     </Style>
 

@@ -18,14 +18,22 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
 
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="60"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="60"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Height="60"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Height="60"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Height="60"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Height="60" Width="300"/>
+
             <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="Role:"/>
             <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="{Binding ElementName=control, Path=CurrentStaff.Role.Name}"/>
+
 
             <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="Login:"/>
             <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="{Binding ElementName=control, Path=CurrentStaff.Person.Login}"/>
@@ -37,7 +45,7 @@
             <TextBox   Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="phoneTextBox" Text="{Binding ElementName=control, Path=CurrentStaff.Person.Phone}" IsReadOnly="True"/>
             <Button    Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="phoneButton"  Width="100px" Content="Change" Click="PhoneButton_Click"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="Email:"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}"  Text="Email:"/>
             <TextBox   Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="emailTextBox" Text="{Binding ElementName=control, Path=CurrentStaff.Person.Email}" IsReadOnly="True"/>
             <Button    Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="emailButton"  Content="Change" Width="100px" Click="EmailButton_Click"/>
 
