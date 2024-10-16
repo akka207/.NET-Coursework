@@ -37,6 +37,23 @@ namespace Exam.AuthorizeControls
                 }
             }
         }
+        public int selectedIndex = -1;
+        public int SelectedIndex
+        {
+            get { return selectedIndex; }
+            set
+            {
+                if (selectedIndex != value)
+                {
+                    selectedIndex = value;
+                    OnPropertyChanged(nameof(SelectedIndex));
+                }
+            }
+        }
+
+        public List<Role> Roles { get; set; } = new List<Role>() { Role.User, Role.Manager, Role.Admin };
+
+
         public AdminEditControl()
         {
             InitializeComponent();
@@ -76,13 +93,35 @@ namespace Exam.AuthorizeControls
         }
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(false, CStaff);
             changePasswordWindow.ShowDialog();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            switch (CStaff.Role.Name)
+            {
+                case "User":
+                    SelectedIndex = 0;
+                    break;
+                case "Manager":
+                    SelectedIndex = 1;
+                    break;
+                case "Admin":
+                    SelectedIndex = 2;
+                    break;
+            }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(SelectedIndex != -1)
+                DBController.ChangeRole(CStaff, (sender as ComboBox).SelectedItem as Role);
         }
     }
 }

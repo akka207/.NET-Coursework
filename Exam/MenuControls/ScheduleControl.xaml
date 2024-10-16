@@ -16,7 +16,7 @@
 
 
         <DataTemplate x:Key="day_template" DataType="{x:Type ListItem}">
-            <CustomControls:CustomBorder Style="{StaticResource Border_CommonStyle}" Height="50">
+            <Border Style="{StaticResource ListViewItemStyle}" Height="50" MouseUp="dayEvent_MouseUp">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -25,10 +25,10 @@
                     <TextBlock Text="{Binding Name}" Grid.Row="0"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="1">
                         <TextBlock Text="Active to: "/>
-                        <TextBlock Text="{Binding EndDateTime, Converter={StaticResource dateTimeRestyleConverter}}"/>
+                        <TextBlock Text="{Binding EndDateTime, Converter={StaticResource emptyDateConverter}}"/>
                     </StackPanel>
                 </Grid>
-            </CustomControls:CustomBorder>
+            </Border>
         </DataTemplate>
 
 
@@ -65,13 +65,15 @@
                 </CustomControls:CustomBorder.Style>
             </CustomControls:CustomBorder>
         </DataTemplate>
-        
+
 
         <DataTemplate x:Key="dayofWeek_template" DataType="{x:Type ListItem}">
             <CustomControls:CustomBorder x:Name="border" Loaded="dayofWeek_CustomBorder_Loaded" Width="90" VerticalAlignment="Top">
                 <StackPanel Orientation="Vertical" Grid.Row="1">
-                    <TextBlock Text="{Binding Date, Converter={StaticResource dateTimeToDateConverter}}"/>
-                    <TextBlock Text="{Binding Date.DayOfWeek}"/>
+                    <StackPanel Orientation="Vertical" MouseUp="weekDay_MouseUp" Background="Transparent">
+                        <TextBlock Text="{Binding Date, Converter={StaticResource dateTimeToDateConverter}}"/>
+                        <TextBlock Text="{Binding Date.DayOfWeek}"/>
+                    </StackPanel>
                     <ItemsControl x:Name="events" ItemTemplate="{StaticResource dayofWeek_event_template}" ItemsSource="{Binding Events}" Grid.Row="2"/>
                 </StackPanel>
                 <CustomControls:CustomBorder.Style>
@@ -191,7 +193,9 @@
             </Grid>
         </Border>
 
-        <ItemsControl ItemTemplate="{StaticResource day_template}"          x:Name="daySchedule"   Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <ScrollViewer x:Name="dayViewer" Grid.Row="2" Grid.ColumnSpan="2">
+            <ItemsControl ItemTemplate="{StaticResource day_template}"      x:Name="daySchedule"/>
+        </ScrollViewer>
         <ItemsControl ItemTemplate="{StaticResource dayofWeek_template}"    x:Name="weekSchedule"  Grid.Row="2" Grid.RowSpan="2" Visibility="Hidden" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

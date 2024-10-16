@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Exam.Windows"
         xmlns:AControls="clr-namespace:Exam.AuthorizeControls"
         mc:Ignorable="d"
-        Title="AdminEditWindow" Height="450" Width="800">
+        Title="Edit" Height="300" Width="500">
     <Grid>
-        <AControls:AdminEditControl x:Name="adminEditControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Height="370"/>
+        <AControls:AdminEditControl x:Name="adminEditControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Height="280"/>
     </Grid>
 </Window>

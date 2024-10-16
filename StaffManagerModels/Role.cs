@@ -14,5 +14,10 @@ namespace StaffManagerModels
         public static Role Admin => new Role() { Id = 1, Name = "Admin" };
         public static Role Manager => new Role() { Id = 2, Name = "Manager" };
         public static Role User => new Role() { Id = 3, Name = "User" };
-	}
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
 }

@@ -7,7 +7,20 @@
              xmlns:controls="clr-namespace:Exam.AuthorizeControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <controls:AdminRegistrationControl Margin="10 0 10 0" />
-    </Grid>
+    <Border Style="{StaticResource Profile_Border_Style}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+
+            <controls:AdminRegistrationControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="7" Margin="10 0 10 0" />
+        </Grid>
+    </Border>
 </UserControl>

@@ -6,11 +6,9 @@
              xmlns:local="clr-namespace:Exam.AuthorizeControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="10" Padding="10" Margin="10">
         <StackPanel>
-            <TextBlock Text="Staff Information" FontSize="24" FontWeight="Bold" 
-                       HorizontalAlignment="Center" Margin="10"/>
             <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -29,7 +27,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Role:" FontWeight="Bold" Margin="5"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=CStaff.Role.Name}" IsReadOnly="True"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" Width="Auto" ItemsSource="{Binding Path=Roles}" SelectedIndex="{Binding Path=SelectedIndex, Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChanged"/>
 
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Login:" FontWeight="Bold" Margin="5"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=CStaff.Person.Login}" IsReadOnly="True"/>

@@ -110,9 +110,16 @@ namespace Exam.MenuControls
 		private void editStaffButton_Click(object sender, RoutedEventArgs e)
 		{
 			AdminEditWindow window = new AdminEditWindow();
+            window.Closed += editStaffWindow_Closed;
 			window.xD = (sender as Button).DataContext as Staff;
 			window.SetStaff();
 			window.ShowDialog();
+
 		}
-	}
+
+        private void editStaffWindow_Closed(object? sender, EventArgs e)
+        {
+            StaffList = new ObservableCollection<Staff>(DBController.GetAllStaff());
+        }
+    }
 }

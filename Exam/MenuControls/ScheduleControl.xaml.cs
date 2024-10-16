@@ -122,13 +122,12 @@ namespace Exam.MenuControls
             switch (view)
             {
                 case ScheduleView.Day:
-                    DateToView = DateTime.Now;
                     if (doGenerate)
                     {
                         DayView = GenerateDay(DateToView);
                         daySchedule.ItemsSource = DayView.Events;
                     }
-                    daySchedule.Visibility = Visibility.Visible;
+                    dayViewer.Visibility = Visibility.Visible;
                     weekSchedule.Visibility = Visibility.Hidden;
                     monthSchedule.Visibility = Visibility.Hidden;
                     arrowUpButton.Visibility = Visibility.Hidden;
@@ -140,7 +139,7 @@ namespace Exam.MenuControls
                         WeekView = GenerateWeek(DateToView);
                         weekSchedule.ItemsSource = WeekView.Days;
                     }
-                    daySchedule.Visibility = Visibility.Hidden;
+                    dayViewer.Visibility = Visibility.Hidden;
                     weekSchedule.Visibility = Visibility.Visible;
                     monthSchedule.Visibility = Visibility.Hidden;
                     arrowUpButton.Visibility = Visibility.Visible;
@@ -152,7 +151,7 @@ namespace Exam.MenuControls
                         MonthView = GenerateMonth(DateToView);
                         monthSchedule.ItemsSource = MonthView.Weeks;
                     }
-                    daySchedule.Visibility = Visibility.Hidden;
+                    dayViewer.Visibility = Visibility.Hidden;
                     weekSchedule.Visibility = Visibility.Hidden;
                     monthSchedule.Visibility = Visibility.Visible;
                     arrowUpButton.Visibility = Visibility.Visible;
@@ -188,9 +187,9 @@ namespace Exam.MenuControls
                 Description = "Use Day/Week/Month menu to navigate between all your events",
                 StartDateTime = DateTime.MinValue
             };
-		}
+        }
 
-		private void dayofWeek_CustomBorder_Loaded(object sender, RoutedEventArgs e)
+        private void dayofWeek_CustomBorder_Loaded(object sender, RoutedEventArgs e)
         {
             var border = sender as CustomBorder;
             border.Highlight = (border.DataContext as Day).IsSelected;
@@ -221,21 +220,21 @@ namespace Exam.MenuControls
         }
 
         private void arrowUpButton_OnClick(object sender, EventArgs e)
-		{
-			DateToView = DateToView.AddDays(7);
-			MonthView = GenerateMonth(DateToView);
-			WeekView = MonthView.Weeks.First();
-			weekSchedule.ItemsSource = WeekView.Days;
-			monthSchedule.ItemsSource = MonthView.Weeks;
-		}
+        {
+            DateToView = DateToView.AddDays(7);
+            MonthView = GenerateMonth(DateToView);
+            WeekView = MonthView.Weeks.First();
+            weekSchedule.ItemsSource = WeekView.Days;
+            monthSchedule.ItemsSource = MonthView.Weeks;
+        }
 
         private void arrowDownButton_OnClick(object sender, EventArgs e)
         {
-			DateToView = DateToView.AddDays(-7);
-			MonthView = GenerateMonth(DateToView);
-			WeekView = MonthView.Weeks.First();
-			weekSchedule.ItemsSource = WeekView.Days;
-			monthSchedule.ItemsSource = MonthView.Weeks;
+            DateToView = DateToView.AddDays(-7);
+            MonthView = GenerateMonth(DateToView);
+            WeekView = MonthView.Weeks.First();
+            weekSchedule.ItemsSource = WeekView.Days;
+            monthSchedule.ItemsSource = MonthView.Weeks;
         }
 
         private void weekOfMonth_MouseUp(object sender, MouseButtonEventArgs e)
@@ -243,6 +242,17 @@ namespace Exam.MenuControls
             WeekView = (sender as CustomBorder).DataContext as Week;
             weekSchedule.ItemsSource = WeekView.Days;
             ChangeContainment(ScheduleView.Week, false);
+        }
+
+        private void dayEvent_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            SelectedEvent = (sender as Border).DataContext as Event;
+        }
+
+        private void weekDay_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            DateToView = ((sender as StackPanel).DataContext as Day).Date;
+            ChangeContainment(ScheduleView.Day);
         }
     }
 }
