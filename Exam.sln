@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exam", "Exam\Exam.csproj", "{1811EB9A-A961-410A-83FF-14ABDCCEAAB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exam", "Exam\Exam.csproj", "{1811EB9A-A961-410A-83FF-14ABDCCEAAB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffManagerModels", "StaffManagerModels\StaffManagerModels.csproj", "{8A53BCC1-0DA3-480B-85BB-BA28BD14F625}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffManagerModels", "StaffManagerModels\StaffManagerModels.csproj", "{8A53BCC1-0DA3-480B-85BB-BA28BD14F625}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.PostgreSQL", "PM.PostgreSQL\PM.PostgreSQL.csproj", "{96010291-9605-433E-A50F-419F95375B1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.DbContext", "PM.DbContext\PM.DbContext.csproj", "{BE55273A-81EE-48C4-B5BC-173888027C6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.SQLite", "PM.SQLite\PM.SQLite.csproj", "{F8EBB578-05BB-4154-A5D6-92E9FE864CE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{8A53BCC1-0DA3-480B-85BB-BA28BD14F625}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A53BCC1-0DA3-480B-85BB-BA28BD14F625}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A53BCC1-0DA3-480B-85BB-BA28BD14F625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96010291-9605-433E-A50F-419F95375B1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96010291-9605-433E-A50F-419F95375B1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96010291-9605-433E-A50F-419F95375B1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96010291-9605-433E-A50F-419F95375B1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE55273A-81EE-48C4-B5BC-173888027C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE55273A-81EE-48C4-B5BC-173888027C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE55273A-81EE-48C4-B5BC-173888027C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE55273A-81EE-48C4-B5BC-173888027C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8EBB578-05BB-4154-A5D6-92E9FE864CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8EBB578-05BB-4154-A5D6-92E9FE864CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8EBB578-05BB-4154-A5D6-92E9FE864CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8EBB578-05BB-4154-A5D6-92E9FE864CE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

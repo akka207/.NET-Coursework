@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Exam.Data
 {
     public static class Config
     {
         public static IConfigurationRoot Configuration { get; set; }
+        public static PM.DbContext.BaseDbContext DbContext;
         static Config()
         {
             var devEnvironmentVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
@@ -27,8 +29,17 @@ namespace Exam.Data
             }
 
             Configuration = builder.Build();
+
+            switch(Configuration.GetSection("ConnectionType").Value)
+            {
+                case "PostgreSQL":
+                    DbContext = new PM.PostgreSQL.PostgresDbContext();
+                    break;
+                case "SQLite":
+                    DbContext = new PM.SQLite.SQLiteDbContext();
+                    break;
+            }
         }
 
-        public static SQLiteDbContext DbContext => new SQLiteDbContext();
     }
 }
