@@ -29,7 +29,7 @@
             <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Height="60"/>
             <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Height="60"/>
             <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Height="60"/>
-            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Height="60" Width="300"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Height="60" Width="474"/>
 
             <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="Role:"/>
             <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="{Binding ElementName=control, Path=CurrentStaff.Role.Name}"/>

@@ -12,19 +12,19 @@ namespace Exam.Data
         public static IConfigurationRoot Configuration { get; set; }
         static Config()
         {
-            var devEnvironmentVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
+            //var devEnvironmentVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
 
-            var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) ||
-                                devEnvironmentVariable.ToLower() == "development";
+            //var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) ||
+            //                    devEnvironmentVariable.ToLower() == "development";
 
             var builder = new ConfigurationBuilder();
             builder
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-            if (isDevelopment)
-            {
-                builder.AddUserSecrets<App>();
-            }
+            //if (isDevelopment)
+            //{
+            //    builder.AddUserSecrets<App>();
+            //}
 
             Configuration = builder.Build();
         }

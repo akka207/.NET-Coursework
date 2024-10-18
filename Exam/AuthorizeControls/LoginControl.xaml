@@ -51,6 +51,6 @@
         <Button x:Name="signUpButton" Grid.Row="5" Grid.Column="0" Content="Sign Up" FontSize="20" Height="40" Click="signUpButton_Click" VerticalAlignment="Bottom"/>
 
 
-        <Button x:Name="debugButton" Grid.Row="5" Grid.Column="1" Content="debug" FontSize="10" Height="40" Click="debugButton_Click" VerticalAlignment="Bottom"/>
+        <!--<Button x:Name="debugButton" Grid.Row="5" Grid.Column="1" Content="debug" FontSize="10" Height="40" Click="debugButton_Click" VerticalAlignment="Bottom"/>-->
     </Grid>
 </UserControl>
