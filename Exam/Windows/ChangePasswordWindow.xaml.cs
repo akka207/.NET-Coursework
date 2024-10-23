@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Exam.Data;
+using Exam.Generators;
 using StaffManagerModels;
 namespace Exam.Windows
 {
@@ -22,12 +23,26 @@ namespace Exam.Windows
     {
         private bool oldPasswordRequired = true;
         private Staff _staffToEdit = null;
-
+        private ApplicationSettings _appSettings;
+        private string _windowId = "ChangePasswordWindow";
         public ChangePasswordWindow()
         {
             InitializeComponent();
+            _appSettings = SettingsManager.LoadSettings();
+            ApplySettings();
         }
-
+        private void ApplySettings()
+        {
+            if (_appSettings.Windows.TryGetValue(_windowId, out WindowSettings settings))
+            {
+                this.Width = settings.Width;
+                this.Height = settings.Height;
+                this.Top = settings.Top;
+                this.Left = settings.Left;
+                if (settings.IsMaximized)
+                    this.WindowState = WindowState.Maximized;
+            }
+        }
         public ChangePasswordWindow(bool requireOldPassword, Staff staffToEdit)
         {
             InitializeComponent();
@@ -35,11 +50,24 @@ namespace Exam.Windows
             oldPasswordRequired = requireOldPassword;
             _staffToEdit = staffToEdit;
         }
-
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            var settings = new WindowSettings
+            {
+                Width = this.Width,
+                Height = this.Height,
+                Top = this.Top,
+                Left = this.Left,
+                IsMaximized = (this.WindowState == WindowState.Maximized)
+            };
+            _appSettings.Windows[_windowId] = settings;
+            SettingsManager.SaveSettings(_appSettings);
+        }
         private void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            string oldPassword = OldPasswordBox.Password;
-            string newPassword = NewPasswordBox.Password;
+            string oldPassword = OldPasswordBox.TextBoxText;
+            string newPassword = NewPasswordBox.TextBoxText;
             if (DBController.ChangePassword(_staffToEdit == null ? DBController.CurrentStaff.Person.Login : _staffToEdit.Person.Login, oldPassword, newPassword, false))
             {
                 MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -50,7 +78,10 @@ namespace Exam.Windows
                 MessageBox.Show("Password change failed. Please check your credentials and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        private void GeneratePassword_Click(object sender, RoutedEventArgs e)
+        {
+            NewPasswordBox.textBox.Text = PasswordGenerator.GeneratePassword();
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (!oldPasswordRequired)

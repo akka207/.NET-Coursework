@@ -43,6 +43,7 @@ namespace Exam.Windows
                     this.WindowState = WindowState.Maximized;
             }
         }
+
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             base.OnClosing(e);
