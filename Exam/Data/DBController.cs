@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,42 @@ using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Exam.Data
 {
-    public class DBController
+    public static class DBController
     {
         public static Staff CurrentStaff { get; private set; }
+
+        static DBController()
+        {
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"PManager");
+            string dbName = "Staff.db";
+
+            if (!Directory.Exists(dbPath))
+                Directory.CreateDirectory(dbPath);
+
+            if (!File.Exists(Path.Combine(dbPath, dbName)))
+            {
+                InitDB();
+            }
+        }
+
+        private static void InitDB()
+        {
+            using (var context = Config.DbContext)
+            {
+                context.Database.Migrate();
+
+                context.Roles.Add(Role.Admin);
+                context.Roles.Add(Role.Manager);
+                context.Roles.Add(Role.User);
+                context.SaveChanges();
+
+                RegisterPerson(new Person() { Login = "admin", FullName = "Administator" }, "admin", Role.Admin.Id);
+            }
+        }
 
         public static bool CheckPassword(string login, string password)
         {
@@ -136,7 +167,7 @@ namespace Exam.Data
             }
         }
 
-        public static void RegisterPerson(Person person, string password)
+        public static void RegisterPerson(Person person, string password, int roleId = 3)
         {
             using (var context = Config.DbContext)
             {
@@ -151,7 +182,7 @@ namespace Exam.Data
 
                 staff.PersonId = person.Id;
                 staff.ScheduleId = schedule.Id;
-                staff.RoleId = Role.User.Id;
+                staff.RoleId = roleId;
 
                 context.Staffs.Add(staff);
                 context.SaveChanges();
@@ -198,7 +229,7 @@ namespace Exam.Data
                         return true;
                     }
                 }
-                else if(CurrentStaff.RoleId == Role.Admin.Id)
+                else if (CurrentStaff.RoleId == Role.Admin.Id)
                 {
                     findedPerson.HashedPasword = GetMD5(newPassword);
                     context.SaveChanges();

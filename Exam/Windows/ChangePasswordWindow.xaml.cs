@@ -49,6 +49,9 @@ namespace Exam.Windows
 
             oldPasswordRequired = requireOldPassword;
             _staffToEdit = staffToEdit;
+
+            _appSettings = SettingsManager.LoadSettings();
+            ApplySettings();
         }
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
@@ -86,7 +89,10 @@ namespace Exam.Windows
         {
             if (!oldPasswordRequired)
             {
+                textLabel.Text = $"Change for: {_staffToEdit.Person.Login}";
                 OldPasswordBox.IsEnabled = false;
+                OldPasswordBox.Visibility = Visibility.Hidden;
+                textLabel.Visibility = Visibility.Visible;
             }
         }
     }

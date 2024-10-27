@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,9 @@ namespace Exam.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlite(Config.Configuration.GetConnectionString("DefaultConnection"));
+            //optionsBuilder.UseSqlite(Config.Configuration.GetConnectionString("DefaultConnection"));
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"PManager\Staff.db");
+            optionsBuilder.UseSqlite($"FileName={path}");
         }
     }
 }
