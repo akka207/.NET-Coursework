@@ -7,7 +7,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:AControls="clr-namespace:Exam.AuthorizeControls"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Authorize V1.0.0.3" MinHeight="450" MaxHeight="450" MinWidth="600" MaxWidth="600">
+        Title="Authorize" MinHeight="450" MaxHeight="450" MinWidth="600" MaxWidth="600">
     <Window.Resources>
         <Style x:Key="LoginButton_Style" TargetType="Button">
             <Setter Property="Background" Value="WhiteSmoke"/>

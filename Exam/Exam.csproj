@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="DBTemplates\Staff.db" />
     <None Remove="GIFs\Icon.gif" />
     <None Remove="Icons\AddUserIcon.png" />
     <None Remove="Icons\ArrowDown.png" />
@@ -61,9 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="DBTemplates\Staff.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="GIFs\Icon.gif" />
     <Resource Include="Icons\AddUserIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
