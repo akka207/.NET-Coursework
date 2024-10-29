@@ -27,30 +27,18 @@ namespace Exam.Data
             string dbPath = Path.Combine(userDirectory, "PManager");
             string dbName = "Staff.db";
 
-            if (!FileAccesses.HasPathAccessable(userDirectory))
-                FileAccesses.ChangePathAccessControlCurrentUser(userDirectory, false);
-            //if (!FileAccesses.HasPathAccessable(dbPath))
-            //    FileAccesses.ChangePathAccessControlCurrentUser(dbPath, false);
-            //if (!FileAccesses.HasPathAccessable(Path.Combine(dbPath, dbName)))
-            //    FileAccesses.ChangePathAccessControlCurrentUser(dbPath, true);
-
             //Logger.Instance.INFO($"Generated path: {dbPath}");
 
             if (!Directory.Exists(dbPath))
             {
                 //Logger.Instance.INFO($"Creating folder PManager");
                 Directory.CreateDirectory(dbPath);
-
-                if (!FileAccesses.HasPathAccessable(dbPath))
-                    FileAccesses.ChangePathAccessControlCurrentUser(dbPath, false);
                 //Logger.Instance.INFO($"Succesful creating");
             }
 
             if (!File.Exists(Path.Combine(dbPath, dbName)))
             {
                 InitDB();
-                if (!FileAccesses.HasPathAccessable(Path.Combine(dbPath, dbName)))
-                    FileAccesses.ChangePathAccessControlCurrentUser(Path.Combine(dbPath, dbName), true);
             }
         }
 
