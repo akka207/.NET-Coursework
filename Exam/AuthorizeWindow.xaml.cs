@@ -38,36 +38,36 @@ namespace Exam
         }
         private void AvailableControls(bool value)
         {
-            Logger.Instance.DEBUG($"Setting AvailableControls to {(value ? "enabled" : "disabled")}");
+            //Logger.Instance.DEBUG($"Setting AvailableControls to {(value ? "enabled" : "disabled")}");
             logInControl.IsEnabled = value;
         }
 
         private void logInControl_OnLogIn(object? sender, EventArgs e)
         {
-            Logger.Instance.INFO("LogIn event triggered");
+            //Logger.Instance.INFO("LogIn event triggered");
             Mouse.OverrideCursor = Cursors.Wait;
             AvailableControls(false);
 
             string _login = logInControl.Login, _password = logInControl.Password;
             Task.Run(() =>
             {
-                Logger.Instance.DEBUG($"Attempting to validate password for login: {_login}");
+                //Logger.Instance.DEBUG($"Attempting to validate password for login: {_login}");
                 if (DBController.CheckPassword(_login, _password))
                 {
-                    Logger.Instance.INFO($"Password validation successful for login: {_login}");
+                    //Logger.Instance.INFO($"Password validation successful for login: {_login}");
                     Staff? staff = DBController.GetStaff(_login, _password);
                     if (staff == null)
                     {
-                        Logger.Instance.ERROR($"Failed to retrieve staff information for login: {_login}");
+                        //Logger.Instance.ERROR($"Failed to retrieve staff information for login: {_login}");
                         MessageBox.Show("An error occurred while retrieving staff information!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        Logger.Instance.INFO($"Staff information retrieved for login: {_login}");
+                        //Logger.Instance.INFO($"Staff information retrieved for login: {_login}");
                         DBController.SelectCurrentStaff(_login, _password);
                         Dispatcher.Invoke(() =>
                         {
-                            Logger.Instance.INFO("Opening Menu window and closing login window");
+                            //Logger.Instance.INFO("Opening Menu window and closing login window");
                             Menu menu = new Menu();
                             menu.Show();
                             Close();
@@ -76,12 +76,12 @@ namespace Exam
                 }
                 else
                 {
-                    Logger.Instance.WARN($"Password validation failed for login: {_login}");
+                    //Logger.Instance.WARN($"Password validation failed for login: {_login}");
                     MessageBox.Show("Incorrect login or password!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 Dispatcher.Invoke(() =>
                 {
-                    Logger.Instance.DEBUG("Restoring cursor and re-enabling controls after login attempt");
+                    //Logger.Instance.DEBUG("Restoring cursor and re-enabling controls after login attempt");
                     Mouse.OverrideCursor = null;
                     AvailableControls(true);
                 });
@@ -90,14 +90,14 @@ namespace Exam
 
         private void logInControl_OnSignUp(object sender, EventArgs e)
         {
-            Logger.Instance.INFO("SignUp event triggered, switching to registration control");
+            //Logger.Instance.INFO("SignUp event triggered, switching to registration control");
             logInControl.Visibility = Visibility.Hidden;
             registerControl.Visibility = Visibility.Visible;
         }
 
         private void registerControl_OnSignUp(object sender, EventArgs e)
         {
-            Logger.Instance.INFO("Registration attempt started");
+            //Logger.Instance.INFO("Registration attempt started");
             Mouse.OverrideCursor = Cursors.Wait;
             AvailableControls(false);
 
@@ -112,13 +112,13 @@ namespace Exam
 
             Task.Run(() =>
             {
-                Logger.Instance.DEBUG("Starting data validation for registration fields");
+                //Logger.Instance.DEBUG("Starting data validation for registration fields");
                 var passwordValidatorMessages = DataValidators.ValidatePassword(_password, _passwordC);
                 var personValidatorMessages = DataValidators.ValidatePerson(person);
 
                 if (!passwordValidatorMessages.IsAllOK)
                 {
-                    Logger.Instance.WARN("Password validation failed");
+                    //Logger.Instance.WARN("Password validation failed");
                     Dispatcher.Invoke(() =>
                     {
                         registerControl.password.SetValidationErrors(passwordValidatorMessages.Data[DataValidators.Fields.Password]);
@@ -128,7 +128,7 @@ namespace Exam
 
                 if (!personValidatorMessages.IsAllOK)
                 {
-                    Logger.Instance.WARN("Person information validation failed");
+                    //Logger.Instance.WARN("Person information validation failed");
                     Dispatcher.Invoke(() =>
                     {
                         registerControl.fullname.SetValidationErrors(personValidatorMessages.Data[DataValidators.Fields.FullName]);
@@ -140,19 +140,19 @@ namespace Exam
 
                 if (passwordValidatorMessages.IsAllOK && personValidatorMessages.IsAllOK)
                 {
-                    Logger.Instance.INFO($"Registration data valid, proceeding with registration for login: {_login}");
+                    //Logger.Instance.INFO($"Registration data valid, proceeding with registration for login: {_login}");
                     DBController.RegisterPerson(person, _password);
                     MessageBox.Show("Registration successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    Logger.Instance.ERROR("Registration failed due to invalid data");
+                    //Logger.Instance.ERROR("Registration failed due to invalid data");
                     MessageBox.Show("Data didn't pass validation (see tips for each field)", "Invalid Data", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 Dispatcher.Invoke(() =>
                 {
-                    Logger.Instance.DEBUG("Restoring cursor and re-enabling controls after registration attempt");
+                    //Logger.Instance.DEBUG("Restoring cursor and re-enabling controls after registration attempt");
                     Mouse.OverrideCursor = null;
                     AvailableControls(true);
                 });
@@ -161,37 +161,37 @@ namespace Exam
 
         private void registerControl_OnLogIn(object sender, EventArgs e)
         {
-            Logger.Instance.INFO("Switching back to login control");
+            //Logger.Instance.INFO("Switching back to login control");
             logInControl.Visibility = Visibility.Visible;
             registerControl.Visibility = Visibility.Hidden;
         }
 
         private void logInControl_OnDebugLogIn(object sender, EventArgs e)
         {
-            Logger.Instance.INFO("Debug login event triggered");
+            //Logger.Instance.INFO("Debug login event triggered");
             Mouse.OverrideCursor = Cursors.Wait;
             AvailableControls(false);
 
             string _login = "Akka 207", _password = "!Qwerty1";
             Task.Run(() =>
             {
-                Logger.Instance.DEBUG($"Attempting debug login for {_login}");
+                //Logger.Instance.DEBUG($"Attempting debug login for {_login}");
                 if (DBController.CheckPassword(_login, _password))
                 {
-                    Logger.Instance.INFO("Debug login successful, retrieving staff information");
+                    //Logger.Instance.INFO("Debug login successful, retrieving staff information");
                     Staff? staff = DBController.GetStaff(_login, _password);
                     if (staff == null)
                     {
-                        Logger.Instance.ERROR("Failed to retrieve staff information for debug login");
+                        //Logger.Instance.ERROR("Failed to retrieve staff information for debug login");
                         MessageBox.Show("An error occurred while retrieving staff information!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
-                        Logger.Instance.INFO("Staff information retrieved successfully for debug login");
+                        //Logger.Instance.INFO("Staff information retrieved successfully for debug login");
                         DBController.SelectCurrentStaff(_login, _password);
                         Dispatcher.Invoke(() =>
                         {
-                            Logger.Instance.INFO("Opening Menu window and closing login window after debug login");
+                            //Logger.Instance.INFO("Opening Menu window and closing login window after debug login");
                             Menu menu = new Menu();
                             menu.Show();
                             Close();
@@ -200,12 +200,12 @@ namespace Exam
                 }
                 else
                 {
-                    Logger.Instance.WARN("Debug login failed - incorrect credentials");
+                    //Logger.Instance.WARN("Debug login failed - incorrect credentials");
                     MessageBox.Show("Incorrect login or password!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 Dispatcher.Invoke(() =>
                 {
-                    Logger.Instance.DEBUG("Restoring cursor and re-enabling controls after debug login attempt");
+                    //Logger.Instance.DEBUG("Restoring cursor and re-enabling controls after debug login attempt");
                     Mouse.OverrideCursor = null;
                     AvailableControls(true);
                 });
