@@ -49,13 +49,13 @@ namespace Exam
             AvailableControls(false);
 
             string _login = logInControl.Login, _password = logInControl.Password;
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 //Logger.Instance.DEBUG($"Attempting to validate password for login: {_login}");
-                if (DBController.CheckPassword(_login, _password))
+                if (await DBController.Instance.CheckPasswordAsync(_login, _password))
                 {
                     //Logger.Instance.INFO($"Password validation successful for login: {_login}");
-                    Staff? staff = DBController.GetStaff(_login, _password);
+                    Staff? staff = await DBController.Instance.GetStaffAsync(_login);
                     if (staff == null)
                     {
                         //Logger.Instance.ERROR($"Failed to retrieve staff information for login: {_login}");
@@ -64,7 +64,7 @@ namespace Exam
                     else
                     {
                         //Logger.Instance.INFO($"Staff information retrieved for login: {_login}");
-                        DBController.SelectCurrentStaff(_login, _password);
+                        await DBController.Instance.SelectCurrentStaffAsync(_login);
                         Dispatcher.Invoke(() =>
                         {
                             //Logger.Instance.INFO("Opening Menu window and closing login window");
@@ -110,7 +110,7 @@ namespace Exam
 
             var person = new Person() { Login = _login, FullName = _fullname, Phone = _phone, Email = _email };
 
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 //Logger.Instance.DEBUG("Starting data validation for registration fields");
                 var passwordValidatorMessages = DataValidators.ValidatePassword(_password, _passwordC);
@@ -141,7 +141,7 @@ namespace Exam
                 if (passwordValidatorMessages.IsAllOK && personValidatorMessages.IsAllOK)
                 {
                     //Logger.Instance.INFO($"Registration data valid, proceeding with registration for login: {_login}");
-                    DBController.RegisterPerson(person, _password);
+                    await DBController.Instance.RegisterPersonAsync(person, _password);
                     MessageBox.Show("Registration successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
@@ -173,13 +173,13 @@ namespace Exam
             AvailableControls(false);
 
             string _login = "Akka 207", _password = "!Qwerty1";
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 //Logger.Instance.DEBUG($"Attempting debug login for {_login}");
-                if (DBController.CheckPassword(_login, _password))
+                if (await DBController.Instance.CheckPasswordAsync(_login, _password))
                 {
                     //Logger.Instance.INFO("Debug login successful, retrieving staff information");
-                    Staff? staff = DBController.GetStaff(_login, _password);
+                    Staff? staff = await DBController.Instance.GetStaffAsync(_login);
                     if (staff == null)
                     {
                         //Logger.Instance.ERROR("Failed to retrieve staff information for debug login");
@@ -188,7 +188,7 @@ namespace Exam
                     else
                     {
                         //Logger.Instance.INFO("Staff information retrieved successfully for debug login");
-                        DBController.SelectCurrentStaff(_login, _password);
+                        await DBController.Instance.SelectCurrentStaffAsync(_login);
                         Dispatcher.Invoke(() =>
                         {
                             //Logger.Instance.INFO("Opening Menu window and closing login window after debug login");

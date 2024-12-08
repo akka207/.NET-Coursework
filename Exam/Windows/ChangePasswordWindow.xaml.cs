@@ -67,11 +67,11 @@ namespace Exam.Windows
             _appSettings.Windows[_windowId] = settings;
             SettingsManager.SaveSettings(_appSettings);
         }
-        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        private async void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
             string oldPassword = OldPasswordBox.TextBoxText;
             string newPassword = NewPasswordBox.TextBoxText;
-            if (DBController.ChangePassword(_staffToEdit == null ? DBController.CurrentStaff.Person.Login : _staffToEdit.Person.Login, oldPassword, newPassword, false))
+            if (await DBController.Instance.ChangePasswordAsync(_staffToEdit == null ? DBController.Instance.CurrentStaff.Person.Login : _staffToEdit.Person.Login, oldPassword, newPassword, false))
             {
                 MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();

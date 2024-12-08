@@ -57,14 +57,14 @@ namespace Exam
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title = $"{DBController.CurrentStaff.Person.Login} | {DBController.CurrentStaff.Role.Name}";
+            Title = $"{DBController.Instance.CurrentStaff.Person.Login} | {DBController.Instance.CurrentStaff.Role.Name}";
         }
 
 		private void panel_OnLogout(object sender, EventArgs e)
 		{
-            DBController.RemoveCurrentStaff();
+            DBController.Instance.RemoveCurrentStaff();
             AuthorizeWindow authorizeWindow = new AuthorizeWindow();
 			Close();
             authorizeWindow.Show();

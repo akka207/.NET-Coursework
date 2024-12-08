@@ -42,7 +42,7 @@ namespace Exam.MenuControls
             InitializeComponent();
         }
 
-        private void PhoneButton_Click(object sender, RoutedEventArgs e)
+        private async void PhoneButton_Click(object sender, RoutedEventArgs e)
         {
             if (phoneTextBox.IsReadOnly)
             {
@@ -53,13 +53,12 @@ namespace Exam.MenuControls
             {
                 phoneTextBox.IsReadOnly = true;
                 phoneButton.Content = "Change";
-                DBController.CurrentStaff.Person.Phone = phoneTextBox.Text;
-                DBController.EditPersonInfo(DBController.CurrentStaff.Person);
-                // а‘узу би-ллахи мин аш-шайтан ар-раджим
+                DBController.Instance.CurrentStaff.Person.Phone = phoneTextBox.Text;
+                await DBController.Instance.EditPersonInfoAsync(DBController.Instance.CurrentStaff.Person);
             }
         }
 
-        private void EmailButton_Click(object sender, RoutedEventArgs e)
+        private async void EmailButton_Click(object sender, RoutedEventArgs e)
         {
             if (emailTextBox.IsReadOnly)
             {
@@ -70,9 +69,8 @@ namespace Exam.MenuControls
             {
                 emailTextBox.IsReadOnly = true;
                 emailButton.Content = "Change";
-                DBController.CurrentStaff.Person.Email = emailTextBox.Text;
-                DBController.EditPersonInfo(DBController.CurrentStaff.Person);
-                // а‘узу би-ллахи мин аш-шайтан ар-раджим
+                DBController.Instance.CurrentStaff.Person.Email = emailTextBox.Text;
+                await DBController.Instance.EditPersonInfoAsync(DBController.Instance.CurrentStaff.Person);
             }
         }
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
@@ -88,7 +86,7 @@ namespace Exam.MenuControls
 
         private void control_Loaded(object sender, RoutedEventArgs e)
         {
-            CurrentStaff = DBController.CurrentStaff;
+            CurrentStaff = DBController.Instance.CurrentStaff;
         }
     }
 

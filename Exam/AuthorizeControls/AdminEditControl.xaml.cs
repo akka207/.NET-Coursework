@@ -60,7 +60,7 @@ namespace Exam.AuthorizeControls
             DataContext = this;
         }
 
-        private void PhoneButton_Click(object sender, RoutedEventArgs e)
+        private async void PhoneButton_Click(object sender, RoutedEventArgs e)
         {
             if (phoneTextBox.IsReadOnly)
             {
@@ -72,11 +72,11 @@ namespace Exam.AuthorizeControls
                 phoneTextBox.IsReadOnly = true;
                 phoneButton.Content = "Change";
                 CStaff.Person.Phone = phoneTextBox.Text;
-                DBController.EditPersonInfo(CStaff.Person);
+                await DBController.Instance.EditPersonInfoAsync(CStaff.Person);
             }
         }
 
-        private void EmailButton_Click(object sender, RoutedEventArgs e)
+        private async void EmailButton_Click(object sender, RoutedEventArgs e)
         {
             if (emailTextBox.IsReadOnly)
             {
@@ -88,7 +88,7 @@ namespace Exam.AuthorizeControls
                 emailTextBox.IsReadOnly = true;
                 emailButton.Content = "Change";
                 CStaff.Person.Email = emailTextBox.Text;
-                DBController.EditPersonInfo(CStaff.Person);
+                await DBController.Instance.EditPersonInfoAsync(CStaff.Person);
             }
         }
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
@@ -118,10 +118,10 @@ namespace Exam.AuthorizeControls
             }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(SelectedIndex != -1)
-                DBController.ChangeRole(CStaff, (sender as ComboBox).SelectedItem as Role);
+                await DBController.Instance.ChangeRoleAsync(CStaff, (sender as ComboBox).SelectedItem as Role);
         }
     }
 }

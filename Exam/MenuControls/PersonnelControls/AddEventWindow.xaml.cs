@@ -27,7 +27,7 @@ namespace Exam.MenuControls.PersonnelControls
         {
             InitializeComponent();
         }
-        private void AddEventButton_Click(object sender, RoutedEventArgs e)
+        private async void AddEventButton_Click(object sender, RoutedEventArgs e)
         {
             DateTime startDateTime;
             DateTime? endDateTime = null;
@@ -61,7 +61,7 @@ namespace Exam.MenuControls.PersonnelControls
                 EndDateTime = endDateTime
             };
 
-            DBController.AddEvent(SelectedStaff, newEvent);
+            await DBController.Instance.AddEventAsync(SelectedStaff, newEvent);
 
             MessageBox.Show("Event added successfully");
         }
