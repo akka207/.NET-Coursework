@@ -7,13 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Exam.Data;
 using StaffManagerModels;
+using System.Runtime.InteropServices.Marshalling;
 
 namespace Exam.Services
 {
 
     public class ApiRequest
     {
-        private const string UNKNOWN = "unknown";
+        public const string UNKNOWN = "unknown";
 
         private static readonly HttpClient client = new HttpClient();
         private readonly string urlPrefix;
@@ -24,9 +25,27 @@ namespace Exam.Services
             urlPrefix = Config.Configuration.GetSection("ApiAddress").Value;
         }
 
-        public void Post()
+        public async Task<string> PostAsync(RequestHeader rtype, string body)
         {
+            var request = new HttpRequestMessage(HttpMethod.Post, urlPrefix)
+            {
+                Content = new StringContent(body)
+            };
 
+            request.Headers.Add("RequestType", rtype.Format());
+
+            var responce = await client.SendAsync(request);
+            if (responce.StatusCode == HttpStatusCode.OK)
+            {
+                var responceBody = await responce.Content.ReadAsStringAsync();
+
+                if (!responceBody.Equals(UNKNOWN))
+                {
+                    return responceBody;
+                }
+            }
+
+            return UNKNOWN;
         }
 
         public async Task<string> GetAsync(string url, RequestHeader rtype, string body)
@@ -36,7 +55,7 @@ namespace Exam.Services
                 Content = new StringContent(body)
             };
 
-            request.Headers.Add("Request", rtype.Format());
+            request.Headers.Add("RequestType", rtype.Format());
 
 
             var responce = await client.SendAsync(request);

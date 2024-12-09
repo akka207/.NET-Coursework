@@ -75,7 +75,7 @@ namespace Exam.MenuControls
         }
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(true);
             changePasswordWindow.ShowDialog();
         }
         public event PropertyChangedEventHandler PropertyChanged;

@@ -4,7 +4,7 @@ using PM.API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PMAPIContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'PMAPIContext' not found.")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
 
 // Add services to the container.
 

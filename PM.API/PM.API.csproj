@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JsonParamContainers\JsonParamContainers.csproj" />
     <ProjectReference Include="..\StaffManagerModels\StaffManagerModels.csproj" />
   </ItemGroup>
 

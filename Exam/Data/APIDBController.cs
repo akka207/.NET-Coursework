@@ -6,6 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using JsonParamContainers;
+using System.Collections;
+using System.Security;
 
 namespace Exam.Data
 {
@@ -15,62 +19,88 @@ namespace Exam.Data
 
         public Staff CurrentStaff { get; set; }
 
-        public Task AddEventAsync(Staff staff, Event newEvent)
+        public async Task AddEventAsync(Staff staff, Event newEvent)
         {
-            throw new NotImplementedException();
+            string json = JsonConvert.SerializeObject(new StafEvent(staff, newEvent));
+            await _apiRequest.PostAsync(RequestHeader.ADD_EVENT, json);
         }
 
-        public Task<bool> ChangePasswordAsync(string login, string oldPassword, string newPassword, bool oldPasswordRequired = true)
+        public async Task<bool> ChangePasswordAsync(string login, string oldPassword, string newPassword, bool oldPasswordRequired = true)
         {
-            throw new NotImplementedException();
+            string responce = ApiRequest.UNKNOWN;
+            if (oldPasswordRequired)
+            {
+                string json = JsonConvert.SerializeObject(new StringArray([login, GetMD5(oldPassword), GetMD5(newPassword)]));
+                responce = await _apiRequest.PostAsync(RequestHeader.CH_PASSWORD_SUBM, json);
+            }
+            else if (CurrentStaff.RoleId == Role.Admin.Id)
+            {
+                string json = JsonConvert.SerializeObject(new StringArray([login, GetMD5(newPassword)]));
+                responce = await _apiRequest.PostAsync(RequestHeader.CH_PASSWORD, json);
+            }
+
+            if (responce != ApiRequest.UNKNOWN)
+            {
+                return Convert.ToBoolean(JsonConvert.DeserializeObject<Param>(responce).Value);
+            }
+            return false;
         }
 
-        public Task ChangeRoleAsync(Staff st, Role role)
+        public async Task ChangeRoleAsync(Staff st, Role role)
         {
-            throw new NotImplementedException();
+            string json = JsonConvert.SerializeObject(new StaffRole(st.Id, role.Id));
+            st.Role = role;
+            st.RoleId = role.Id;
+            await _apiRequest.PostAsync(RequestHeader.CH_ROLE, json);
         }
 
         public async Task<bool> CheckPasswordAsync(string login, string password)
         {
-            if (GetMD5(password) == await _apiRequest.GetAsync("string", RequestHeader.PASSWORD, login))
+            if (GetMD5(password) == await _apiRequest.GetAsync("string", RequestHeader.PASSWORD, JsonBody(login)))
             {
                 return true;
             }
             return false;
         }
 
-        public Task EditPersonInfoAsync(Person newPerson)
+        public async Task EditPersonInfoAsync(Person newPerson)
         {
-            throw new NotImplementedException();
+            string json = JsonConvert.SerializeObject(newPerson);
+            await _apiRequest.PostAsync(RequestHeader.EDT_PERSON, json);
         }
 
-        public Task<ICollection<Staff>> GetAllStaffAsync()
+        public async Task<ICollection<Staff>> GetAllStaffAsync()
         {
-            throw new NotImplementedException();
+            string json = await _apiRequest.GetAsync("collection", RequestHeader.ALL_STAFF, "");
+            return JsonConvert.DeserializeObject<Staff[]>(json);
         }
 
         public async Task<Staff?> GetStaffAsync(string login)
         {
-            string json = await _apiRequest.GetAsync("collection", RequestHeader.STAFF, login);
-            return JsonSerializer.Deserialize<Staff>(json);
+            string json = await _apiRequest.GetAsync("object", RequestHeader.STAFF, JsonBody(login));
+            Staff staff = JsonConvert.DeserializeObject<Staff>(json);
+            return staff;
         }
 
-        public Task RegisterPersonAsync(Person person, string password, int roleId = 3)
+        public async Task RegisterPersonAsync(Person person, string password, int roleId = 3)
         {
-            throw new NotImplementedException();
+            person.HashedPasword = GetMD5(password);
+            Staff staff = new Staff() { Person = person, RoleId = roleId };
+            string json = JsonConvert.SerializeObject(staff);
+            await _apiRequest.PostAsync(RequestHeader.EDT_PERSON, json);
         }
 
         public void RemoveCurrentStaff()
         {
-            throw new NotImplementedException();
+            CurrentStaff = null;
         }
 
-        public Task SelectCurrentStaffAsync(string login)
+        public async Task SelectCurrentStaffAsync(string login)
         {
-            throw new NotImplementedException();
+            CurrentStaff = await GetStaffAsync(login);
         }
 
-        public Task UpdateCurrentStaffAsync()
+        public async Task UpdateCurrentStaffAsync()
         {
             throw new NotImplementedException();
         }
@@ -84,6 +114,11 @@ namespace Exam.Data
 
                 return Convert.ToHexString(hashBytes);
             }
+        }
+
+        private string JsonBody(string param)
+        {
+            return JsonConvert.SerializeObject(new Param(param));
         }
     }
 }

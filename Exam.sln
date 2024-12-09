@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffManagerModels", "Staff
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.API", "PM.API\PM.API.csproj", "{50F8ED79-4B00-4030-AD25-55690A31F173}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonParamContainers", "JsonParamContainers\JsonParamContainers.csproj", "{F26EAF0F-F717-47AF-8488-7BE3D524E607}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{50F8ED79-4B00-4030-AD25-55690A31F173}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50F8ED79-4B00-4030-AD25-55690A31F173}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50F8ED79-4B00-4030-AD25-55690A31F173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F26EAF0F-F717-47AF-8488-7BE3D524E607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F26EAF0F-F717-47AF-8488-7BE3D524E607}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F26EAF0F-F717-47AF-8488-7BE3D524E607}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F26EAF0F-F717-47AF-8488-7BE3D524E607}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

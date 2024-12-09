@@ -21,14 +21,15 @@ namespace Exam.Windows
     /// </summary>
     public partial class ChangePasswordWindow : Window
     {
-        private bool oldPasswordRequired = true;
+        private bool oldPasswordRequired;
         private Staff _staffToEdit = null;
         private ApplicationSettings _appSettings;
         private string _windowId = "ChangePasswordWindow";
-        public ChangePasswordWindow()
+        public ChangePasswordWindow(bool requireOldPassword)
         {
             InitializeComponent();
             _appSettings = SettingsManager.LoadSettings();
+            oldPasswordRequired = requireOldPassword;
             ApplySettings();
         }
         private void ApplySettings()
@@ -71,7 +72,7 @@ namespace Exam.Windows
         {
             string oldPassword = OldPasswordBox.TextBoxText;
             string newPassword = NewPasswordBox.TextBoxText;
-            if (await DBController.Instance.ChangePasswordAsync(_staffToEdit == null ? DBController.Instance.CurrentStaff.Person.Login : _staffToEdit.Person.Login, oldPassword, newPassword, false))
+            if (await DBController.Instance.ChangePasswordAsync(_staffToEdit == null ? DBController.Instance.CurrentStaff.Person.Login : _staffToEdit.Person.Login, oldPassword, newPassword, oldPasswordRequired))
             {
                 MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();

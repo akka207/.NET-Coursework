@@ -159,7 +159,6 @@ namespace Exam.Data
                 newEvent.ScheduleId = staff.ScheduleId;
                 await context.Events.AddAsync(newEvent);
                 await context.SaveChangesAsync();
-                staff.Schedule.Events = await context.Events.Where(e => e.ScheduleId == staff.Schedule.Id).ToArrayAsync();
             }
         }
 
@@ -190,6 +189,7 @@ namespace Exam.Data
                         findedPerson.HashedPasword = GetMD5(newPassword);
                         await context.SaveChangesAsync();
                         return true;
+                        
                     }
                 }
                 else if (CurrentStaff.RoleId == Role.Admin.Id && findedPerson != null)

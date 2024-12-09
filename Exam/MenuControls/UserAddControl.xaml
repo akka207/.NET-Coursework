@@ -20,7 +20,7 @@
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
 
-            <controls:AdminRegistrationControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="7" Margin="10 0 10 0" />
+            <controls:AdminRegistrationControl x:Name="regControl" Grid.Column="1" Grid.Row="1" Grid.RowSpan="7" Margin="10 0 10 0" OnSignUp="regControl_OnSignUp"/>
         </Grid>
     </Border>
 </UserControl>
