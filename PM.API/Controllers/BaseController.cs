@@ -147,10 +147,16 @@ namespace PM.API.Controllers
                 Person person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == newPerson.Id);
                 if (person != null)
                 {
-                    person.Email = newPerson.Email;
-                    person.Phone = newPerson.Phone;
-                    await _context.SaveChangesAsync();
-
+                    if(person.Email != newPerson.Email)
+                    {
+                        person.Email = newPerson.Email;
+                        await _context.SaveChangesAsync();
+                    }
+                    if (person.Phone != newPerson.Phone)
+                    {
+                        person.Phone = newPerson.Phone;
+                        await _context.SaveChangesAsync();
+                    }
                     return JsonConvert.SerializeObject(new Param(true.ToString()));
                 }
             }

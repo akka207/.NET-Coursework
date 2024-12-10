@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Exam
 {
-    /// <summary>
-    /// Interaction logic for Menu.xaml
-    /// </summary>
     public partial class Menu : Window
     {
         public Menu()
@@ -41,6 +38,7 @@ namespace Exam
                     personnel.Visibility = Visibility.Visible;
                     profile.Visibility = Visibility.Hidden;
                     add.Visibility = Visibility.Hidden;
+                    personnel.LoadStaffs();
                     break;
                 case MenuControls.MenuPanel.MenuType.Profile:
                     schedule.Visibility = Visibility.Hidden;
@@ -70,19 +68,19 @@ namespace Exam
             authorizeWindow.Show();
 		}
 
-		private void DragPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-		{
+        private void ControlBox_OnDrag(object sender, EventArgs e)
+        {
             DragMove();
-		}
+        }
 
-		private void minimize_OnClick(object sender, EventArgs e)
-		{
-            WindowState = WindowState.Minimized;
-		}
-
-		private void close_OnClick(object sender, EventArgs e)
-		{
+        private void ControlBox_OnClose(object sender, EventArgs e)
+        {
             Close();
-		}
-	}
+        }
+
+        private void ControlBox_OnMinimize(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+    }
 }

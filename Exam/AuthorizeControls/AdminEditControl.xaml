@@ -5,20 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Exam.AuthorizeControls"
              xmlns:CustomControls="clr-namespace:Exam.CustomControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
-    <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="10" Padding="10" Margin="10">
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <Border Padding="10" Margin="10">
         <StackPanel>
             <Grid Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -36,12 +37,13 @@
                 <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=CStaff.Person.FullName}" IsReadOnly="True"/>
 
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Phone:" FontWeight="Bold" Margin="5"/>
-                <TextBox x:Name="phoneTextBox" Grid.Row="5" Grid.Column="1" Text="{Binding Path=CStaff.Person.Phone}" IsReadOnly="True"/>
-                <Button x:Name="phoneButton" Grid.Row="5" Grid.Column="2" Width="100px" Content="Change" Click="PhoneButton_Click"/>
+                <TextBox x:Name="phoneTextBox" Grid.Row="5" Grid.Column="1" Width="100" HorizontalAlignment="Left" Style="{StaticResource Switchable_TextBox_Style}" Text="{Binding Path=CStaff.Person.Phone}" IsReadOnly="True"/>
+                <Button x:Name="phoneButton" Grid.Row="5" Grid.Column="2" Width="100" Content="Change" Click="PhoneButton_Click"/>
 
                 <TextBlock Grid.Row="6" Grid.Column="0" Text="Email:" FontWeight="Bold" Margin="5"/>
-                <TextBox x:Name="emailTextBox" Grid.Row="6" Grid.Column="1" Text="{Binding Path=CStaff.Person.Email}" IsReadOnly="True"/>
-                <Button x:Name="emailButton" Grid.Row="6" Grid.Column="2" Content="Change" Width="100px" Click="EmailButton_Click"/>
+                <TextBox x:Name="emailTextBox" Grid.Row="6" Grid.Column="1" Width="150" HorizontalAlignment="Left" Style="{StaticResource Switchable_TextBox_Style}" Text="{Binding Path=CStaff.Person.Email}" IsReadOnly="True"/>
+                <Button x:Name="emailButton" Grid.Row="6" Grid.Column="2" Content="Change" Width="100" Click="EmailButton_Click"/>
+                
                 <Button Grid.Row="8" Grid.ColumnSpan="3" Content="Change Password"  Click="ChangePasswordButton_Click"/>
             </Grid>
         </StackPanel>

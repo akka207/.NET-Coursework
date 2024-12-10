@@ -48,13 +48,20 @@ namespace Exam.MenuControls
             {
                 phoneTextBox.IsReadOnly = false;
                 phoneButton.Content = "Save";
+                phoneTextBox.Focusable = true;
+                Keyboard.Focus(phoneTextBox);
             }
             else
             {
                 phoneTextBox.IsReadOnly = true;
                 phoneButton.Content = "Change";
-                DBController.Instance.CurrentStaff.Person.Phone = phoneTextBox.Text;
-                await DBController.Instance.EditPersonInfoAsync(DBController.Instance.CurrentStaff.Person);
+                phoneTextBox.Focusable = false;
+
+                if (DBController.Instance.CurrentStaff.Person.Phone != phoneTextBox.Text)
+                {
+                    DBController.Instance.CurrentStaff.Person.Phone = phoneTextBox.Text;
+                    await DBController.Instance.EditPersonInfoAsync(DBController.Instance.CurrentStaff.Person);
+                }
             }
         }
 
@@ -64,13 +71,20 @@ namespace Exam.MenuControls
             {
                 emailTextBox.IsReadOnly = false;
                 emailButton.Content = "Save";
+                emailTextBox.Focusable = true;
+                Keyboard.Focus(emailTextBox);
             }
             else
             {
                 emailTextBox.IsReadOnly = true;
                 emailButton.Content = "Change";
-                DBController.Instance.CurrentStaff.Person.Email = emailTextBox.Text;
-                await DBController.Instance.EditPersonInfoAsync(DBController.Instance.CurrentStaff.Person);
+                emailTextBox.Focusable = false;
+
+                if (DBController.Instance.CurrentStaff.Person.Email != emailTextBox.Text)
+                {
+                    DBController.Instance.CurrentStaff.Person.Email = emailTextBox.Text;
+                    await DBController.Instance.EditPersonInfoAsync(DBController.Instance.CurrentStaff.Person);
+                }
             }
         }
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)

@@ -6,26 +6,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PMAPIContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+app.UseStaticFiles();
 
 app.MapControllers();
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.Value.Equals("/download", StringComparison.OrdinalIgnoreCase))
+    {
+        var redirectPath = builder.Configuration["Redirection:DownloadPath"];
+        context.Response.Redirect(redirectPath);
+    }
+    else
+    {
+        await next();
+    }
+});
 
 app.Run();

@@ -87,7 +87,7 @@ namespace Exam.Data
             person.HashedPasword = GetMD5(password);
             Staff staff = new Staff() { Person = person, RoleId = roleId };
             string json = JsonConvert.SerializeObject(staff);
-            await _apiRequest.PostAsync(RequestHeader.EDT_PERSON, json);
+            await _apiRequest.PostAsync(RequestHeader.REG_PERSON, json);
         }
 
         public void RemoveCurrentStaff()
@@ -102,7 +102,7 @@ namespace Exam.Data
 
         public async Task UpdateCurrentStaffAsync()
         {
-            throw new NotImplementedException();
+            CurrentStaff = await GetStaffAsync(CurrentStaff.Person.Login);
         }
 
         private string GetMD5(string input)

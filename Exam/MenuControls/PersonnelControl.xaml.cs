@@ -111,10 +111,9 @@ namespace Exam.MenuControls
         {
             AdminEditWindow window = new AdminEditWindow();
             window.Closed += editStaffWindow_Closed;
-            window.xD = (sender as Button).DataContext as Staff;
+            window.SelectedStaff = (sender as Button).DataContext as Staff;
             window.SetStaff();
             window.ShowDialog();
-
         }
 
         private void editStaffWindow_Closed(object? sender, EventArgs e)
@@ -122,7 +121,7 @@ namespace Exam.MenuControls
             LoadStaffs();
         }
 
-        private async void LoadStaffs()
+        public async void LoadStaffs()
         {
             if (DBController.Instance.CurrentStaff.RoleId == Role.Admin.Id)
                 StaffList = new ObservableCollection<Staff>((await DBController.Instance

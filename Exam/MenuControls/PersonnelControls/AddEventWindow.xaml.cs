@@ -72,7 +72,7 @@ namespace Exam.MenuControls.PersonnelControls
             EndDatePickerLabel.Visibility = Visibility.Visible;
             EndTimeTextBox.Visibility = Visibility.Visible;
             EndTimeTextBoxLabel.Visibility = Visibility.Visible;
-            window.Height = 420;
+            window.Height = 440;
         }
 
         private void HasEndDateTimeCheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -81,7 +81,7 @@ namespace Exam.MenuControls.PersonnelControls
             EndDatePickerLabel.Visibility = Visibility.Collapsed;
             EndTimeTextBox.Visibility = Visibility.Collapsed;
             EndTimeTextBoxLabel.Visibility = Visibility.Collapsed;
-            window.Height = 320;
+            window.Height = 340;
         }
 
         private void ClearFieldsButton_Click(object sender, RoutedEventArgs e)
@@ -93,6 +93,21 @@ namespace Exam.MenuControls.PersonnelControls
             EndDatePicker.SelectedDate = null;
             EndTimeTextBox.textBox.Clear();
             HasEndDateTimeCheckBox.IsChecked = false;
+        }
+
+        private void ControlBox_OnClose(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ControlBox_OnDrag(object sender, EventArgs e)
+        {
+            DragMove();
+        }
+
+        private void ControlBox_OnMinimize(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

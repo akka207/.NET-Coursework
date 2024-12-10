@@ -17,19 +17,18 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="35"/>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="35"/>
             </Grid.ColumnDefinitions>
 
-            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="60"/>
-            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="60"/>
-            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Height="60"/>
-            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Height="60"/>
-            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Height="60"/>
-            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Height="60" Width="474"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="50"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Height="50"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Height="50"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Height="50"/>
+            <Border Style="{StaticResource ProfileTyle_Border_Style}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Height="50"/>
 
             <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="Role:"/>
             <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="{Binding ElementName=control, Path=CurrentStaff.Role.Name}"/>
@@ -42,12 +41,14 @@
             <TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="{Binding ElementName=control, Path=CurrentStaff.Person.FullName}"/>
 
             <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}" Text="Phone:"/>
-            <TextBox   Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="phoneTextBox" Text="{Binding ElementName=control, Path=CurrentStaff.Person.Phone}" IsReadOnly="True"/>
-            <Button    Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="phoneButton"  Width="100px" Content="Change" Click="PhoneButton_Click"/>
+            <TextBox   Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource Switchable_TextBox_Style}" x:Name="phoneTextBox" 
+                       Text="{Binding ElementName=control, Path=CurrentStaff.Person.Phone, Mode=OneWay}" IsReadOnly="True" Focusable="False"/>
+            <Button    Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="phoneButton"  Width="100" Content="Change" Click="PhoneButton_Click"/>
 
             <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlock_Tytle}"  Text="Email:"/>
-            <TextBox   Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="emailTextBox" Text="{Binding ElementName=control, Path=CurrentStaff.Person.Email}" IsReadOnly="True"/>
-            <Button    Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="emailButton"  Content="Change" Width="100px" Click="EmailButton_Click"/>
+            <TextBox   Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource Switchable_TextBox_Style}" x:Name="emailTextBox" 
+                       Text="{Binding ElementName=control, Path=CurrentStaff.Person.Email, Mode=OneWay}" IsReadOnly="True" Focusable="False"/>
+            <Button    Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="emailButton"  Content="Change" Width="100" Click="EmailButton_Click"/>
 
             <Button    Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="5" Width="200" Content="Change Password" Click="ChangePasswordButton_Click"/>
         </Grid>

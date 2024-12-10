@@ -26,16 +26,8 @@ namespace Exam
         public AuthorizeWindow()
         {
             InitializeComponent();
-            LoadGifAnimation();
         }
-        private void LoadGifAnimation()
-        {
-            var gifUri = new Uri("pack://application:,,,/GIFs/Icon.gif", UriKind.Absolute);
-            var image = new BitmapImage(gifUri);
-            ImageBehavior.SetAnimatedSource(gifImage, image);
-            ImageBehavior.SetRepeatBehavior(gifImage, new System.Windows.Media.Animation.RepeatBehavior(1));
-            ImageBehavior.SetAnimationSpeedRatio(gifImage, 1.5);
-        }
+
         private void AvailableControls(bool value)
         {
             //Logger.Instance.DEBUG($"Setting AvailableControls to {(value ? "enabled" : "disabled")}");
@@ -212,5 +204,19 @@ namespace Exam
             });
         }
 
+        private void ControlBox_OnDrag(object sender, EventArgs e)
+        {
+            DragMove();
+        }
+
+        private void ControlBox_OnClose(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ControlBox_OnMinimize(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
     }
 }

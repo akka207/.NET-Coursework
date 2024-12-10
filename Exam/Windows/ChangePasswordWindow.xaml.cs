@@ -16,9 +16,6 @@ using Exam.Generators;
 using StaffManagerModels;
 namespace Exam.Windows
 {
-    /// <summary>
-    /// Interaction logic for ChangePasswordWindow.xaml
-    /// </summary>
     public partial class ChangePasswordWindow : Window
     {
         private bool oldPasswordRequired;
@@ -95,6 +92,21 @@ namespace Exam.Windows
                 OldPasswordBox.Visibility = Visibility.Hidden;
                 textLabel.Visibility = Visibility.Visible;
             }
+        }
+
+        private void ControlBox_OnDrag(object sender, EventArgs e)
+        {
+            DragMove();
+        }
+
+        private void ControlBox_OnClose(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ControlBox_OnMinimize(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

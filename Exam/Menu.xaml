@@ -19,24 +19,16 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="2"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="{StaticResource ShadowedBrush}" Grid.Row="0" Grid.Column="1" MouseLeftButtonDown="DragPanel_MouseLeftButtonDown"/>
+        <CustomControls:ControlBox Grid.Row="0" Grid.Column="1" OnDrag="ControlBox_OnDrag" OnClose="ControlBox_OnClose" OnMinimize="ControlBox_OnMinimize"/>
 
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <CustomControls:CircleImageButton x:Name="minimize" ImageWidth="24" ImageHeight="24" IconPath="pack://application:,,,/Icons/MinimizeIcon.png" Margin="0 6 6 0" OnClick="minimize_OnClick"/>
-            <CustomControls:CircleImageButton x:Name="close" ImageWidth="24" ImageHeight="24" IconPath="pack://application:,,,/Icons/CloseIcon.png" Margin="0 6 6 0" OnClick="close_OnClick"/>
-        </StackPanel>
-
-        <Rectangle Fill="{StaticResource DarkBrush}" Grid.Row="1" Grid.Column="1"/>
-
-        <MenuControls:ScheduleControl x:Name="schedule" Visibility="Visible" Grid.Column="1" Grid.Row="2"/>
-        <MenuControls:PersonnelControl x:Name="personnel" Visibility="Hidden" Grid.Column="1" Grid.Row="2"/>
-        <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Padding="20"/>
-        <MenuControls:UserAddControl x:Name="add" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Padding="20"/>
+        <MenuControls:ScheduleControl x:Name="schedule" Visibility="Visible" Grid.Column="1" Grid.Row="1"/>
+        <MenuControls:PersonnelControl x:Name="personnel" Visibility="Hidden" Grid.Column="1" Grid.Row="1"/>
+        <MenuControls:ProfileControl x:Name="profile" Visibility="Hidden" Grid.Column="1" Grid.Row="1" Padding="20" Height="400" VerticalAlignment="Top"/>
+        <MenuControls:UserAddControl x:Name="add" Visibility="Hidden" Grid.Column="1" Grid.Row="1" Padding="20" Height="450" VerticalAlignment="Top"/>
         <MenuControls:MenuPanel x:Name="panel" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" 
                                 Width="180" Height="{Binding ElementName=menu, Path=Height}"
                                 OnMenuSelected="MenuPanel_OnMenuSelected" OnLogout="panel_OnLogout"/>

@@ -66,13 +66,21 @@ namespace Exam.AuthorizeControls
             {
                 phoneTextBox.IsReadOnly = false;
                 phoneButton.Content = "Save";
+                phoneTextBox.Focusable = true;
+                Keyboard.Focus(phoneTextBox);
             }
             else
             {
                 phoneTextBox.IsReadOnly = true;
                 phoneButton.Content = "Change";
+                phoneTextBox.Focusable = false;
                 CStaff.Person.Phone = phoneTextBox.Text;
-                await DBController.Instance.EditPersonInfoAsync(CStaff.Person);
+
+                if (CStaff.Person.Phone != phoneTextBox.Text)
+                {
+                    CStaff.Person.Phone = phoneTextBox.Text;
+                    await DBController.Instance.EditPersonInfoAsync(CStaff.Person);
+                }
             }
         }
 
@@ -82,13 +90,21 @@ namespace Exam.AuthorizeControls
             {
                 emailTextBox.IsReadOnly = false;
                 emailButton.Content = "Save";
+                emailTextBox.Focusable = true;
+                Keyboard.Focus(emailTextBox);
             }
             else
             {
                 emailTextBox.IsReadOnly = true;
                 emailButton.Content = "Change";
+                emailTextBox.Focusable = false;
                 CStaff.Person.Email = emailTextBox.Text;
-                await DBController.Instance.EditPersonInfoAsync(CStaff.Person);
+
+                if (CStaff.Person.Email != emailTextBox.Text)
+                {
+                    CStaff.Person.Email = emailTextBox.Text;
+                    await DBController.Instance.EditPersonInfoAsync(CStaff.Person);
+                }
             }
         }
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
