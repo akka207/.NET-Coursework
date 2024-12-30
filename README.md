@@ -5,7 +5,7 @@ Database:
 Abandoned /Databases/Staff.db
 
 Currently has ability to create empty database in .../User/AppData/PManager/ by template (Change appsettings.json "ConnectionType": "LOCAL").
-Or use API access to remote db insted (see branch "api")
+Or use API access to remote db insted
 
 # Topic  
 Personnel Manager. A program for managing user schedules and planning events (work schedules, salary dates, activities) in a calendar format.
