@@ -16,19 +16,17 @@ using Exam.Generators;
 using StaffManagerModels;
 namespace Exam.Windows
 {
-    /// <summary>
-    /// Interaction logic for ChangePasswordWindow.xaml
-    /// </summary>
     public partial class ChangePasswordWindow : Window
     {
-        private bool oldPasswordRequired = true;
+        private bool oldPasswordRequired;
         private Staff _staffToEdit = null;
         private ApplicationSettings _appSettings;
         private string _windowId = "ChangePasswordWindow";
-        public ChangePasswordWindow()
+        public ChangePasswordWindow(bool requireOldPassword)
         {
             InitializeComponent();
             _appSettings = SettingsManager.LoadSettings();
+            oldPasswordRequired = requireOldPassword;
             ApplySettings();
         }
         private void ApplySettings()
@@ -67,11 +65,11 @@ namespace Exam.Windows
             _appSettings.Windows[_windowId] = settings;
             SettingsManager.SaveSettings(_appSettings);
         }
-        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        private async void ChangePassword_Click(object sender, RoutedEventArgs e)
         {
             string oldPassword = OldPasswordBox.TextBoxText;
             string newPassword = NewPasswordBox.TextBoxText;
-            if (DBController.ChangePassword(_staffToEdit == null ? DBController.CurrentStaff.Person.Login : _staffToEdit.Person.Login, oldPassword, newPassword, false))
+            if (await DBController.Instance.ChangePasswordAsync(_staffToEdit == null ? DBController.Instance.CurrentStaff.Person.Login : _staffToEdit.Person.Login, oldPassword, newPassword, oldPasswordRequired))
             {
                 MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
@@ -94,6 +92,21 @@ namespace Exam.Windows
                 OldPasswordBox.Visibility = Visibility.Hidden;
                 textLabel.Visibility = Visibility.Visible;
             }
+        }
+
+        private void ControlBox_OnDrag(object sender, EventArgs e)
+        {
+            DragMove();
+        }
+
+        private void ControlBox_OnClose(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ControlBox_OnMinimize(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Exam
 {
-    /// <summary>
-    /// Interaction logic for Menu.xaml
-    /// </summary>
     public partial class Menu : Window
     {
         public Menu()
@@ -41,6 +38,7 @@ namespace Exam
                     personnel.Visibility = Visibility.Visible;
                     profile.Visibility = Visibility.Hidden;
                     add.Visibility = Visibility.Hidden;
+                    personnel.LoadStaffs();
                     break;
                 case MenuControls.MenuPanel.MenuType.Profile:
                     schedule.Visibility = Visibility.Hidden;
@@ -57,32 +55,32 @@ namespace Exam
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title = $"{DBController.CurrentStaff.Person.Login} | {DBController.CurrentStaff.Role.Name}";
+            Title = $"{DBController.Instance.CurrentStaff.Person.Login} | {DBController.Instance.CurrentStaff.Role.Name}";
         }
 
 		private void panel_OnLogout(object sender, EventArgs e)
 		{
-            DBController.RemoveCurrentStaff();
+            DBController.Instance.RemoveCurrentStaff();
             AuthorizeWindow authorizeWindow = new AuthorizeWindow();
 			Close();
             authorizeWindow.Show();
 		}
 
-		private void DragPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-		{
+        private void ControlBox_OnDrag(object sender, EventArgs e)
+        {
             DragMove();
-		}
+        }
 
-		private void minimize_OnClick(object sender, EventArgs e)
-		{
-            WindowState = WindowState.Minimized;
-		}
-
-		private void close_OnClick(object sender, EventArgs e)
-		{
+        private void ControlBox_OnClose(object sender, EventArgs e)
+        {
             Close();
-		}
-	}
+        }
+
+        private void ControlBox_OnMinimize(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+    }
 }

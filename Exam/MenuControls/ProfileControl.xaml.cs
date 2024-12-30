@@ -42,42 +42,54 @@ namespace Exam.MenuControls
             InitializeComponent();
         }
 
-        private void PhoneButton_Click(object sender, RoutedEventArgs e)
+        private async void PhoneButton_Click(object sender, RoutedEventArgs e)
         {
             if (phoneTextBox.IsReadOnly)
             {
                 phoneTextBox.IsReadOnly = false;
                 phoneButton.Content = "Save";
+                phoneTextBox.Focusable = true;
+                Keyboard.Focus(phoneTextBox);
             }
             else
             {
                 phoneTextBox.IsReadOnly = true;
                 phoneButton.Content = "Change";
-                DBController.CurrentStaff.Person.Phone = phoneTextBox.Text;
-                DBController.EditPersonInfo(DBController.CurrentStaff.Person);
-                // а‘узу би-ллахи мин аш-шайтан ар-раджим
+                phoneTextBox.Focusable = false;
+
+                if (DBController.Instance.CurrentStaff.Person.Phone != phoneTextBox.Text)
+                {
+                    DBController.Instance.CurrentStaff.Person.Phone = phoneTextBox.Text;
+                    await DBController.Instance.EditPersonInfoAsync(DBController.Instance.CurrentStaff.Person);
+                }
             }
         }
 
-        private void EmailButton_Click(object sender, RoutedEventArgs e)
+        private async void EmailButton_Click(object sender, RoutedEventArgs e)
         {
             if (emailTextBox.IsReadOnly)
             {
                 emailTextBox.IsReadOnly = false;
                 emailButton.Content = "Save";
+                emailTextBox.Focusable = true;
+                Keyboard.Focus(emailTextBox);
             }
             else
             {
                 emailTextBox.IsReadOnly = true;
                 emailButton.Content = "Change";
-                DBController.CurrentStaff.Person.Email = emailTextBox.Text;
-                DBController.EditPersonInfo(DBController.CurrentStaff.Person);
-                // а‘узу би-ллахи мин аш-шайтан ар-раджим
+                emailTextBox.Focusable = false;
+
+                if (DBController.Instance.CurrentStaff.Person.Email != emailTextBox.Text)
+                {
+                    DBController.Instance.CurrentStaff.Person.Email = emailTextBox.Text;
+                    await DBController.Instance.EditPersonInfoAsync(DBController.Instance.CurrentStaff.Person);
+                }
             }
         }
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(true);
             changePasswordWindow.ShowDialog();
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -88,7 +100,7 @@ namespace Exam.MenuControls
 
         private void control_Loaded(object sender, RoutedEventArgs e)
         {
-            CurrentStaff = DBController.CurrentStaff;
+            CurrentStaff = DBController.Instance.CurrentStaff;
         }
     }
 

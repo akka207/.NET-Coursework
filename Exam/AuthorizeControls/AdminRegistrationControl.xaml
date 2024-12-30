@@ -16,7 +16,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70*"/>
@@ -28,9 +28,9 @@
             <CustomControls:CustomTextBox x:Name="passwordC" Grid.Row="3" Placeholder="Confirm Password" FontSize="20"/>
             <CustomControls:CustomTextBox x:Name="phone" Grid.Row="4" Placeholder="Phone" FontSize="20"/>
             <CustomControls:CustomTextBox x:Name="email" Grid.Row="5" Placeholder="Email" FontSize="20"/>
-            <Button x:Name="confirmButton" Grid.Row="6" Content="Sign Up" FontSize="20" Height="40" Click="confirmButton_Click"/>
-            <Button x:Name="loginGenerateButton" Grid.Row="1" Grid.Column="1" Content="Generate" FontSize="20" Height="40" Click="generateLoginButton_Click" Margin="10"/>
-            <Button x:Name="passwordGenerateButton" Grid.Row="2" Grid.Column="1" Content="Random" FontSize="20" Height="40" Click="generatePasswordButton_Click" Margin="10"/>
+            <Button x:Name="confirmButton" Grid.Row="6" Content="Sign Up" FontSize="20" Height="30" Click="confirmButton_Click"/>
+            <Button x:Name="loginGenerateButton" Grid.Row="1" Grid.Column="1" Content="Generate" FontSize="20" Height="26" Click="generateLoginButton_Click" Margin="10"/>
+            <Button x:Name="passwordGenerateButton" Grid.Row="2" Grid.Column="1" Content="Random" FontSize="20" Height="26" Click="generatePasswordButton_Click" Margin="10"/>
 
 
         </Grid>

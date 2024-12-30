@@ -82,7 +82,7 @@ namespace Exam.MenuControls
 
         private Day GenerateDay(DateTime date)
         {
-            List<Event> events = DBController.CurrentStaff.Schedule.Events
+            List<Event> events = DBController.Instance.CurrentStaff.Schedule.Events
                     .Where(e => (e.EndDateTime != null ? e.EndDateTime : e.StartDateTime) >= ToStartOfDay(date)
                                 && e.StartDateTime < ToStartOfNextDay(date))
                     .OrderBy(e => e.StartDateTime)
@@ -176,7 +176,7 @@ namespace Exam.MenuControls
         private void control_Loaded(object sender, RoutedEventArgs e)
         {
             ChangeContainment(ScheduleView.Day);
-            SelectedEvent = DBController.CurrentStaff.Schedule.Events
+            SelectedEvent = DBController.Instance.CurrentStaff.Schedule.Events
                 .Where(e => e.StartDateTime > DateTime.Now)
                 .OrderBy(e => e.StartDateTime)
                 .FirstOrDefault();

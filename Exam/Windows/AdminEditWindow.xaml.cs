@@ -22,7 +22,7 @@ namespace Exam.Windows
     /// </summary>
     public partial class AdminEditWindow : Window
     {
-        public Staff xD;
+        public Staff SelectedStaff;
         private ApplicationSettings _appSettings;
         private string _windowId = "AdminEditWindow";
         public AdminEditWindow()
@@ -60,7 +60,22 @@ namespace Exam.Windows
         }
         public void SetStaff()
         {
-            adminEditControl.CStaff = xD;
+            adminEditControl.CStaff = SelectedStaff;
+        }
+
+        private void ControlBox_OnDrag(object sender, EventArgs e)
+        {
+            DragMove();
+        }
+
+        private void ControlBox_OnClose(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ControlBox_OnMinimize(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
     }
 }

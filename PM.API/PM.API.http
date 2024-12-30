@@ -1,0 +1,6 @@
+@PM.API_HostAddress = http://localhost:80
+
+GET {{PM.API_HostAddress}}/
+Accept: application/json
+
+###

@@ -57,7 +57,7 @@ namespace Exam.MenuControls
 		}
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (DBController.CurrentStaff.Role.Name != "Admin")
+			if (DBController.Instance.CurrentStaff.Role.Name != "Admin")
 			{
 				addBorder.Visibility = Visibility.Collapsed;
 			}
