@@ -1,0 +1,78 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #C7CEDB;
+    background-color: #eaeaea;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    background-color: #0c3e28;
+    padding: 20px;
+    border-radius: 8px;
+    color: #7E9181;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.company-logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #A0AAB2;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #94b299;
+}
+
+.main {
+    margin-top: 20px;
+    text-align: center;
+    color: #101B0D;
+}
+
+.app-preview {
+    margin-bottom: 20px;
+}
+
+.app-image {
+    width: 200px;
+    max-width: 200px;
+    height: auto;
+    background-color: #63aaa3;
+    border: 2px solid #7E9181;
+    border-radius: 8px;
+}
+
+.download-button {
+    margin-top: 20px;
+}
+
+.download-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #94b299;
+    color: #101B0D;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.download-link:hover {
+    background-color: #7E9181;
+    color: #C7CEDB;
+}

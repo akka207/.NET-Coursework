@@ -60,35 +60,51 @@ namespace Exam.AuthorizeControls
             DataContext = this;
         }
 
-        private void PhoneButton_Click(object sender, RoutedEventArgs e)
+        private async void PhoneButton_Click(object sender, RoutedEventArgs e)
         {
             if (phoneTextBox.IsReadOnly)
             {
                 phoneTextBox.IsReadOnly = false;
                 phoneButton.Content = "Save";
+                phoneTextBox.Focusable = true;
+                Keyboard.Focus(phoneTextBox);
             }
             else
             {
                 phoneTextBox.IsReadOnly = true;
                 phoneButton.Content = "Change";
+                phoneTextBox.Focusable = false;
                 CStaff.Person.Phone = phoneTextBox.Text;
-                DBController.EditPersonInfo(CStaff.Person);
+
+                if (CStaff.Person.Phone != phoneTextBox.Text)
+                {
+                    CStaff.Person.Phone = phoneTextBox.Text;
+                    await DBController.Instance.EditPersonInfoAsync(CStaff.Person);
+                }
             }
         }
 
-        private void EmailButton_Click(object sender, RoutedEventArgs e)
+        private async void EmailButton_Click(object sender, RoutedEventArgs e)
         {
             if (emailTextBox.IsReadOnly)
             {
                 emailTextBox.IsReadOnly = false;
                 emailButton.Content = "Save";
+                emailTextBox.Focusable = true;
+                Keyboard.Focus(emailTextBox);
             }
             else
             {
                 emailTextBox.IsReadOnly = true;
                 emailButton.Content = "Change";
+                emailTextBox.Focusable = false;
                 CStaff.Person.Email = emailTextBox.Text;
-                DBController.EditPersonInfo(CStaff.Person);
+
+                if (CStaff.Person.Email != emailTextBox.Text)
+                {
+                    CStaff.Person.Email = emailTextBox.Text;
+                    await DBController.Instance.EditPersonInfoAsync(CStaff.Person);
+                }
             }
         }
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
@@ -118,10 +134,10 @@ namespace Exam.AuthorizeControls
             }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(SelectedIndex != -1)
-                DBController.ChangeRole(CStaff, (sender as ComboBox).SelectedItem as Role);
+                await DBController.Instance.ChangeRoleAsync(CStaff, (sender as ComboBox).SelectedItem as Role);
         }
     }
 }

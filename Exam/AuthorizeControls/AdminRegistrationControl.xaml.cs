@@ -20,7 +20,6 @@ namespace Exam.AuthorizeControls
     /// </summary>
     public partial class AdminRegistrationControl : UserControl
     {
-        public event EventHandler OnLogIn;
         public event EventHandler OnSignUp;
         public string Login
         {

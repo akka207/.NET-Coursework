@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="GIFs\Icon.gif" />
     <None Remove="Icons\AddUserIcon.png" />
     <None Remove="Icons\ArrowDown.png" />
     <None Remove="Icons\ArrowUp.png" />
@@ -50,6 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JsonParamContainers\JsonParamContainers.csproj" />
     <ProjectReference Include="..\StaffManagerModels\StaffManagerModels.csproj" />
   </ItemGroup>
 
@@ -60,7 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="GIFs\Icon.gif" />
     <Resource Include="Icons\AddUserIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

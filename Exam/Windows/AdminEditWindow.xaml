@@ -4,10 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Exam.Windows"
+        xmlns:CustomControls="clr-namespace:Exam.CustomControls"
         xmlns:AControls="clr-namespace:Exam.AuthorizeControls"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Edit" Height="300" Width="500">
+        Title="Edit" MinHeight="320" MaxHeight="320" Width="500">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+
     <Grid>
-        <AControls:AdminEditControl x:Name="adminEditControl" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Height="280"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <CustomControls:ControlBox OnDrag="ControlBox_OnDrag" OnClose="ControlBox_OnClose" OnMinimize="ControlBox_OnMinimize"/>
+        <AControls:AdminEditControl x:Name="adminEditControl" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Height="320"/>
     </Grid>
 </Window>

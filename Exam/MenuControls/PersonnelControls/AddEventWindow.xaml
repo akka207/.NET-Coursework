@@ -6,9 +6,13 @@
         xmlns:local="clr-namespace:Exam.MenuControls.PersonnelControls"
         xmlns:CustomControls="clr-namespace:Exam.CustomControls"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" x:Name="window"
-        Title="AddEventWindow" Height="320" Width="400">
+        Title="AddEventWindow" Height="340" Width="400" WindowStyle="None">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="37"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -24,25 +28,27 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Name" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-        <CustomControls:CustomTextBox x:Name="NameTextBox" Grid.Row="1" Grid.Column="1" Margin="5" Placeholder="Salary"/>
+        <CustomControls:ControlBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" OnClose="ControlBox_OnClose" OnDrag="ControlBox_OnDrag" OnMinimize="ControlBox_OnMinimize"/>
 
-        <TextBlock Text="Description" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-        <CustomControls:CustomTextBox x:Name="DescriptionTextBox" Grid.Row="2" Grid.Column="1" Margin="5" Placeholder="Time to get salary"/>
+        <TextBlock Text="Name" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <CustomControls:CustomTextBox x:Name="NameTextBox" Grid.Row="2" Grid.Column="1" Margin="5" Placeholder="Salary"/>
 
-        <TextBlock Text="Start Date" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-        <DatePicker x:Name="StartDatePicker" Grid.Row="3" Grid.Column="1" Margin="5" />
-        <TextBlock Text="Time" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
-        <CustomControls:CustomTextBox x:Name="StartTimeTextBox" Grid.Row="4" Grid.Column="1" Margin="5" Placeholder="12:00"/>
+        <TextBlock Text="Description" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <CustomControls:CustomTextBox x:Name="DescriptionTextBox" Grid.Row="3" Grid.Column="1" Margin="5" Placeholder="Time to get salary"/>
 
-        <CheckBox x:Name="HasEndDateTimeCheckBox" Content="Event Has End DateTime" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Checked="HasEndDateTimeCheckBox_Checked" Unchecked="HasEndDateTimeCheckBox_Unchecked"/>
+        <TextBlock Text="Start Date" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <DatePicker x:Name="StartDatePicker" Grid.Row="4" Grid.Column="1" Margin="5" />
+        <TextBlock Text="Time" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <CustomControls:CustomTextBox x:Name="StartTimeTextBox" Grid.Row="5" Grid.Column="1" Margin="5" Placeholder="12:00"/>
 
-        <TextBlock x:Name="EndDatePickerLabel" Text="End Date" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="5" Visibility="Collapsed"/>
-        <DatePicker x:Name="EndDatePicker" Grid.Row="6" Grid.Column="1" Margin="5" Visibility="Collapsed"/>
-        <TextBlock x:Name="EndTimeTextBoxLabel" Text="Time" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="5" Visibility="Collapsed"/>
-        <CustomControls:CustomTextBox x:Name="EndTimeTextBox" Grid.Row="7" Grid.Column="1" Margin="5" Placeholder="12:00" Visibility="Collapsed"/>
+        <CheckBox x:Name="HasEndDateTimeCheckBox" Content="Event Has End DateTime" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Checked="HasEndDateTimeCheckBox_Checked" Unchecked="HasEndDateTimeCheckBox_Unchecked"/>
 
-        <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
+        <TextBlock x:Name="EndDatePickerLabel" Text="End Date" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="5" Visibility="Collapsed"/>
+        <DatePicker x:Name="EndDatePicker" Grid.Row="7" Grid.Column="1" Margin="5" Visibility="Collapsed"/>
+        <TextBlock x:Name="EndTimeTextBoxLabel" Text="Time" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="5" Visibility="Collapsed"/>
+        <CustomControls:CustomTextBox x:Name="EndTimeTextBox" Grid.Row="8" Grid.Column="1" Margin="5" Placeholder="12:00" Visibility="Collapsed"/>
+
+        <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Content="Add Event" Margin="5" Click="AddEventButton_Click"/>
             <Button Content="Clear" Margin="5" Click="ClearFieldsButton_Click"/>
         </StackPanel>

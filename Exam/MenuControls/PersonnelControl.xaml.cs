@@ -79,7 +79,7 @@ namespace Exam.MenuControls
                 }
             }
 
-            switch (DBController.CurrentStaff.Role.Name)
+            switch (DBController.Instance.CurrentStaff.Role.Name)
             {
                 case "User":
                     addEventButton.Visibility = Visibility.Hidden;
@@ -96,14 +96,14 @@ namespace Exam.MenuControls
             }
         }
 
-        private void addEventButton_Click(object sender, RoutedEventArgs e)
+        private async void addEventButton_Click(object sender, RoutedEventArgs e)
         {
             AddEventWindow window = new AddEventWindow();
             window.SelectedStaff = (sender as Button).DataContext as Staff;
             window.ShowDialog();
-            if (window.SelectedStaff.Id == DBController.CurrentStaff.Id)
+            if (window.SelectedStaff.Id == DBController.Instance.CurrentStaff.Id)
             {
-                DBController.UpdateCurrentStaff();
+                DBController.Instance.UpdateCurrentStaffAsync();
             }
         }
 
@@ -111,10 +111,9 @@ namespace Exam.MenuControls
         {
             AdminEditWindow window = new AdminEditWindow();
             window.Closed += editStaffWindow_Closed;
-            window.xD = (sender as Button).DataContext as Staff;
+            window.SelectedStaff = (sender as Button).DataContext as Staff;
             window.SetStaff();
             window.ShowDialog();
-
         }
 
         private void editStaffWindow_Closed(object? sender, EventArgs e)
@@ -122,16 +121,16 @@ namespace Exam.MenuControls
             LoadStaffs();
         }
 
-        private void LoadStaffs()
+        public async void LoadStaffs()
         {
-            if (DBController.CurrentStaff.RoleId == Role.Admin.Id)
-                StaffList = new ObservableCollection<Staff>(DBController
-                    .GetAllStaff()
-                    .Where(s => s.Person.Login != DBController.CurrentStaff.Person.Login));
+            if (DBController.Instance.CurrentStaff.RoleId == Role.Admin.Id)
+                StaffList = new ObservableCollection<Staff>((await DBController.Instance
+                    .GetAllStaffAsync())
+                    .Where(s => s.Person.Login != DBController.Instance.CurrentStaff.Person.Login));
             else
-                StaffList = new ObservableCollection<Staff>(DBController
-                    .GetAllStaff()
-                    .Where(s => s.RoleId != Role.Admin.Id && s.Person.Login != DBController.CurrentStaff.Person.Login));
+                StaffList = new ObservableCollection<Staff>((await DBController.Instance
+                    .GetAllStaffAsync())
+                    .Where(s => s.RoleId != Role.Admin.Id && s.Person.Login != DBController.Instance.CurrentStaff.Person.Login));
         }
     }
 }
