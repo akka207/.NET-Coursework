@@ -21,4 +21,8 @@
     <ProjectReference Include="..\StaffManagerModels\StaffManagerModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\download\files\" />
+  </ItemGroup>
+
 </Project>

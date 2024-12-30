@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exam", "Exam\Exam.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffManagerModels", "StaffManagerModels\StaffManagerModels.csproj", "{8A53BCC1-0DA3-480B-85BB-BA28BD14F625}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PM.API", "PM.API\PM.API.csproj", "{50F8ED79-4B00-4030-AD25-55690A31F173}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PM.API", "PM.API\PM.API.csproj", "{50F8ED79-4B00-4030-AD25-55690A31F173}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonParamContainers", "JsonParamContainers\JsonParamContainers.csproj", "{F26EAF0F-F717-47AF-8488-7BE3D524E607}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonParamContainers", "JsonParamContainers\JsonParamContainers.csproj", "{F26EAF0F-F717-47AF-8488-7BE3D524E607}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
