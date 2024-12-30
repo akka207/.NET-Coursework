@@ -1,77 +1,84 @@
+https://personnelmanager.northeurope.cloudapp.azure.com/download/index.html
+
 Database:
-/Databases/Staff.db
 
-# Тема
-Менеджер персоналу. Програма для керування розкладом користувачів. Планування подій (графік роботи, дата зарплати, заходи) у вигляді календарю
+Abandoned /Databases/Staff.db
 
-# Мета
-Десктопний додаток, розроблений за допомогою технології WPF, націлений на користування в локальній мережі.
+Currently has ability to create empty database in .../User/AppData/PManager/ by template (Change appsettings.json "ConnectionType": "LOCAL").
+Or use API access to remote db insted (see branch "api")
 
-# Загальний функціонал
-+ Диференціація користувачів програми на ролі (Admin, Manager, User)
-+ Система індивідуальних графіків подій / звіту роботи 
+# Topic  
+Personnel Manager. A program for managing user schedules and planning events (work schedules, salary dates, activities) in a calendar format.
 
-## Ролі користувачів
+# Goal  
+A desktop application developed using WPF technology, targeted for use in a local network.
 
-### User / Manager
-+ Перегляд графіку подій (дата\час роботи, дні зарплати)
-+ Звіт роботи (відмітка присутності)
+# General Functionality  
++ Differentiation of user roles within the application (Admin, Manager, User).  
++ System for individual event schedules and work reports.  
 
-### Manager
-+ Встановлення графіку для User
+## User Roles  
 
-### Admin
-+ Створення користувачів (генерація логіну та паролю, симуляція комерційного видання акаунтів). Користувачі надалі можуть самостійно доповнювати профілі інформацією
+### User / Manager  
++ View event schedules (work dates/times, salary days).  
++ Work reports (attendance marking).  
 
-## Елементи керування
-Елементами керування є GUI, що включає в себе систему з меню різних вікон (всі вікна існують тільки в одному екземплярі та неодночасно). 
-Перелік вікон:
-+ Вікно входу / реєстрації
-+ Вікно меню
-+ MessageBox для підтвердження дій
+### Manager  
++ Setting schedules for Users.  
 
-### Графік подій
-Є одним з секцій меню. В себе включає календар, на якому в зручному вигляді показано "розклад" роботи та список 
+### Admin  
++ User creation (login and password generation, simulation of account issuance). Users can later update their profiles with additional information.  
 
-### Вікно входу
-+ Поле вводу логіну (Login)
-+ Поле вводу паролю (Password)
-+ Кнопка входу (Login) - переходить на вікно меню
-+ Кнопка реєстрації для самостійного заповнення (Sign Up) - змінює поля вводу на:
-    + Ім'я (Full Name) - в форматі Ім'я Прізвище
-    + Логін (Login)
-    + Кнопка Згенерувати (Generate) з правої сторони від вводу логіну - генерація логіну за введеним ім'ям (Формат: Surn_aa11, де Surn - перші 4 літери прізвища транслітеровані англійською, aa - 2 випадкові букви, 11 - 2 випадкові цифри)
-    + Пароль (Password)
-    + Кнопка Згенерувати (Generate) з правої сторони від вводу паролю - генерація випадкового паролю
-    + Підтеврдження паролю (у випадку генерації також заповнюється автоматично)
-    + Телефон (Phone)
-    + Адреса електронної пошти (Email)
-    + Кнопка реєстрації (Sign Up) - після реєстрації потрібно увійти в аккаунт
-    + Повернення до входу (Back to Log In)
-### Основне вікно
-+ Розділи меню:
- + Розклад (Schedule)
-    + Кнопки розкладу на день/тиждень/місяць (day/week/month)
- + Персонал (Personnel) - перегляд співробітників та можливості для адміністраторів :
-    + Додати подію (Add Event) 
-    + Редагування інформації про співробітника (Edit Staff)
-      + Можливість змінити телефон, пошту, пароль та роль
- + Розділ додавання персоналу (Add user) - тільки для адміністраторів з реєстрацією нового користувача по даним: 
-    + Ім'я (Full Name) - в форматі Ім'я Прізвище
-    + Логін (Login)
-    + Кнопка Згенерувати (Generate) з правої сторони від вводу логіну - генерація логіну за введеним ім'ям (Формат: Surn_aa11, де Surn - перші 4 літери прізвища транслітеровані англійською, aa - 2 випадкові букви, 11 - 2 випадкові цифри)
-    + Пароль (Password)
-    + Кнопка Згенерувати (Generate) з правої сторони від вводу паролю - генерація випадкового паролю
-    + Підтеврдження паролю (у випадку генерації також заповнюється автоматично)
-    + Телефон (Phone)
-    + Адреса електронної пошти (Email)
-    + Кнопка реєстрації (Sign Up) - після реєстрації потрібно увійти в аккаунт
-    + Повернення до входу (Back to Log In)
- + Інформація про себе (My profile) - перегляд та зміна деякої інформації:
-    + Зміна телефону (кнопка Change з правоъ сторони від поля Phone)
-    + Зміна пошти (кнопка Change з правоъ сторони від поля Email)
-    + Кнопка зміни паролю (Change Password) відкриває вікно:
-        + Поле вводу старого паролю (Old Password)
-        + Поле вводу нового паролю (New Password)
-        + Кнопка підтвердження зміни (Change Password)
-+ Кнопка виходу з аккаунту(Log Out)
+## UI Elements  
+Control elements include a GUI with a menu-based system of various windows (all windows exist as single instances and are not open simultaneously).  
+
++ **Login/Registration window**  
++ **Menu window**  
++ **MessageBox** for action confirmations  
+
+### Event Schedule  
++ Part of the menu sections.  
++ Includes a calendar displaying work schedules and events in an accessible format.  
+
+### Login Window  
++ **Login input field**  
++ **Password input field**  
++ **Login button** – navigates to the menu window.  
++ **Registration button (Sign Up)** – switches input fields to:  
+    + Full Name (in "First Last" format).  
+    + Login.  
+    + Generate button to the right of the login input field – generates a login based on the entered name (Format: Surn_aa11, where **Surn** is the first 4 letters of the last name transliterated into English, **aa** are 2 random letters, **11** are 2 random digits).  
+    + Password.  
+    + Generate button to the right of the password input field – generates a random password.  
+    + Password confirmation (autofills upon generation).  
+    + Phone.  
+    + Email address.  
+    + Sign Up button – after registration, users must log in to their account.  
+    + Back to Log In button.  
+
+### Main Window  
++ **Menu sections:**  
+    + **Schedule:**  
+        + Buttons to view the schedule by day/week/month.  
+    + **Personnel** – view employees and options for administrators:  
+        + Add Event.  
+        + Edit Staff – allows changing phone, email, password, and role.  
+    + **Add User section** – exclusive to administrators for registering new users with the following details:  
+        + Full Name (in "First Last" format).  
+        + Login.  
+        + Generate button to the right of the login input field – generates a login based on the entered name (Format: Surn_aa11, where **Surn** is the first 4 letters of the last name transliterated into English, **aa** are 2 random letters, **11** are 2 random digits).  
+        + Password.  
+        + Generate button to the right of the password input field – generates a random password.  
+        + Password confirmation (autofills upon generation).  
+        + Phone.  
+        + Email address.  
+        + Sign Up button – after registration, users must log in to their account.  
+        + Back to Log In button.  
+    + **My Profile** – view and update some information:  
+        + Change Phone (Change button to the right of the Phone field).  
+        + Change Email (Change button to the right of the Email field).  
+        + Change Password button – opens a window with:  
+            + Old Password input field.  
+            + New Password input field.  
+            + Change Password button.  
++ **Log Out button**.
