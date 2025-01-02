@@ -11,7 +11,7 @@ using PM.API.Data;
 namespace PM.API.Migrations
 {
     [DbContext(typeof(PMAPIContext))]
-    [Migration("20241208154710_m0")]
+    [Migration("20250102192317_m0")]
     partial class m0
     {
         /// <inheritdoc />
@@ -19,6 +19,25 @@ namespace PM.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.11");
+
+            modelBuilder.Entity("PM.API.JWT.JWTStoredRecord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("JWT")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JWTs");
+                });
 
             modelBuilder.Entity("StaffManagerModels.Event", b =>
                 {
@@ -32,9 +51,6 @@ namespace PM.API.Migrations
 
                     b.Property<DateTime?>("EndDateTime")
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsSelected")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -50,7 +66,7 @@ namespace PM.API.Migrations
 
                     b.HasIndex("ScheduleId");
 
-                    b.ToTable("Event");
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Person", b =>
@@ -77,7 +93,7 @@ namespace PM.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Person");
+                    b.ToTable("Persons");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Role", b =>
@@ -92,7 +108,7 @@ namespace PM.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Schedule", b =>
@@ -103,7 +119,7 @@ namespace PM.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Schedule");
+                    b.ToTable("Schedules");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Staff", b =>
@@ -129,7 +145,7 @@ namespace PM.API.Migrations
 
                     b.HasIndex("ScheduleId");
 
-                    b.ToTable("Staff");
+                    b.ToTable("Staffs");
                 });
 
             modelBuilder.Entity("StaffManagerModels.Event", b =>
