@@ -21,7 +21,14 @@ namespace PM.API.JWT
 
         public async Task<string> RegisterJWTAsync(Staff staff)
         {
-            string header = JsonConvert.SerializeObject(new { alg = _configuration["JWT:Header:alg"], typ = _configuration["JWT:Header:typ"] });
+            string? alg = _configuration["JWT:Header:alg"];
+            string? typ = _configuration["JWT:Header:typ"];
+            if (alg == null || typ == null || alg != "HS256" || typ != "JWT")
+            {
+                return "ERROR: appsettings parameters does not supported";
+            }
+
+            string header = JsonConvert.SerializeObject(new { alg, typ });
             string payload = JsonConvert.SerializeObject(new JWTPayload(staff.Id,
                 DateTime.UtcNow.AddMinutes(Convert.ToInt32(_configuration["JWT:ExpirationMins"])),
                 Guid.NewGuid().ToString()));
@@ -112,6 +119,7 @@ namespace PM.API.JWT
                 return "ERROR: Unauthorized";
 
             _context.JWTs.Remove(record);
+            await _context.SaveChangesAsync();
 
 
             JWTPayload? payload = JsonConvert.DeserializeObject<JWTPayload>(config.Payload);
@@ -125,12 +133,11 @@ namespace PM.API.JWT
 
                 config.Payload = newPayload;
 
-                record.Id = default;
                 record.JWT = config.Encrypt(secret);
 
                 await _context.JWTs.AddAsync(record);
                 await _context.SaveChangesAsync();
-                
+
                 return record.JWT;
             }
 
@@ -148,7 +155,7 @@ namespace PM.API.JWT
         //    }
 
         //    config.TryDecode(jwt, secret);
-            
+
         //    JWTPayload? payload = JsonConvert.DeserializeObject<JWTPayload>(config.Payload);
 
         //    if (payload != null)

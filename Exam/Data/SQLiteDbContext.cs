@@ -9,6 +9,7 @@ using StaffManagerModels;
 using System.Windows.Controls;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Exam.Services;
 
 namespace Exam.Data
 {
@@ -28,7 +29,7 @@ namespace Exam.Data
         {
             base.OnConfiguring(optionsBuilder);
             //optionsBuilder.UseSqlite(Config.Configuration.GetConnectionString("DefaultConnection"));
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"PManager\Staff.db");
+            string path = UserFileManager.GetUserFilesPath("Staff.db");
             optionsBuilder.UseSqlite($"FileName={path}");
         }
     }

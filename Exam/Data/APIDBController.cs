@@ -16,6 +16,7 @@ namespace Exam.Data
     public class APIDBController : IDBController
     {
         private readonly ApiRequest _apiRequest = new ApiRequest();
+        private readonly AuthorizeRequest _authRequest = new AuthorizeRequest();
 
         public Staff CurrentStaff { get; set; }
 
@@ -56,7 +57,11 @@ namespace Exam.Data
 
         public async Task<bool> CheckPasswordAsync(string login, string password)
         {
-            if (GetMD5(password) == await _apiRequest.GetAsync("string", RequestHeader.PASSWORD, JsonBody(login)))
+            string cryptedPwd = GetMD5(password);
+
+            await _authRequest.LoginAsync(login, cryptedPwd);
+
+            if (cryptedPwd == await _apiRequest.GetAsync("string", RequestHeader.PASSWORD, string.Empty))
             {
                 return true;
             }

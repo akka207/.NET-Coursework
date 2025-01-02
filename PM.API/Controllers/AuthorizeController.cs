@@ -49,7 +49,13 @@ namespace PM.API.Controllers
 
                         if (staff != null)
                         {
-                            Tokens? tokens = JsonConvert.DeserializeObject<Tokens>(await _JWTHandler.RegisterJWTAsync(staff));
+                            string registerResult = await _JWTHandler.RegisterJWTAsync(staff);
+                            if(registerResult.StartsWith("ERROR"))
+                            {
+                                return registerResult;
+                            }
+
+                            Tokens? tokens = JsonConvert.DeserializeObject<Tokens>(registerResult);
 
                             if (tokens != null)
                             {
