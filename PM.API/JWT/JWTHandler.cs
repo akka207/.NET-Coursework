@@ -19,7 +19,7 @@ namespace PM.API.JWT
         }
 
 
-        public async Task<string> RegisterJWTAsync(Staff staff)
+        public async Task<string> RegisterJWTAsync(Person person)
         {
             string? alg = _configuration["JWT:Header:alg"];
             string? typ = _configuration["JWT:Header:typ"];
@@ -29,7 +29,7 @@ namespace PM.API.JWT
             }
 
             string header = JsonConvert.SerializeObject(new { alg, typ });
-            string payload = JsonConvert.SerializeObject(new JWTPayload(staff.Id,
+            string payload = JsonConvert.SerializeObject(new JWTPayload(person.Login,
                 DateTime.UtcNow.AddMinutes(Convert.ToInt32(_configuration["JWT:ExpirationMins"])),
                 Guid.NewGuid().ToString()));
 
@@ -61,7 +61,7 @@ namespace PM.API.JWT
             return "ERROR: appsettings does not setuped propertly";
         }
 
-        public string ValidateJWT(string jwt)
+        public string ValidateJWT(string jwt, bool ignoreTime = false)
         {
             JWTConfig config = new JWTConfig();
             string? secret = _configuration["JWT:Secret"];
@@ -73,8 +73,8 @@ namespace PM.API.JWT
 
                     if (payload != null)
                     {
-                        if (payload.exp > DateTime.UtcNow)
-                            return payload.sub.ToString();
+                        if (payload.exp > DateTime.UtcNow || ignoreTime)
+                            return payload.sub;
                         else
                             return "ERROR: Token expired";
                     }

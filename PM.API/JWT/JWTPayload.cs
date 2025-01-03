@@ -3,11 +3,11 @@
     public class JWTPayload
     {
 
-        public int sub { get; set; } = default!;
+        public string sub { get; set; } = default!;
         public DateTime exp { get; set; } = default!;
         public string jti { get; set; }
 
-        public JWTPayload(int _sub, DateTime _exp, string _jti)
+        public JWTPayload(string _sub, DateTime _exp, string _jti)
         {
             sub = _sub;
             exp = _exp;

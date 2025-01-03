@@ -10,15 +10,35 @@ using Newtonsoft.Json;
 using JsonParamContainers;
 using System.Collections;
 using System.Security;
+using System.Windows;
+using System.Reflection.PortableExecutable;
 
 namespace Exam.Data
 {
-    public class APIDBController : IDBController
+    public class APIDBController : IDBController, IAPIController
     {
         private readonly ApiRequest _apiRequest = new ApiRequest();
         private readonly AuthorizeRequest _authRequest = new AuthorizeRequest();
+        private readonly string tokensStorageFile = Config.Configuration["TokensStorageFile"] ?? string.Empty;
+
+        private record Tokens(string jwt, string refreshToken);
+        private record Payload(string sub);
 
         public Staff CurrentStaff { get; set; }
+
+
+        public APIDBController()
+        {
+            _apiRequest.OnRefreshRequest += _apiRequest_OnRefreshRequest;
+        }
+
+
+        private async void _apiRequest_OnRefreshRequest(object? sender, EventArgs e)
+        {
+            MessageBox.Show("Your session was expired. Refreshing in process..", "Session expired", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+            await RefreshAsync();
+        }
 
         public async Task AddEventAsync(Staff staff, Event newEvent)
         {
@@ -55,16 +75,29 @@ namespace Exam.Data
             await _apiRequest.PostAsync(RequestHeader.CH_ROLE, json);
         }
 
-        public async Task<bool> CheckPasswordAsync(string login, string password)
+        public async Task<bool> LoginAsync(string login, string password)
         {
-            string cryptedPwd = GetMD5(password);
-
-            await _authRequest.LoginAsync(login, cryptedPwd);
-
-            if (cryptedPwd == await _apiRequest.GetAsync("string", RequestHeader.PASSWORD, string.Empty))
+            if (await RefreshAsync())
             {
                 return true;
             }
+
+            string cryptedPwd = GetMD5(password);
+
+            UserFileManager.Clear(tokensStorageFile);
+
+            string loginResult = await _authRequest.LoginAsync(login, cryptedPwd);
+            if (!loginResult.StartsWith("ERROR"))
+            {
+                UserFileManager.Write(tokensStorageFile, loginResult);
+
+                if (cryptedPwd == await _apiRequest.GetAsync("string", RequestHeader.PASSWORD, string.Empty))
+                {
+                    return true;
+                }
+
+            }
+
             return false;
         }
 
@@ -77,7 +110,19 @@ namespace Exam.Data
         public async Task<ICollection<Staff>> GetAllStaffAsync()
         {
             string json = await _apiRequest.GetAsync("collection", RequestHeader.ALL_STAFF, "");
-            return JsonConvert.DeserializeObject<Staff[]>(json);
+
+            Staff[]? staffs = null;
+
+            try
+            {
+                staffs = JsonConvert.DeserializeObject<Staff[]>(json);
+            }
+            catch (Exception ex)
+            {
+                // Logger.Instance.ERROR(ex.Message);
+            }
+
+            return staffs == null ? new List<Staff>() : staffs;
         }
 
         public async Task<Staff?> GetStaffAsync(string login)
@@ -95,8 +140,10 @@ namespace Exam.Data
             await _apiRequest.PostAsync(RequestHeader.REG_PERSON, json);
         }
 
-        public void RemoveCurrentStaff()
+        public async Task LogoutAsync()
         {
+            await _authRequest.LogoutAsync();
+            UserFileManager.Clear(tokensStorageFile);
             CurrentStaff = null;
         }
 
@@ -108,6 +155,50 @@ namespace Exam.Data
         public async Task UpdateCurrentStaffAsync()
         {
             CurrentStaff = await GetStaffAsync(CurrentStaff.Person.Login);
+        }
+
+        public async Task<bool> RefreshAsync()
+        {
+            string jsonTokens = UserFileManager.Read(tokensStorageFile);
+            if (jsonTokens != string.Empty)
+            {
+                string refreshResult = await _authRequest.RefreshAsync(jsonTokens);
+
+                if (!refreshResult.StartsWith("ERROR"))
+                {
+                    UserFileManager.Write(tokensStorageFile, refreshResult);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public string GetLoginFromJWT()
+        {
+            string jwt = AuthorizeRequest.JWT;
+
+            if (string.IsNullOrEmpty(jwt))
+                return string.Empty;
+
+            string[] parts = jwt.Split('.');
+            if (parts.Length != 3)
+                return string.Empty;
+
+            string encPayload = parts[1];
+
+            string? payloadJson = Encoding.ASCII.GetString(Convert.FromBase64String(encPayload));
+            if (payloadJson != null)
+            {
+                Payload? payload = JsonConvert.DeserializeObject<Payload>(payloadJson);
+
+                if (payload != null)
+                {
+                    return payload.sub;
+                }
+            }
+
+            return string.Empty;
         }
 
         private string GetMD5(string input)

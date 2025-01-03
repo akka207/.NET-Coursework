@@ -16,6 +16,8 @@ namespace Exam.Services
     {
         public const string UNKNOWN = "unknown";
 
+        public event EventHandler OnRefreshRequest;
+
         private static readonly HttpClient client = new HttpClient();
         private readonly string urlPrefix;
 
@@ -33,16 +35,19 @@ namespace Exam.Services
             };
 
             request.Headers.Add("RequestType", rtype.Format());
+            request.Headers.Add("JWT", AuthorizeRequest.JWT);
 
             var responce = await client.SendAsync(request);
             if (responce.StatusCode == HttpStatusCode.OK)
             {
                 var responceBody = await responce.Content.ReadAsStringAsync();
 
-                if (!responceBody.Equals(UNKNOWN))
+                if (responceBody.Contains("ERROR: Token expired"))
                 {
-                    return responceBody;
+                    OnRefreshRequest?.Invoke(this, EventArgs.Empty);
                 }
+
+                return responceBody;
             }
 
             return UNKNOWN;
@@ -56,6 +61,7 @@ namespace Exam.Services
             };
 
             request.Headers.Add("RequestType", rtype.Format());
+            request.Headers.Add("JWT", AuthorizeRequest.JWT);
 
 
             var responce = await client.SendAsync(request);
@@ -64,13 +70,15 @@ namespace Exam.Services
             {
                 var responceBody = await responce.Content.ReadAsStringAsync();
 
-                if (!responceBody.Equals(UNKNOWN))
+                if (responceBody.Contains("ERROR: Token expired"))
                 {
-                    return responceBody;
+                    OnRefreshRequest?.Invoke(this, EventArgs.Empty);
                 }
+
+                return responceBody;
             }
 
-            return string.Empty;
+            return UNKNOWN;
         }
     }
 }

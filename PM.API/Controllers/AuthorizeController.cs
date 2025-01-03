@@ -45,25 +45,20 @@ namespace PM.API.Controllers
 
                     if (person != null && person.HashedPasword == authData.hashedPassword)
                     {
-                        Staff? staff = await _context.Staffs.FirstOrDefaultAsync(s => s.PersonId == person.Id);
-
-                        if (staff != null)
+                        string registerResult = await _JWTHandler.RegisterJWTAsync(person);
+                        if(registerResult.StartsWith("ERROR"))
                         {
-                            string registerResult = await _JWTHandler.RegisterJWTAsync(staff);
-                            if(registerResult.StartsWith("ERROR"))
-                            {
-                                return registerResult;
-                            }
+                            return registerResult;
+                        }
 
-                            Tokens? tokens = JsonConvert.DeserializeObject<Tokens>(registerResult);
+                        Tokens? tokens = JsonConvert.DeserializeObject<Tokens>(registerResult);
 
-                            if (tokens != null)
-                            {
-                                Response.Headers.Append("JWT", tokens.jwt);
-                                Response.Headers.Append("RefreshToken", tokens.refreshToken);
+                        if (tokens != null)
+                        {
+                            Response.Headers.Append("JWT", tokens.jwt);
+                            Response.Headers.Append("RefreshToken", tokens.refreshToken);
 
-                                return string.Empty;
-                            }
+                            return string.Empty;
                         }
                     }
                 }
@@ -73,7 +68,7 @@ namespace PM.API.Controllers
                 string? jwt = Request.Headers["JWT"];
                 if (jwt != null)
                 {
-                    string validationResult = _JWTHandler.ValidateJWT(jwt);
+                    string validationResult = _JWTHandler.ValidateJWT(jwt, false);
                     if (validationResult.StartsWith("ERROR"))
                         return validationResult;
 

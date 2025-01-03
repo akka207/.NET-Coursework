@@ -41,15 +41,11 @@ namespace PM.API.Controllers
                 return jwtStatus;
             }
 
-            int staffId = Convert.ToInt32(jwtStatus);
+            string personLogin = jwtStatus;
 
             if (Request.Headers["RequestType"] == RequestHeader.PASSWORD.Format())
             {
-                Staff? staff = await _context.Staffs.FirstOrDefaultAsync(s => s.Id == staffId);
-                if (staff != null)
-                {
-                    return (await _context.Persons.Where(p => p.Id == staff.PersonId).FirstOrDefaultAsync())?.HashedPasword ?? UNKNOWN;
-                }
+                return (await _context.Persons.Where(p => p.Login == personLogin).FirstOrDefaultAsync())?.HashedPasword ?? UNKNOWN;
             }
 
             return UNKNOWN;
@@ -110,7 +106,7 @@ namespace PM.API.Controllers
         public async Task<string> PostObject()
         {
             string jwtStatus = CheckJWT();
-            if (jwtStatus.StartsWith("ERROR"))
+            if (jwtStatus.StartsWith("ERROR") && Request.Headers["RequestType"] != RequestHeader.REG_PERSON.Format())
             {
                 return jwtStatus;
             }
@@ -237,7 +233,7 @@ namespace PM.API.Controllers
 
             if (jwt != null)
             {
-                return _JWTHandler.ValidateJWT(jwt);
+                return _JWTHandler.ValidateJWT(jwt, false);
             }
 
             return "ERROR: Invalid access tocken";

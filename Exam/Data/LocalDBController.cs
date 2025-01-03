@@ -55,7 +55,7 @@ namespace Exam.Data
             }
         }
 
-        public async Task<bool> CheckPasswordAsync(string login, string password)
+        public async Task<bool> LoginAsync(string login, string password)
         {
             using (var context = Config.DbContext)
             {
@@ -94,7 +94,7 @@ namespace Exam.Data
             CurrentStaff = await GetStaffAsync(login);
         }
 
-        public void RemoveCurrentStaff()
+        public async Task LogoutAsync()
         {
             CurrentStaff = null;
         }
@@ -184,7 +184,7 @@ namespace Exam.Data
 
                 if (oldPasswordRequired)
                 {
-                    if (findedPerson != null && await CheckPasswordAsync(login, oldPassword))
+                    if (findedPerson != null && await LoginAsync(login, oldPassword))
                     {
                         findedPerson.HashedPasword = GetMD5(newPassword);
                         await context.SaveChangesAsync();

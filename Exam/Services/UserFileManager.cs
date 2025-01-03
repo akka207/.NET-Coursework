@@ -11,19 +11,41 @@ namespace Exam.Services
 {
     public static class UserFileManager
     {
-        public static string GetUserFilesPath(string postfix)
+        public static string GetPath(string postfix)
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Config.Configuration["UserFolder"], postfix);
+            string? userFolder = Config.Configuration["UserFolder"];
+            if (!string.IsNullOrWhiteSpace(userFolder))
+            {
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), userFolder, postfix);
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
-        public static void WriteToUserFiles(string postfix, string data)
+        public static void Write(string postfix, string data)
         {
-            File.WriteAllText(GetUserFilesPath(postfix), data);
+            File.WriteAllText(GetPath(postfix), data);
         }
 
-        public static string ReadFromUserFiles(string postfix)
+        public static string Read(string postfix)
         {
-            return File.ReadAllText(GetUserFilesPath(postfix));
+            string path = GetPath(postfix);
+            if (File.Exists(path))
+            {
+                return File.ReadAllText(path);
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        public static void Clear(string postfix)
+        {
+            if(File.Exists(GetPath(postfix)))
+                File.Delete(GetPath(postfix));
         }
     }
 }

@@ -65,7 +65,7 @@ namespace Exam.Services
 
         public void Log(LogLevel level, string message)
         {
-            UserFileManager.WriteToUserFiles("Log.txt", $"{level}\t{DateTime.Now}\t{message}\n");
+            UserFileManager.Write("Log.txt", $"{level}\t{DateTime.Now}\t{message}\n");
         }
     }
 }

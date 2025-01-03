@@ -9,7 +9,7 @@ namespace PM.API.Services
         /// </summary>
         /// <param name="staff"></param>
         /// <returns>JSON of JWT and refresh token "{"jwt":"...","refreshToken":"..."}"</returns>
-        Task<string> RegisterJWTAsync(Staff staff);
+        Task<string> RegisterJWTAsync(Person person);
 
         /// <summary>
         /// Validate token by signature and expiration date.
@@ -19,7 +19,7 @@ namespace PM.API.Services
         /// "ERROR: Invalide token" if signature not matches, 
         /// Staff id if everything OK
         /// </returns>
-        string ValidateJWT(string jwt);
+        string ValidateJWT(string jwt, bool ignoreTime);
 
         /// <summary>
         /// Update JWT generating new id to it. Updates JWT expiration.

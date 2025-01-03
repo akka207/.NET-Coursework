@@ -15,24 +15,22 @@ namespace Exam.Services
 {
     public class AuthorizeRequest
     {
-        private static string JWT = string.Empty;
+        public static string JWT = string.Empty;
         private static readonly HttpClient client = new HttpClient();
         private readonly string urlPrefix;
-        private readonly string tokensFile;
 
         private record Tokens(string jwt, string refreshToken);
 
         public AuthorizeRequest()
         {
-            urlPrefix = Config.Configuration["AuthorizeAddress"];
-            tokensFile = Config.Configuration["TokensStorageFile"];
+            urlPrefix = Config.Configuration["AuthorizeAddress"] ?? string.Empty;
         }
 
-        public async Task LoginAsync(string login, string password)
+        public async Task<string> LoginAsync(string login, string hashedPassword)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, urlPrefix)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(new { login, password }))
+                Content = new StringContent(JsonConvert.SerializeObject(new { login, hashedPassword }))
             };
 
             request.Headers.Add("RequestType", RequestHeader.LOGIN.Format());
@@ -42,36 +40,44 @@ namespace Exam.Services
             {
                 var responceBody = await responce.Content.ReadAsStringAsync();
 
-                UserFileManager.WriteToUserFiles(tokensFile, responceBody);
+                if (!responceBody.StartsWith("ERROR"))
+                {
+                    string jwt = responce.Headers.GetValues("JWT").FirstOrDefault() ?? string.Empty;
+                    string refreshToken = responce.Headers.GetValues("RefreshToken").FirstOrDefault() ?? string.Empty;
+                    JWT = jwt;
+                    Tokens tokens = new Tokens(jwt, refreshToken);
+                    return JsonConvert.SerializeObject(tokens);
+                }
+
+                return responceBody;
             }
+
+            return $"ERROR: {responce.StatusCode}";
         }
 
         public async Task LogoutAsync()
         {
-            var tokens = JsonConvert.DeserializeObject<Tokens>(UserFileManager.ReadFromUserFiles(tokensFile));
-
-            if (tokens == null)
-                return;
-
             var request = new HttpRequestMessage(HttpMethod.Post, urlPrefix);
 
-            request.Headers.Add("RequestType", RequestHeader.LOGIN.Format());
-            request.Headers.Add("AccessToken", tokens.jwt);
+            request.Headers.Add("RequestType", RequestHeader.LOGOUT.Format());
+            request.Headers.Add("JWT", JWT);
 
             var responce = await client.SendAsync(request);
+
+            JWT = string.Empty;
         }
 
-        public async Task RefreshAsync()
+        public async Task<string> RefreshAsync(string jsonTokens)
         {
-            var tokens = JsonConvert.DeserializeObject<Tokens>(UserFileManager.ReadFromUserFiles(tokensFile));
+            var tokens = JsonConvert.DeserializeObject<Tokens>(jsonTokens);
 
             if (tokens == null)
-                return;
+                return "ERROR: Parameters deserialization failed";
 
             var request = new HttpRequestMessage(HttpMethod.Post, urlPrefix);
 
-            request.Headers.Add("RequestType", RequestHeader.LOGIN.Format());
-            request.Headers.Add("AccessToken", tokens.jwt);
+            request.Headers.Add("RequestType", RequestHeader.REFRESH.Format());
+            request.Headers.Add("JWT", tokens.jwt);
             request.Headers.Add("RefreshToken", tokens.refreshToken);
 
             var responce = await client.SendAsync(request);
@@ -79,10 +85,21 @@ namespace Exam.Services
             {
                 var responceBody = await responce.Content.ReadAsStringAsync();
 
-                tokens = new Tokens(responceBody, tokens.refreshToken);
+                if (responceBody.StartsWith("ERROR"))
+                {
+                    return responceBody;
+                }
 
-                UserFileManager.WriteToUserFiles(tokensFile, JsonConvert.SerializeObject(tokens));
+                string jwt = responce.Headers.GetValues("JWT").FirstOrDefault() ?? string.Empty;
+
+                tokens = new Tokens(jwt, tokens.refreshToken);
+
+                JWT = jwt;
+
+                return JsonConvert.SerializeObject(tokens);
             }
+
+            return $"ERROR: {responce.StatusCode}";
         }
     }
 }

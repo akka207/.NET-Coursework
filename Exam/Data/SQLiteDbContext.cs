@@ -29,7 +29,7 @@ namespace Exam.Data
         {
             base.OnConfiguring(optionsBuilder);
             //optionsBuilder.UseSqlite(Config.Configuration.GetConnectionString("DefaultConnection"));
-            string path = UserFileManager.GetUserFilesPath("Staff.db");
+            string path = UserFileManager.GetPath("Staff.db");
             optionsBuilder.UseSqlite($"FileName={path}");
         }
     }
