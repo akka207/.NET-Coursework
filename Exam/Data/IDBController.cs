@@ -11,13 +11,13 @@ namespace Exam.Data
     {
         public Staff CurrentStaff { get; set; }
 
-        public Task<bool> CheckPasswordAsync(string login, string password);
+        public Task<bool> LoginAsync(string login, string password);
 
         public Task<Staff?> GetStaffAsync(string login);
 
         public Task SelectCurrentStaffAsync(string login);
 
-        public void RemoveCurrentStaff();
+        public Task LogoutAsync();
 
         public Task UpdateCurrentStaffAsync();
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:AControls="clr-namespace:Exam.AuthorizeControls"
         xmlns:CustomControls="clr-namespace:Exam.CustomControls"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded"
         Title="Authorize" MinHeight="480" MaxHeight="480" MinWidth="600" MaxWidth="600">
     <Window.Resources>
         <Style x:Key="LoginButton_Style" TargetType="Button">

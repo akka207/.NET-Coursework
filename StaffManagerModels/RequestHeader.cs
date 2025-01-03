@@ -8,6 +8,9 @@ namespace StaffManagerModels
 {
     public enum RequestHeader
     {
+        LOGIN,
+        LOGOUT,
+        REFRESH,
         PASSWORD,
         STAFF,
         UPD_STAFF,
@@ -46,8 +49,15 @@ namespace StaffManagerModels
                     return "chp";
                 case RequestHeader.CH_PASSWORD_SUBM:
                     return "cps";
+                case RequestHeader.LOGIN:
+                    return "lgi";
+                case RequestHeader.LOGOUT:
+                    return "lgo";
+                case RequestHeader.REFRESH:
+                    return "ref";
+                default:
+                    return "null";
             }
-            return "null";
         }
     }
 }

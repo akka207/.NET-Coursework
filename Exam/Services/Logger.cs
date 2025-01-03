@@ -23,16 +23,13 @@ namespace Exam.Services
     public class Logger
     {
         public static Logger Instance { get; private set; }
-            = new Logger((LogLevel)Enum.Parse(typeof(LogLevel), Config.Configuration.GetSection("Logger").GetSection("LogLevel").Value, true),
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"PManager/Log.txt"));
+            = new Logger((LogLevel)Enum.Parse(typeof(LogLevel), Config.Configuration["Logger:LogLevel"], true));
 
         private LogLevel _level;
-        private string _path;
 
-        public Logger(LogLevel level, string path)
+        public Logger(LogLevel level)
         {
             _level = level;
-            _path = path;
         }
 
         public void FATAL(string message)
@@ -68,7 +65,7 @@ namespace Exam.Services
 
         public void Log(LogLevel level, string message)
         {
-            File.AppendAllText(_path, $"{level}\t{DateTime.Now}\t{message}\n");
+            UserFileManager.Write("Log.txt", $"{level}\t{DateTime.Now}\t{message}\n");
         }
     }
 }

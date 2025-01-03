@@ -22,6 +22,7 @@ namespace Exam
     /// </summary>
     public partial class AuthorizeWindow : Window
     {
+        public bool AutomaticLogin = true;
 
         public AuthorizeWindow()
         {
@@ -34,6 +35,33 @@ namespace Exam
             logInControl.IsEnabled = value;
         }
 
+        private async Task<bool> TryRestoreSession()
+        {
+            if(DBController.Instance is IAPIController controller)
+            {
+                if(await controller.RefreshAsync())
+                {
+                    string login = controller.GetLoginFromJWT();
+
+                    await DBController.Instance.SelectCurrentStaffAsync(login);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(AutomaticLogin && await TryRestoreSession())
+            {
+                Menu menu = new Menu();
+                menu.Show();
+                Close();
+            }
+        }
+
         private void logInControl_OnLogIn(object? sender, EventArgs e)
         {
             //Logger.Instance.INFO("LogIn event triggered");
@@ -44,7 +72,7 @@ namespace Exam
             Task.Run(async () =>
             {
                 //Logger.Instance.DEBUG($"Attempting to validate password for login: {_login}");
-                if (await DBController.Instance.CheckPasswordAsync(_login, _password))
+                if (await DBController.Instance.LoginAsync(_login, _password))
                 {
                     //Logger.Instance.INFO($"Password validation successful for login: {_login}");
                     Staff? staff = await DBController.Instance.GetStaffAsync(_login);
@@ -168,7 +196,7 @@ namespace Exam
             Task.Run(async () =>
             {
                 //Logger.Instance.DEBUG($"Attempting debug login for {_login}");
-                if (await DBController.Instance.CheckPasswordAsync(_login, _password))
+                if (await DBController.Instance.LoginAsync(_login, _password))
                 {
                     //Logger.Instance.INFO("Debug login successful, retrieving staff information");
                     Staff? staff = await DBController.Instance.GetStaffAsync(_login);

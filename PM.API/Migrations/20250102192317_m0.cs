@@ -12,7 +12,21 @@ namespace PM.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Person",
+                name: "JWTs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    JWT = table.Column<string>(type: "TEXT", nullable: false),
+                    RefreshToken = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JWTs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Persons",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -25,11 +39,11 @@ namespace PM.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.Id);
+                    table.PrimaryKey("PK_Persons", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
+                name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -38,11 +52,11 @@ namespace PM.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Role", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Schedule",
+                name: "Schedules",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -50,11 +64,11 @@ namespace PM.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Schedule", x => x.Id);
+                    table.PrimaryKey("PK_Schedules", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Event",
+                name: "Events",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -63,22 +77,21 @@ namespace PM.API.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     StartDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     EndDateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    ScheduleId = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsSelected = table.Column<bool>(type: "INTEGER", nullable: false)
+                    ScheduleId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Event", x => x.Id);
+                    table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Event_Schedule_ScheduleId",
+                        name: "FK_Events_Schedules_ScheduleId",
                         column: x => x.ScheduleId,
-                        principalTable: "Schedule",
+                        principalTable: "Schedules",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Staff",
+                name: "Staffs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -89,45 +102,45 @@ namespace PM.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Staff", x => x.Id);
+                    table.PrimaryKey("PK_Staffs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Staff_Person_PersonId",
+                        name: "FK_Staffs_Persons_PersonId",
                         column: x => x.PersonId,
-                        principalTable: "Person",
+                        principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Staff_Role_RoleId",
+                        name: "FK_Staffs_Roles_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "Role",
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Staff_Schedule_ScheduleId",
+                        name: "FK_Staffs_Schedules_ScheduleId",
                         column: x => x.ScheduleId,
-                        principalTable: "Schedule",
+                        principalTable: "Schedules",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Event_ScheduleId",
-                table: "Event",
+                name: "IX_Events_ScheduleId",
+                table: "Events",
                 column: "ScheduleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Staff_PersonId",
-                table: "Staff",
+                name: "IX_Staffs_PersonId",
+                table: "Staffs",
                 column: "PersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Staff_RoleId",
-                table: "Staff",
+                name: "IX_Staffs_RoleId",
+                table: "Staffs",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Staff_ScheduleId",
-                table: "Staff",
+                name: "IX_Staffs_ScheduleId",
+                table: "Staffs",
                 column: "ScheduleId");
         }
 
@@ -135,19 +148,22 @@ namespace PM.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Event");
+                name: "Events");
 
             migrationBuilder.DropTable(
-                name: "Staff");
+                name: "JWTs");
 
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "Staffs");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "Persons");
 
             migrationBuilder.DropTable(
-                name: "Schedule");
+                name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Schedules");
         }
     }
 }
